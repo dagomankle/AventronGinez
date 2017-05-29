@@ -5,6 +5,7 @@
  */
 package AventronDP;
 
+import AventronMD.AutomovilMD;
 import java.util.Date;
 import java.util.List;
 import javax.sql.rowset.serial.SerialBlob;
@@ -17,28 +18,29 @@ public class AutomovilDP {
     
     private String autoPlaca;
     private Date autoAnio;
-    private int autoSientosMaximos;
+    private int autoAsientosMaximos;
     private  SerialBlob autoImagen;
+    private AutomovilMD  controlMD  = new AutomovilMD();
 
     public void GuardarAutomovil(){
-    
+        controlMD.InsertarAutomovil(this);
     }
     
-    /*public AutomovilDP CargarAutomovil(){
-        ;
+    public AutomovilDP CargarAutomovil(String placa){
+        return controlMD.RecuperarAutomovil(placa);
     }
     
     public List<AutomovilDP> CargarAutomoviles(){
-        
+        return controlMD.RecuperarAutomoviles();
     }
     
-    public void DescartarAutomovil(){
-    
+    public void DescartarAutomovil(String placa){
+        controlMD.EliminarAutomovil(placa);
     }
     
     public boolean VerificarAutomovil(){
-        
-    }*/
+        return controlMD.ValidarAutomovil(this);
+    }
     
     public String getAutoPlaca() {
         return autoPlaca;
@@ -49,7 +51,7 @@ public class AutomovilDP {
     }
 
     public int getAutoSientosMaximos() {
-        return autoSientosMaximos;
+        return autoAsientosMaximos;
     }
 
     public SerialBlob getAutoImagen() {
@@ -65,7 +67,7 @@ public class AutomovilDP {
     }
 
     public void setAutoSientosMaximos(int autoSientosMaximos) {
-        this.autoSientosMaximos = autoSientosMaximos;
+        this.autoAsientosMaximos = autoSientosMaximos;
     }
 
     public void setAutoImagen(SerialBlob autoImagen) {
@@ -75,8 +77,15 @@ public class AutomovilDP {
     public AutomovilDP(String autoPlaca, Date autoAnio, int autoSientosMaximos, SerialBlob autoImagen) {
         this.autoPlaca = autoPlaca;
         this.autoAnio = autoAnio;
-        this.autoSientosMaximos = autoSientosMaximos;
+        this.autoAsientosMaximos = autoSientosMaximos;
         this.autoImagen = autoImagen;
+    }
+
+    public AutomovilDP() {
+        this.autoPlaca = null;
+        this.autoAnio = null;
+        this.autoAsientosMaximos = 0;
+        this.autoImagen = null;
     }
     
     
