@@ -5,10 +5,17 @@
  */
 package AventronDP;
 
+import java.util.Date;
+
 /**
  *
  * @author dagom
  */
 public class AutomovilDP {
+    
+    private String autoPlaca;
+    private Date autoAnio;
+    private int autoSientosMaximos;
+    private int autoImagen;
     
 }
