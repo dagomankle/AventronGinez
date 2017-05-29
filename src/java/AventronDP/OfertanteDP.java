@@ -5,33 +5,36 @@
  */
 package AventronDP;
 
+import AventronMD.OfertanteMD;
+
 /**
  *
  * @author ANDRES
  */
 public class OfertanteDP {
     
-    private String usuarioCI;
-    private String ofertanteCodigo;
+    private int usuarioCI;
     private String usuarioNombre;
     private String usuarioTipo;
     private String usuarioSexo;
     private String usuarioContrasena;
+    private String ofertanteTipoLic;
 
-    public String getUsuarioCI() {
+    public OfertanteDP(int usuarioCI, String usuarioNombre, String usuarioTipo, String usuarioSexo, String usuarioContrasena, String ofertanteTipoLic) {
+        this.usuarioCI = usuarioCI;
+        this.usuarioNombre = usuarioNombre;
+        this.usuarioTipo = usuarioTipo;
+        this.usuarioSexo = usuarioSexo;
+        this.usuarioContrasena = usuarioContrasena;
+        this.ofertanteTipoLic = ofertanteTipoLic;
+    }
+
+    public int getUsuarioCI() {
         return usuarioCI;
     }
 
-    public void setUsuarioCI(String usuarioCI) {
+    public void setUsuarioCI(int usuarioCI) {
         this.usuarioCI = usuarioCI;
-    }
-
-    public String getOfertanteCodigo() {
-        return ofertanteCodigo;
-    }
-
-    public void setOfertanteCodigo(String ofertanteCodigo) {
-        this.ofertanteCodigo = ofertanteCodigo;
     }
 
     public String getUsuarioNombre() {
@@ -65,7 +68,17 @@ public class OfertanteDP {
     public void setUsuarioContrasena(String usuarioContrasena) {
         this.usuarioContrasena = usuarioContrasena;
     }
+
+    public String getOfertanteTipoLic() {
+        return ofertanteTipoLic;
+    }
+
+    public void setOfertanteTipoLic(String ofertanteTipoLic) {
+        this.ofertanteTipoLic = ofertanteTipoLic;
+    }
     
+    
+
     
     
     
