@@ -6,6 +6,7 @@
 package AventronDP;
 
 import java.util.Date;
+import java.util.List;
 import javax.sql.rowset.serial.SerialBlob;
 
 /**
@@ -19,6 +20,26 @@ public class AutomovilDP {
     private int autoSientosMaximos;
     private  SerialBlob autoImagen;
 
+    public void GuardarAutomovil(){
+    
+    }
+    
+    /*public AutomovilDP CargarAutomovil(){
+        ;
+    }
+    
+    public List<AutomovilDP> CargarAutomoviles(){
+        
+    }
+    
+    public void DescartarAutomovil(){
+    
+    }
+    
+    public boolean VerificarAutomovil(){
+        
+    }*/
+    
     public String getAutoPlaca() {
         return autoPlaca;
     }
