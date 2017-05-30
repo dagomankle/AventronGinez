@@ -22,8 +22,11 @@ public class AutomovilDP {
     private  SerialBlob autoImagen;
     private AutomovilMD  controlMD  = new AutomovilMD();
 
-    public void GuardarAutomovil(){
-        controlMD.InsertarAutomovil(this);
+    public void GuardarAutomovil(String tipo){
+        if (tipo == "insertar")
+            controlMD.InsertarAutomovil(this);
+        if (tipo == "actualizar")
+            controlMD.ActualizarAutomovil(this);
     }
     
     public AutomovilDP CargarAutomovil(String placa){
