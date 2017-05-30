@@ -54,7 +54,7 @@ public class AutomovilMD {
                 st.close();
                 Query = "";
             } else {
-           Query = "insert into automovil  (AUTOPLACA , AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
+           Query = "INSERT INTO AUTOMOVIL  (AUTOPLACA , AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
                     + auto.getAutoPlaca() + "',"
                     + auto.getAutoAnio() + ","
                     + auto.getAutoSientosMaximos() + ",'"
@@ -80,10 +80,9 @@ public class AutomovilMD {
             DataSource DSAutomovil = this.getConnection0();
             Connection con = DSAutomovil.getConnection();
             Statement st = con.createStatement();
-            String Query = "insert into automovil  ( AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
-                    + auto.getAutoAnio() + ","
-                    + auto.getAutoSientosMaximos() + ",'"
-                    + auto.getAutoImagen() + "')";
+            String Query = "UPDATE AUTOMOVIL  SET AUTOANIO= '"+auto.getAutoAnio() 
+                    + "',  AUTOASIENTOSMAXIMOS = "+auto.getAutoSientosMaximos() 
+                    +", AUTOIMAGEN ="+ auto.getAutoImagen() +"WHERE AUTOPLACA = "+auto.getAutoPlaca() ;
             st.executeUpdate(Query);
             con.close();
             st.close();
