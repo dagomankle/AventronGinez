@@ -57,7 +57,7 @@ public class AutomovilMD {
            Query = "INSERT INTO AUTOMOVIL  (AUTOPLACA , AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
                     + auto.getAutoPlaca() + "',"
                     + auto.getAutoAnio() + ","
-                    + auto.getAutoSientosMaximos() + ",'"
+                    + auto.getAutoAsientosMaximos() + ",'"
                     + auto.getAutoImagen() + "')";
             error = "Ingreso Exitoso..";
             st.executeUpdate(Query);
@@ -81,7 +81,7 @@ public class AutomovilMD {
             Connection con = DSAutomovil.getConnection();
             Statement st = con.createStatement();
             String Query = "UPDATE AUTOMOVIL  SET AUTOANIO= '"+auto.getAutoAnio() 
-                    + "',  AUTOASIENTOSMAXIMOS = "+auto.getAutoSientosMaximos() 
+                    + "',  AUTOASIENTOSMAXIMOS = "+auto.getAutoAsientosMaximos() 
                     +", AUTOIMAGEN ="+ auto.getAutoImagen() +"WHERE AUTOPLACA = "+auto.getAutoPlaca() ;
             st.executeUpdate(Query);
             con.close();

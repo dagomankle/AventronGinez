@@ -9,11 +9,16 @@ import AventronMD.AutomovilMD;
 import java.util.Date;
 import java.util.List;
 import javax.sql.rowset.serial.SerialBlob;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author dagom
  */
+
+@ManagedBean
+@ViewScoped
 public class AutomovilDP {
     
     private String autoPlaca;
@@ -53,7 +58,7 @@ public class AutomovilDP {
         return autoAnio;
     }
 
-    public int getAutoSientosMaximos() {
+    public int getAutoAsientosMaximos() {
         return autoAsientosMaximos;
     }
 
@@ -69,7 +74,7 @@ public class AutomovilDP {
         this.autoAnio = autoAnio;
     }
 
-    public void setAutoSientosMaximos(int autoSientosMaximos) {
+    public void setAutoAsientosMaximos(int autoSientosMaximos) {
         this.autoAsientosMaximos = autoSientosMaximos;
     }
 
