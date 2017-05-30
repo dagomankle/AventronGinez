@@ -8,6 +8,8 @@ package AventronMD;
 import AventronDP.AutomovilDP;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import javax.naming.Context;
@@ -37,14 +39,14 @@ public class AutomovilMD {
     }
 
     public void InsertarAutomovil(AutomovilDP auto){
-        /*try {
+        String error = "";
+        try {
             DataSource DSAutomovil = this.getConnection0();
             Connection con = DSAutomovil.getConnection();
             Statement st = con.createStatement();
             //actividad = actividad1;
             //String detalle = auto.getAutoPlaca();
-            String Query = "";
-            Query ="INSERT INTO automovil (col1, col2,col3 col4) VAlUES ('"+auto.getAutoPlaca()+"',"+ auto.getAutoAnio()+ ")"; // "select * from Usuario where usuarioci='" + detalle + "'";
+            String Query = "select * from automovil where autoPlaca ='" + auto.getAutoPlaca() + "'";
             ResultSet rs = st.executeQuery(Query);
             if (rs.next()) {
                 error = "El usuario que desea crear ya existe.";
@@ -52,11 +54,11 @@ public class AutomovilMD {
                 st.close();
                 Query = "";
             } else {
-           //Query = "insert into actividad  (CODIGORESULTADO, CODIGOUSUARIO, NUMERACIONACTIVIDAD, DETALLEACTIVIDAD) values('"
-           //         + actividad.getCodigoResultado() + "','"
-           //         + actividad.getCodigoUsuario() + "','"
-           //         + actividad.getNumeracionActividad() + "','"
-           //         + actividad.getDetalleActividad() + "')";
+           Query = "INSERT INTO AUTOMOVIL  (AUTOPLACA , AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
+                    + auto.getAutoPlaca() + "',"
+                    + auto.getAutoAnio() + ","
+                    + auto.getAutoAsientosMaximos() + ",'"
+                    + auto.getAutoImagen() + "')";
             error = "Ingreso Exitoso..";
             st.executeUpdate(Query);
             con.close();
@@ -66,15 +68,30 @@ public class AutomovilMD {
             /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
-        } */
+        } 
     }
     
     public void EliminarAutomovil(String placa){
     
     }
     
-    public void ActualizarAutomovil(String placa){
-    
+    public void ActualizarAutomovil(AutomovilDP auto){
+         try {
+            DataSource DSAutomovil = this.getConnection0();
+            Connection con = DSAutomovil.getConnection();
+            Statement st = con.createStatement();
+            String Query = "UPDATE AUTOMOVIL  SET AUTOANIO= '"+auto.getAutoAnio() 
+                    + "',  AUTOASIENTOSMAXIMOS = "+auto.getAutoAsientosMaximos() 
+                    +", AUTOIMAGEN ="+ auto.getAutoImagen() +"WHERE AUTOPLACA = "+auto.getAutoPlaca() ;
+            st.executeUpdate(Query);
+            con.close();
+            st.close();
+            
+        } catch (NamingException ex) {
+            /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+        }    
     }
     
     public boolean ValidarAutomovil(AutomovilDP auto){

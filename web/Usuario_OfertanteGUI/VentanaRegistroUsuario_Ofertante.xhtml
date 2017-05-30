@@ -9,11 +9,12 @@
       xmlns:ice="http://www.icesoft.com/icefaces/component">
     <h:head>
         <link rel="stylesheet" type="text/css" />
-        <title> CREAR CUENTA</title>
+        <title>CREAR CUENTA</title>
              
     </h:head>
     
     <h:body>
+         Bienvenido a Creacion de Cuentas Proto
         <ace:tabSet clientSide="true" id="Cuerpo">
             <ace:tabPane label="CREAR NUEVA CUENTA">
                 <ice:form>
@@ -85,6 +86,9 @@
         </ace:tabSet>
     </h:body>
     <ace:panel id="employeeInfoOutputPanel">
+          <ice:form>                
+                <ice:commandButton id="Regresar" value="  Regresar " onclick= "window.close('VentanaRegistroUsuario_Ofertante.xhtml');window.open('../VentanaInicioAventron.xhtml' );" ></ice:commandButton> 
+          </ice:form>         
         <ace:messages id="allMsgsA" />
     </ace:panel>
 </html>
