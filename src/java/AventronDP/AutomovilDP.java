@@ -74,8 +74,8 @@ public class AutomovilDP {
         this.autoAnio = autoAnio;
     }
 
-    public void setAutoAsientosMaximos(int autoSientosMaximos) {
-        this.autoAsientosMaximos = autoSientosMaximos;
+    public void setAutoAsientosMaximos(String autoSientosMaximos) {
+        this.autoAsientosMaximos = Integer.parseInt(autoSientosMaximos);
     }
 
     public void setAutoImagen(SerialBlob autoImagen) {

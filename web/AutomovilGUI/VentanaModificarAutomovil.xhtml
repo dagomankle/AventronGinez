@@ -1,12 +1,96 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+    
     <h:head>
-        <title>Facelet Title</title>
+        <link rel="stylesheet" type="text/css" />
+        <title>Crear Automovil</title>
+             
     </h:head>
+    
     <h:body>
-        Hello from Facelets
+         Bienvenido a modificación de automobil Proto
+        <ace:tabSet clientSide="true" id="Cuerpo">
+            <ace:tabPane label="Actualizar Automovil">
+                <ice:form>
+                    <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+                        
+                        <ice:outputText id="in1" value="Seleccione Placa de Automovil:"></ice:outputText>
+                        <ace:simpleSelectOneMenu id="smenux" value="#{automovilDP.CargarAutomovil(placa)}">
+                            <f:selectItem id="seler1" itemValue="1"/>
+                            <ace:ajax render="@this smenu"/>
+                        </ace:simpleSelectOneMenu>
+                        
+                        <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
+                        <ace:dateTimeEntry id="Codigo1" value="#{automovilDP.autoAnio}" label="Codigo" >
+                            
+                        </ace:dateTimeEntry>
+                        
+                        <ice:outputText id="out3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
+                        <ace:simpleSelectOneMenu id="smenu" value= "#{automovilDP.autoAsientosMaximos}">
+                            <f:selectItem id="sele1" itemValue="1"/>
+                            <f:selectItem id="sele2" itemValue="2"/>
+                            <f:selectItem id="sele3" itemValue="3"/>
+                            <f:selectItem id="sele4" itemValue="4"/>
+                            <f:selectItem id="sele5" itemValue="5"/>
+                            <f:selectItem id="sele6" itemValue="6"/>
+                            <f:selectItem id="sele7" itemValue="7"/>
+                            <f:selectItem id="sele8" itemValue="8"/>
+                            <f:selectItem id="sele9" itemValue="9"/>
+                            <f:selectItem id="sele10" itemValue="10"/>
+                            <f:selectItem id="sele11" itemValue="11"/>
+                            <f:selectItem id="sele12" itemValue="12"/>
+                            <f:selectItem id="sele13" itemValue="13"/>
+                            <f:selectItem id="sele14" itemValue="14"/>
+                            <f:selectItem id="sele15" itemValue="15"/>
+                            <f:selectItem id="sele16" itemValue="16"/>
+                            <f:selectItem id="sele17" itemValue="17"/>
+                            <f:selectItem id="sele18" itemValue="18"/>
+                            <ace:ajax render="@this smenu"/>
+                        </ace:simpleSelectOneMenu>
+                        
+                        
+                        <ice:outputText id="out4" value="Imagen del Automovil:"></ice:outputText>
+                        <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}">  
+                        </ace:fileEntry>
+                        
+                        <ice:commandButton id="insertar" value="Guardar" action="#{ofertanteDP.Insertar}"></ice:commandButton>
+                    </ice:panelGrid>
+                    <h:panelGroup rendered="#{ofertanteDP.verDialogo}">
+                        <ace:dialog id="dialogServer"
+                                    header="Mensaje"
+                                    closable="false"
+                                    modal="true"
+                                    draggable="false"
+                                    showEffect="clip"
+                                    hideEffect="fade"
+                                    width="400"
+                                    visible="true"
+                                    rendered="#{ofertanteDP.verDialogo}"
+                                    widgetVar="dialogo">
+                            <h:panelGrid width="100%" style="text-align: center;" columns="1">
+                                <h:outputLabel id="firstNameLabel" style="color: white;" value="#{ofertanteDP.error}"/>
+                               <h:commandButton id="submitServer" value="Aceptar"  onclick="window.location.reload('index.xhtml');">
+                                    <ace:ajax render="@none"></ace:ajax>
+                                </h:commandButton> 
+                            </h:panelGrid>
+                        </ace:dialog>
+                    </h:panelGroup>
+                </ice:form>
+            </ace:tabPane>
+        </ace:tabSet>
     </h:body>
+    <ace:panel id="employeeInfoOutputPanel">
+        
+        <ice:form>                
+            <ice:commandButton id="Regresar" value="  Regresar " onclick= "window.close('VentanaIngresoAutomovil.xhtml');window.open('VentanaInicioAutomovil.xhtml' );" ></ice:commandButton> 
+        </ice:form> 
+    <ace:messages id="allMsgsA" />
+    </ace:panel>
 </html>
-
