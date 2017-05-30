@@ -27,38 +27,21 @@
                         </ace:textEntry>
                         
                         <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
-                        <ace:textEntry id="Codigo1" value="#{automovilDP.autoAnio}" label="Codigo" >
-                            <ace:ajax event="blur" render="allMsgsA"/>
-                        </ace:textEntry>
+                        <ace:dateTimeEntry id="Codigo1" value="#{automovilDP.autoAnio}" label="Codigo" >
+                            
+                        </ace:dateTimeEntry>
                         
-                        <ice:outputText id="out3" value="Seleccione Asientos Maximos:"></ice:outputText>
-                        <ace:comboBox id="smenu" value="#{ofertanteDP.usuarioTipo}">
-                            <f:selectItem id="sele1" itemValue="Usuario"/>
-                            <f:selectItem id="sele2" itemValue="Ofertante"/>
+                        <ice:outputText id="out3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
+                        <ace:comboBox id="smenu" value="#{automovilDP.autoPlaca}">
+                            <f:selectItem id="sele1" itemValue="1"/>
+                            <f:selectItem id="sele2" itemValue="2"/>
                             <ace:ajax render="@this smenu"/>
                         </ace:comboBox>
                         
                         
-                        <ice:outputText id="out4" value="Seleccione su sexo:"></ice:outputText>
-                        <ace:comboBox id="smenu1" value="#{ofertanteDP.usuarioSexo}">
-                            <f:selectItem id="sele1" itemValue="Masculino"/>
-                            <f:selectItem id="sele2" itemValue="Femenino"/>
-                            <ace:ajax render="@this smenu"/>
-                        </ace:comboBox>
-                        
-                        
-                        <ice:outputText id="out5" value="Ingrese la contraseña del usuario:"></ice:outputText>
-                        <ace:textEntry id="Contraseña" value="#{ofertanteDP.usuarioContrasena}" label="Contraseña" >
-                            <ace:ajax event="blur" render="allMsgsA"/>
-                        </ace:textEntry>
-                        
-                        <ice:outputText id="out6" value="Seleccione su tipo de licencia:"></ice:outputText>
-                        <ace:comboBox id="smenu2" value="#{ofertanteDP.ofertanteTipoLic}">
-                            <f:selectItem id="sele1" itemValue="A"/>
-                            <f:selectItem id="sele2" itemValue="B"/>
-                            <ace:ajax render="@this smenu"/>
-                        </ace:comboBox>
-                        
+                        <ice:outputText id="out4" value="Imagen del Automovil:"></ice:outputText>
+                        <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}">  
+                        </ace:fileEntry>
                         
                         <ice:commandButton id="insertar" value="Guardar" action="#{ofertanteDP.Insertar}"></ice:commandButton>
                     </ice:panelGrid>
