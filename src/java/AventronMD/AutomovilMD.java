@@ -37,7 +37,7 @@ public class AutomovilMD {
     }
 
     public void InsertarAutomovil(AutomovilDP auto){
-        /*try {
+       /* try {
             DataSource DSAutomovil = this.getConnection0();
             Connection con = DSAutomovil.getConnection();
             Statement st = con.createStatement();
@@ -52,10 +52,10 @@ public class AutomovilMD {
                 st.close();
                 Query = "";
             } else {
-           //Query = "insert into actividad  (CODIGORESULTADO, CODIGOUSUARIO, NUMERACIONACTIVIDAD, DETALLEACTIVIDAD) values('"
-           //         + actividad.getCodigoResultado() + "','"
-           //         + actividad.getCodigoUsuario() + "','"
-           //         + actividad.getNumeracionActividad() + "','"
+           //Query = "insert into automovil  (CODIGORESULTADO, CODIGOUSUARIO, NUMERACIONACTIVIDAD, DETALLEACTIVIDAD) values('"
+           //         + auto.getAutoPlaca() + "',"
+           //         + auto.getAutoAnio() + ","
+           //         + auto.auto.getAutoAnio() + ",'"
            //         + actividad.getDetalleActividad() + "')";
             error = "Ingreso Exitoso..";
             st.executeUpdate(Query);
