@@ -104,6 +104,4 @@ public class AutomovilMD {
         Context c = new InitialContext();
         return (DataSource) c.lookup("java:comp/env/connection0");
     }
-    
-    
 }

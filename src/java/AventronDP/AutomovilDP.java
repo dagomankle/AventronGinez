@@ -95,6 +95,4 @@ public class AutomovilDP {
         this.autoAsientosMaximos = 0;
         this.autoImagen = null;
     }
-    
-    
 }
