@@ -8,48 +8,36 @@ package AventronDP;
 import AventronMD.AutomovilMD;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
 import javax.sql.rowset.serial.SerialBlob;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author dagom
  */
-
-@ManagedBean
-@ViewScoped
+@Named(value = "automovilDP")
+@RequestScoped
 public class AutomovilDP {
-    
+
     private String autoPlaca;
     private Date autoAnio;
     private int autoAsientosMaximos;
-    private  SerialBlob autoImagen;
-    private AutomovilMD  controlMD  = new AutomovilMD();
+    private  SerialBlob autoImagen;    
+    
+    /**
+     * Creates a new instance of AutomovilDP
+     */
+    public AutomovilDP() {
+    }
 
-    public void GuardarAutomovil(String tipo){
-        if (tipo == "insertar")
-            controlMD.InsertarAutomovil(this);
-        if (tipo == "actualizar")
-            controlMD.ActualizarAutomovil(this);
+    public AutomovilDP(String autoPlaca, Date autoAnio, int autoAsientosMaximos, SerialBlob autoImagen) {
+        this.autoPlaca = autoPlaca;
+        this.autoAnio = autoAnio;
+        this.autoAsientosMaximos = autoAsientosMaximos;
+        this.autoImagen = autoImagen;
     }
-    
-    public AutomovilDP CargarAutomovil(String placa){
-        return controlMD.RecuperarAutomovil(placa);
-    }
-    
-    public List<AutomovilDP> CargarAutomoviles(){
-        return controlMD.RecuperarAutomoviles();
-    }
-    
-    public void DescartarAutomovil(String placa){
-        controlMD.EliminarAutomovil(placa);
-    }
-    
-    public boolean VerificarAutomovil(){
-        return controlMD.ValidarAutomovil(this);
-    }
-    
+
     public String getAutoPlaca() {
         return autoPlaca;
     }
@@ -74,25 +62,39 @@ public class AutomovilDP {
         this.autoAnio = autoAnio;
     }
 
-    public void setAutoAsientosMaximos(String autoSientosMaximos) {
-        this.autoAsientosMaximos = Integer.parseInt(autoSientosMaximos);
+    public void setAutoAsientosMaximos(int autoAsientosMaximos) {
+        this.autoAsientosMaximos = autoAsientosMaximos;
     }
 
     public void setAutoImagen(SerialBlob autoImagen) {
         this.autoImagen = autoImagen;
     }
-
-    public AutomovilDP(String autoPlaca, Date autoAnio, int autoSientosMaximos, SerialBlob autoImagen) {
-        this.autoPlaca = autoPlaca;
-        this.autoAnio = autoAnio;
-        this.autoAsientosMaximos = autoSientosMaximos;
-        this.autoImagen = autoImagen;
+ 
+    public void guardarAutomovil(String tipo){
+        AutomovilMD controlMD = new AutomovilMD();
+        if (tipo == "insertar")
+            controlMD.InsertarAutomovil(this);
+        if (tipo == "actualizar")
+            controlMD.ActualizarAutomovil(this);
     }
-
-    public AutomovilDP() {
-        this.autoPlaca = null;
-        this.autoAnio = null;
-        this.autoAsientosMaximos = 0;
-        this.autoImagen = null;
+    
+    public AutomovilDP cargarAutomovil(String placa){
+        AutomovilMD controlMD = new AutomovilMD();
+        return controlMD.RecuperarAutomovil(placa);
     }
+    
+    public List<AutomovilDP> cargarAutomoviles(){
+        AutomovilMD controlMD = new AutomovilMD();
+        return controlMD.RecuperarAutomoviles();
+    }
+    
+    public void descartarAutomovil(String placa){
+        AutomovilMD controlMD = new AutomovilMD();
+        controlMD.EliminarAutomovil(placa);
+    }
+    
+    public boolean verificarAutomovil(){
+        AutomovilMD controlMD = new AutomovilMD();
+        return controlMD.ValidarAutomovil(this);
+    }    
 }
