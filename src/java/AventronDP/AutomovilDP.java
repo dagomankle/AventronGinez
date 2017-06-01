@@ -71,30 +71,30 @@ public class AutomovilDP {
     }
  
     public void guardarAutomovil(String tipo){
-        AutomovilMD controlMD = new AutomovilMD();
+        AutomovilMD controlMD = new AutomovilMD(this);
         if (tipo == "insertar")
-            controlMD.InsertarAutomovil(this);
+            controlMD.insertarAutomovil(this);
         if (tipo == "actualizar")
-            controlMD.ActualizarAutomovil(this);
+            controlMD.actualizarAutomovil(this);
     }
     
     public AutomovilDP cargarAutomovil(String placa){
-        AutomovilMD controlMD = new AutomovilMD();
-        return controlMD.RecuperarAutomovil(placa);
+        AutomovilMD controlMD = new AutomovilMD(this);
+        return controlMD.recuperarAutomovil(placa);
     }
     
     public List<AutomovilDP> cargarAutomoviles(){
-        AutomovilMD controlMD = new AutomovilMD();
-        return controlMD.RecuperarAutomoviles();
+        AutomovilMD controlMD = new AutomovilMD(this);
+        return controlMD.recuperarAutomoviles();
     }
     
     public void descartarAutomovil(String placa){
-        AutomovilMD controlMD = new AutomovilMD();
-        controlMD.EliminarAutomovil(placa);
+        AutomovilMD controlMD = new AutomovilMD(this);
+        controlMD.eliminarAutomovil(placa);
     }
     
     public boolean verificarAutomovil(){
-        AutomovilMD controlMD = new AutomovilMD();
-        return controlMD.ValidarAutomovil(this);
+        AutomovilMD controlMD = new AutomovilMD(this);
+        return controlMD.validarAutomovil(this);
     }    
 }
