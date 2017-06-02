@@ -33,7 +33,7 @@ public class OfertanteMD {
         this.error = error;
     }
 
-    public void Insertar(OfertanteDP ofertante) {
+   /* public void Insertar(OfertanteDP ofertante) {
         try {
             DataSource DSActividad = this.getConnection0();
             Connection con = DSActividad.getConnection();
@@ -48,13 +48,13 @@ public class OfertanteMD {
                 st.close();
                 Query = "";
             } else {
-                Query = "insert into OFERTANTE  (USUARIOCI, USUARIONOMBRE, USUARIOTIPO, USUARIOSEXO, USUARIOCONTRASENA, OFERTANTETIPOLIC) values('"
+                Query = "insert into OFERTANTE  (USUARIOCI, USUARIONOMBRE, USUARIOTIPO, USUARIOSEXO, USUARIOCONTRASENA) values('"
                         + ofertante.getUsuarioCI() + "','"
                         + ofertante.getUsuarioNombre() + "','"
                         + ofertante.getUsuarioTipo() + "','"
                         + ofertante.getUsuarioSexo() + "','"
-                        + ofertante.getUsuarioContrasena() + "','"
-                        + ofertante.getOfertanteTipoLic() + "')";
+                        + ofertante.getUsuarioContrasena() + "')";
+                        //+ ofertante.getOfertanteTipoLic() 
                 error = "Ingreso Exitoso..";
                 st.executeUpdate(Query);
                 con.close();
@@ -77,16 +77,16 @@ public class OfertanteMD {
                 + ofertante.getUsuarioNombre() + "', USUARIOTIPO = '"
                 + ofertante.getUsuarioTipo() + "', USUARIOSEXO = '"
                 + ofertante.getUsuarioSexo() + "', USUARIOCONTRASENA = '"
-                + ofertante.getUsuarioContrasena() + "', OFERTANTETIPOLIC = '"
-                + ofertante.getOfertanteTipoLic() + "' where USUARIOCI='"
+                + ofertante.getUsuarioContrasena() + "' where USUARIOCI='"
                 + ofertante.getUsuarioCI() + "'";
         st.executeUpdate(Query);
         con.close();
         st.close();
     }
+    
+    */
+    
+    
 
-    private DataSource getConnection0() throws NamingException {
-        Context c = new InitialContext();
-        return (DataSource) c.lookup("java:comp/env/connection0");
-    }
+    
 }

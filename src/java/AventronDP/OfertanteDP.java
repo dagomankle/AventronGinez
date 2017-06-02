@@ -20,7 +20,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.naming.NamingException;
-import org.icefaces.ace.component.textentry.TextEntry;
+//import org.icefaces.ace.component.textentry.TextEntry;
 
 /**
  *
@@ -36,7 +36,7 @@ public class OfertanteDP implements Serializable {
     private String usuarioTipo;
     private String usuarioSexo;
     private String usuarioContrasena;
-    private String ofertanteTipoLic;
+    //private String ofertanteTipoLic;
     private String error;
 
     public String getError() {
@@ -52,13 +52,13 @@ public class OfertanteDP implements Serializable {
     
     
 
-    public OfertanteDP(int usuarioCI, String usuarioNombre, String usuarioTipo, String usuarioSexo, String usuarioContrasena, String ofertanteTipoLic) {
+    public OfertanteDP(int usuarioCI, String usuarioNombre, String usuarioTipo, String usuarioSexo, String usuarioContrasena) {
         this.usuarioCI = usuarioCI;
         this.usuarioNombre = usuarioNombre;
         this.usuarioTipo = usuarioTipo;
         this.usuarioSexo = usuarioSexo;
         this.usuarioContrasena = usuarioContrasena;
-        this.ofertanteTipoLic = ofertanteTipoLic;
+        //this.ofertanteTipoLic = ofertanteTipoLic;
     }
 
     public int getUsuarioCI() {
@@ -101,13 +101,13 @@ public class OfertanteDP implements Serializable {
         this.usuarioContrasena = usuarioContrasena;
     }
 
-    public String getOfertanteTipoLic() {
+    /*public String getOfertanteTipoLic() {
         return ofertanteTipoLic;
     }
 
     public void setOfertanteTipoLic(String ofertanteTipoLic) {
         this.ofertanteTipoLic = ofertanteTipoLic;
-    }
+    }*/
     
     private boolean verpaginas=false;
 
@@ -140,8 +140,8 @@ public class OfertanteDP implements Serializable {
             usuarioSexo = "M";
         }
         else usuarioSexo = "F";
-        OfertanteDP nuevoOf = new OfertanteDP(usuarioCI, usuarioNombre, usuarioTipo, usuarioSexo, usuarioContrasena, ofertanteTipoLic);
-        nuevo.Insertar(nuevoOf);
+        OfertanteDP nuevoOf = new OfertanteDP(usuarioCI, usuarioNombre, usuarioTipo, usuarioSexo, usuarioContrasena);
+        //nuevo.Insertar(nuevoOf);
         this.setError(nuevo.getError());
         this.setVerDialogo(true);
     }
@@ -176,12 +176,12 @@ public class OfertanteDP implements Serializable {
     
     public void guardar() {
         OfertanteMD usuario = new OfertanteMD();
-        OfertanteDP nueva = new OfertanteDP(usuarioCI, usuarioNombre, usuarioTipo, usuarioSexo, usuarioContrasena, ofertanteTipoLic);
-        usuario.Insertar(nueva);
+        OfertanteDP nueva = new OfertanteDP(usuarioCI, usuarioNombre, usuarioTipo, usuarioSexo, usuarioContrasena);
+        //usuario.Insertar(nueva);
         this.setError(usuario.getError());
         if (this.error.compareTo("Ingreso Exitoso") == 0) {
             this.setUsuarioCI(0);
-            this.setOfertanteTipoLic("");
+            //this.setOfertanteTipoLic("");
             this.setUsuarioContrasena("");
             this.setUsuarioNombre("");
             this.setUsuarioSexo("");
