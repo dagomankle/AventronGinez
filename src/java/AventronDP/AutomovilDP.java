@@ -21,6 +21,7 @@ import javax.sql.rowset.serial.SerialBlob;
 public class AutomovilDP {
 
     private String autoPlaca;
+    private int usuarioCI;
     private Date autoAnio;
     private int autoAsientosMaximos;
     private  SerialBlob autoImagen;    
@@ -54,6 +55,10 @@ public class AutomovilDP {
         return autoImagen;
     }
 
+    public int getUsuarioCI() {
+        return usuarioCI;
+    }
+
     public void setAutoPlaca(String autoPlaca) {
         this.autoPlaca = autoPlaca;
     }
@@ -69,13 +74,17 @@ public class AutomovilDP {
     public void setAutoImagen(SerialBlob autoImagen) {
         this.autoImagen = autoImagen;
     }
+
+    public void setUsuarioCI(int usuarioCI) {
+        this.usuarioCI = usuarioCI;
+    }
  
     public void guardarAutomovil(String tipo){
         AutomovilMD controlMD = new AutomovilMD(this);
         if (tipo == "insertar")
-            controlMD.insertarAutomovil(this);
+            controlMD.insertarAutomovil();
         if (tipo == "actualizar")
-            controlMD.actualizarAutomovil(this);
+            controlMD.actualizarAutomovil();
     }
     
     public AutomovilDP cargarAutomovil(String placa){
@@ -97,4 +106,6 @@ public class AutomovilDP {
         AutomovilMD controlMD = new AutomovilMD(this);
         return controlMD.validarAutomovil(this);
     }    
+    
+    
 }

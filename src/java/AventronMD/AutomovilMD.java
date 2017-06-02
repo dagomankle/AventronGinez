@@ -27,15 +27,42 @@ public class AutomovilMD {
     private Connection con;
     private Statement stm;
     private String cadena;
+    private ResultSet rs; 
 
     public AutomovilMD(AutomovilDP automovilDP) {
         this.automovilDP = automovilDP;
     }
     
     public AutomovilDP recuperarAutomovil( String placa){
-        AutomovilDP retorno = new AutomovilDP();
-        
-        return retorno;
+         try {
+            DataSource DSAutomovil = this.getAventronPool();
+            this.con = DSAutomovil.getConnection();
+            this.stm = this.con.createStatement();
+            this.cadena = "SELECT * FROM AUTOMOVIL WHERE AUTOPLACA = '"+placa 
+                    + "'";
+            rs = this.stm.executeQuery(this.cadena);
+            con.close();
+            this.stm.close();
+            
+            /*while (rs.next()) {
+                String autoPlaca = rs.getString("AUTOPLACA");
+                int supplierID = rs.getInt("SUP_ID");
+                Date price = rs.getFloat("PRICE");
+                int sales = rs.getInt("SALES");
+                int total = rs.getInt("TOTAL");
+                System.out.println(coffeeName + "\t" + supplierID +
+                                   "\t" + price + "\t" + sales +
+                                   "\t" + total);
+            }*/
+             automovilDP = new AutomovilDP();
+            
+        } catch (NamingException ex) {
+            /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);    }   
+        }
+       
+        return automovilDP;
     }
     
     public List<AutomovilDP> recuperarAutomoviles(){
@@ -44,12 +71,12 @@ public class AutomovilMD {
         return retorno;        
     }
 
-    public void insertarAutomovil(AutomovilDP auto){
+    public void insertarAutomovil(){
         String error = "";
         try {
-            DataSource DSAutomovil = this.getConnection0();
+            DataSource DSAutomovil = this.getAventronPool();
             this.con = DSAutomovil.getConnection();
-            this.stm = this.con.createStatement();
+           /* this.stm = this.con.createStatement();
             //actividad = actividad1;
             //String detalle = auto.getAutoPlaca();
             this.cadena = "select * from automovil where autoPlaca ='" + auto.getAutoPlaca() + "'";
@@ -59,17 +86,18 @@ public class AutomovilMD {
                 con.close();
                 this.stm.close();
                 this.cadena = "";
-            } else {
-           cadena = "INSERT INTO AUTOMOVIL  (AUTOPLACA , AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
-                    + auto.getAutoPlaca() + "',"
-                    + auto.getAutoAnio() + ","
-                    + auto.getAutoAsientosMaximos() + ",'"
-                    + auto.getAutoImagen() + "')";
+            } else {*/
+           cadena = "INSERT INTO AUTOMOVIL  (AUTOPLACA , USUARIOCI, AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
+                    + automovilDP.getAutoPlaca() + "',"
+                    +automovilDP.getUsuarioCI() +","
+                    + automovilDP.getAutoAnio() + ","
+                    + automovilDP.getAutoAsientosMaximos() + ",'"
+                    + automovilDP.getAutoImagen() + "')";
             error = "Ingreso Exitoso..";
             this.stm.executeUpdate(this.cadena);
             this.con.close();
             this.stm.close();
-            }
+
         } catch (NamingException ex) {
             /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -81,14 +109,14 @@ public class AutomovilMD {
     
     }
     
-    public void actualizarAutomovil(AutomovilDP auto){
+    public void actualizarAutomovil(){
          try {
-            DataSource DSAutomovil = this.getConnection0();
+            DataSource DSAutomovil = this.getAventronPool();
             this.con = DSAutomovil.getConnection();
             this.stm = this.con.createStatement();
-            this.cadena = "UPDATE AUTOMOVIL  SET AUTOANIO= '"+auto.getAutoAnio() 
-                    + "',  AUTOASIENTOSMAXIMOS = "+auto.getAutoAsientosMaximos() 
-                    +", AUTOIMAGEN ="+ auto.getAutoImagen() +"WHERE AUTOPLACA = "+auto.getAutoPlaca() ;
+            this.cadena = "UPDATE AUTOMOVIL  SET AUTOANIO= '"+automovilDP.getAutoAnio() 
+                    + "',  AUTOASIENTOSMAXIMOS = "+automovilDP.getAutoAsientosMaximos() 
+                    +", AUTOIMAGEN ="+ automovilDP.getAutoImagen() +"WHERE AUTOPLACA = "+automovilDP.getAutoPlaca() ;
             this.stm.executeUpdate(this.cadena);
             con.close();
             this.stm.close();
@@ -106,8 +134,10 @@ public class AutomovilMD {
         return resultado;
     }
     
-    private DataSource getConnection0() throws NamingException {
+    private DataSource getAventronPool() throws NamingException {
         Context c = new InitialContext();
-        return (DataSource) c.lookup("java:comp/env/connection0");
+        return (DataSource) c.lookup("java:comp/env/AventronPool");
     }
+    
+    
 }

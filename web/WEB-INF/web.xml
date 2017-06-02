@@ -30,8 +30,8 @@
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <resource-ref>
-        <description>jdbc:oracle:thin:@localhost:1521:Aventron0</description>
-        <res-ref-name>connection0</res-ref-name>
+        <description>jdbc:oracle:thin:@localhost:1521:orcl2</description>
+        <res-ref-name>AventronPool</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
