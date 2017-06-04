@@ -23,24 +23,13 @@
             <br></br>
             <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="INICIAR SESION" action="/VentanaIngresoUsuario.xhtml?faces-redirect=true"></ice:commandLink>
         </ice:form>
-        </h:head>
+      </h:head>
    
 
 
     <h:body>
         Bienvenido a AventronProto!!!!
-        <ace:tabSet clientSide="true" id="Cuerpo">
-            <ace:tabPane label="Inicio Aventron">
-                <ice:form>
-                    <ice:panelGrid columns="4" rowClasses="oddRow, evenRow" >                  
-                        <ice:commandButton id="usuario" value="  Regitrarse  " onclick = "window.close('VentanaInicioAventron.xhtml');window.open('Usuario_OfertanteGUI/VentanaRegistroUsuario_Ofertante.xhtml');"  ></ice:commandButton>
-                        <ice:commandButton id="automovil" value="  ProtoAutomovil  " onclick=" window.close('VentanaInicioAventron.xhtml');window.open('AutomovilGUI/VentanaInicioAutomovil.xhtml');"></ice:commandButton>
-                        <ice:commandButton id="ubicacion" value="  ProtoUbicación  " onclick=" window.close('VentanaInicioAventron.xhtml');window.open('UbicacionGUI/VentanaInicioUbicacion.xhtml');"></ice:commandButton>
-                        <ice:commandButton id="inicioses" value="  Inicar   " onclick=" window.close('VentanaInicioAventron.xhtml');window.open('UbicacionGUI/VentanaInicioUbicacion.xhtml');"></ice:commandButton>
-                    </ice:panelGrid>          
-                </ice:form>
-            </ace:tabPane>
-        </ace:tabSet>
+        Inicie una sesion o registrese ^^
     </h:body>
     <ace:panel id="employeeInfoOutputPanel">
         <ace:messages id="allMsgsA" />

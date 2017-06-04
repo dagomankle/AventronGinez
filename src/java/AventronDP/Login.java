@@ -45,7 +45,7 @@ public class Login implements Serializable {
         usuario.setEstadoSesion(true);
         if (usuario.getCiUsuario() != null) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Usuario", usuario);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/LoginGUI/VentanaInicioAventron.xhtml");
         } else {
             String message = "POR FAVOR INGRESE LOS DATOS CORRECTOS";
             FacesMessage facesMessage = new FacesMessage((FacesMessage.Severity) FacesMessage.VALUES.get(2), message, message);
@@ -57,7 +57,7 @@ public class Login implements Serializable {
        // this.setConfirmar(true);
         usuario.setEstadoSesion(false);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("../VentanaInicioAventron.xhtml");
 
     }
 

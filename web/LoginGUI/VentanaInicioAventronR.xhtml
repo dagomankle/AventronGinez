@@ -8,7 +8,9 @@
       xmlns:ace="http://www.icefaces.org/icefaces/components"
       xmlns:ice="http://www.icesoft.com/icefaces/component">
     <h:head>
-        <title>Eliminar Automovil</title>
+        
+        <title>Bienvenido</title>
+        
         <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion}">
             <ice:outputLabel style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; color: red; font-family: Verdana;" value="Bienvenido : #{login.usuario.nombreUsuario} (#{login.usuario.tipoUsuario})"></ice:outputLabel>
             <br></br>
@@ -20,11 +22,30 @@
             <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="REGISTRARSE" action="/VentanaRegistroUsuario_Ofertante.xhtml?faces-redirect=true"></ice:commandLink>
             <br></br>
             <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="INICIAR SESION" action="/VentanaIngresoUsuario.xhtml?faces-redirect=true"></ice:commandLink>
-        </ice:form>           
-        
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+        </ice:form>
+      </h:head>
+   
 
+
+    <h:body>
+        Bienvenido a AventronProto!!!!
+        <ace:tabSet clientSide="true" id="Cuerpo">
+            <ace:tabPane label="Inicio Aventron">
+                <ice:form>
+                    <ice:panelGrid columns="4" rowClasses="oddRow, evenRow" >                  
+                        <ice:commandButton id="usuario" value="  Regitrarse  " onclick = "window.close('VentanaInicioAventronR.xhtml');window.open('../Usuario_OfertanteGUI/VentanaRegistroUsuario_Ofertante.xhtml');"  ></ice:commandButton>
+                        <ice:commandButton id="automovil" value="  ProtoAutomovil  " onclick=" window.close('VentanaInicioAventronR.xhtml');window.open('../AutomovilGUI/VentanaInicioAutomovil.xhtml');"></ice:commandButton>
+                        <ice:commandButton id="ubicacion" value="  ProtoUbicación  " onclick=" window.close('VentanaInicioAventronR.xhtml');window.open('../UbicacionGUI/VentanaInicioUbicacion.xhtml');"></ice:commandButton>
+                        <ice:commandButton id="inicioses" value="  Inicar   " onclick=" window.close('VentanaInicioAventronR.xhtml');window.open('../UbicacionGUI/VentanaInicioUbicacion.xhtml');"></ice:commandButton>
+                    </ice:panelGrid>          
+                </ice:form>
+            </ace:tabPane>
+        </ace:tabSet>
+    </h:body>
+    <ace:panel id="employeeInfoOutputPanel">
+        <ace:messages id="allMsgsA" />
+
+        Hecho por JuanCarlos Cruz, Daniel Ginez, Romina Jaramillo, Jaime Subia.   
+
+    </ace:panel>
+</html>
