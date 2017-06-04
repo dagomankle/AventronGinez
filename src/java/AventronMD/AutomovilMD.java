@@ -48,7 +48,7 @@ public class AutomovilMD {
             
             while (rs.next()) {
                 String autoPlaca = rs.getString("AUTOPLACA");
-                int usuarioCI = rs.getInt("USUARIOCI");
+                String usuarioCI = rs.getString("USUARIOCI");
                 Date autoAnio = rs.getDate("AUTOANIO");
                 int autoAsientosMaximos = rs.getInt("AUTOASIENTOSMAXIMOS");
                 Blob autoImagen = rs.getBlob("AUTOIMAGEN");
@@ -79,8 +79,8 @@ public class AutomovilMD {
             DataSource DSAutomovil = this.getAventronPool();
             this.con = DSAutomovil.getConnection();
            cadena = "INSERT INTO AUTOMOVIL  (AUTOPLACA , USUARIOCI, AUTOANIO,  AUTOASIENTOSMAXIMOS, AUTOIMAGEN ) values('"
-                    + automovilDP.getAutoPlaca() + "',"
-                    +automovilDP.getUsuarioCI() +", to_date('"
+                    + automovilDP.getAutoPlaca() + "','"
+                    +automovilDP.getUsuarioCI() +"', to_date('"
                     + automovilDP.getAutoAnio() + "','yyyy-mm-dd'),"
                     + automovilDP.getAutoAsientosMaximos() + ",'"
                     + automovilDP.getAutoImagen() + "')";

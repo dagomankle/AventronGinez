@@ -22,7 +22,7 @@ import javax.enterprise.context.RequestScoped;
 public class AutomovilDP {
 
     private String autoPlaca;
-    private int usuarioCI;
+    private String usuarioCI;
     private Date autoAnio;
     private int autoAsientosMaximos;
     private Blob autoImagen;
@@ -32,11 +32,11 @@ public class AutomovilDP {
      * Creates a new instance of AutomovilDP
      */
     public AutomovilDP() {
-        this.usuarioCI = 12345;
+        this.usuarioCI = "12345";
         this.vecinos = this.cargarAutomoviles();
     }
 
-    public AutomovilDP(String autoPlaca, int usuarioCI, Date autoAnio, int autoAsientosMaximos, Blob autoImagen) {
+    public AutomovilDP(String autoPlaca, String usuarioCI, Date autoAnio, int autoAsientosMaximos, Blob autoImagen) {
         this.autoPlaca = autoPlaca;
         this.usuarioCI = usuarioCI;
         this.autoAnio = autoAnio;
@@ -61,7 +61,7 @@ public class AutomovilDP {
         return autoImagen;
     }
 
-    public int getUsuarioCI() {
+    public String getUsuarioCI() {
         return usuarioCI;
     }
 
@@ -85,7 +85,7 @@ public class AutomovilDP {
         this.autoImagen = autoImagen;
     }
 
-    public void setUsuarioCI(int usuarioCI) {
+    public void setUsuarioCI(String usuarioCI) {
         this.usuarioCI = usuarioCI;
     }
 
