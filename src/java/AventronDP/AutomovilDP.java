@@ -6,11 +6,12 @@
 package AventronDP;
 
 import AventronMD.AutomovilMD;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.sql.rowset.serial.SerialBlob;
+
 
 /**
  *
@@ -24,19 +25,24 @@ public class AutomovilDP {
     private int usuarioCI;
     private Date autoAnio;
     private int autoAsientosMaximos;
-    private  SerialBlob autoImagen;    
+    private Blob autoImagen;
+    private List<AutomovilDP> vecinos;
     
     /**
      * Creates a new instance of AutomovilDP
      */
     public AutomovilDP() {
+        this.usuarioCI = 12345;
+        this.vecinos = this.cargarAutomoviles();
     }
 
-    public AutomovilDP(String autoPlaca, Date autoAnio, int autoAsientosMaximos, SerialBlob autoImagen) {
+    public AutomovilDP(String autoPlaca, int usuarioCI, Date autoAnio, int autoAsientosMaximos, Blob autoImagen) {
         this.autoPlaca = autoPlaca;
+        this.usuarioCI = usuarioCI;
         this.autoAnio = autoAnio;
         this.autoAsientosMaximos = autoAsientosMaximos;
         this.autoImagen = autoImagen;
+        this.vecinos = null;
     }
 
     public String getAutoPlaca() {
@@ -51,7 +57,7 @@ public class AutomovilDP {
         return autoAsientosMaximos;
     }
 
-    public SerialBlob getAutoImagen() {
+    public Blob getAutoImagen() {
         return autoImagen;
     }
 
@@ -59,6 +65,10 @@ public class AutomovilDP {
         return usuarioCI;
     }
 
+    public List<AutomovilDP> getVecinos() {
+        return vecinos;
+    }
+    
     public void setAutoPlaca(String autoPlaca) {
         this.autoPlaca = autoPlaca;
     }
@@ -71,41 +81,51 @@ public class AutomovilDP {
         this.autoAsientosMaximos = autoAsientosMaximos;
     }
 
-    public void setAutoImagen(SerialBlob autoImagen) {
+    public void setAutoImagen(Blob autoImagen) {
         this.autoImagen = autoImagen;
     }
 
     public void setUsuarioCI(int usuarioCI) {
         this.usuarioCI = usuarioCI;
     }
- 
-    public void guardarAutomovil(String tipo){
+
+    public void setVecinos(List<AutomovilDP> vecinos) {
+        this.vecinos = vecinos;
+    }
+     
+    public void guardarAutomovil(){
         AutomovilMD controlMD = new AutomovilMD(this);
-        if (tipo == "insertar")
-            controlMD.insertarAutomovil();
-        if (tipo == "actualizar")
-            controlMD.actualizarAutomovil();
+        controlMD.insertarAutomovil();
+    }
+
+    public void modificarAutomovil(){
+        AutomovilMD controlMD = new AutomovilMD(this);
+        controlMD.actualizarAutomovil();
     }
     
-    public AutomovilDP cargarAutomovil(String placa){
+    public void cargarAutomovil(){
         AutomovilMD controlMD = new AutomovilMD(this);
-        return controlMD.recuperarAutomovil(placa);
+        AutomovilDP sera = controlMD.recuperarAutomovil();
+        this.autoPlaca = sera.autoPlaca;
+        this.usuarioCI = sera.usuarioCI;
+        this.autoAnio = sera.autoAnio;
+        this.autoAsientosMaximos = sera.autoAsientosMaximos;
+        this.autoImagen = sera.autoImagen;
     }
     
     public List<AutomovilDP> cargarAutomoviles(){
         AutomovilMD controlMD = new AutomovilMD(this);
-        return controlMD.recuperarAutomoviles();
+        return controlMD.recuperarAutomoviles(this);
     }
     
-    public void descartarAutomovil(String placa){
+    public void descartarAutomovil(){
         AutomovilMD controlMD = new AutomovilMD(this);
-        controlMD.eliminarAutomovil(placa);
+        controlMD.eliminarAutomovil(this.autoPlaca);
     }
     
     public boolean verificarAutomovil(){
         AutomovilMD controlMD = new AutomovilMD(this);
         return controlMD.validarAutomovil(this);
     }    
-    
     
 }

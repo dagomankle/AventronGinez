@@ -10,7 +10,7 @@
     
     <h:head>
         <link rel="stylesheet" type="text/css" />
-        <title>Crear Automovil</title>
+        <title>Modificar Automovil</title>
              
     </h:head>
     
@@ -22,13 +22,12 @@
                     <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
                         
                         <ice:outputText id="in1" value="Seleccione Placa de Automovil:"></ice:outputText>
-                        <ace:simpleSelectOneMenu id="smenux" value="#{automovilDP.CargarAutomovil(placa)}">
-                            <f:selectItem id="seler1" itemValue="1"/>
-                            <ace:ajax render="@this smenu"/>
-                        </ace:simpleSelectOneMenu>
+                        <h:selectOneMenu value="#{automovilDP.cargarAutomovil() }">
+                            <f:selectItems value="#{automovilDP.vecinos}" />
+                        </h:selectOneMenu>
                         
                         <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
-                        <ace:dateTimeEntry id="Codigo1" value="#{automovilDP.autoAnio}" label="Codigo" >
+                        <ace:dateTimeEntry id="Codigo1" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >
                             
                         </ace:dateTimeEntry>
                         
