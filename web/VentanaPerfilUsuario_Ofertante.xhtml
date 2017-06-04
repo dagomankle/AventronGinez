@@ -6,11 +6,12 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:icecore="http://www.icefaces.org/icefaces/core"
       xmlns:ace="http://www.icefaces.org/icefaces/components"
-      xmlns:ice="http://www.icesoft.com/icefaces/component">
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        
+
         <title>PERFIL USUARIO</title>
-        
+
         <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion}">
             <ice:outputLabel style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; color: red; font-family: Verdana;" value="Bienvenido : #{login.usuario.nombreUsuario} (#{login.usuario.tipoUsuario})"></ice:outputLabel>
             <br></br>
@@ -23,9 +24,36 @@
             <br></br>
             <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="INICIAR SESION" action="/VentanaIngresoUsuario.xhtml?faces-redirect=true"></ice:commandLink>
         </ice:form>
-        </h:head>
+    </h:head>
     <h:body>
-        
+        <ui:define name="example">
+            <h:form id="form">
+                <ace:tabSet id="sampleTabSet" clientSide="false">
+                    <ace:tabPane id="toDoList" label="To Do List">
+                        <h:selectManyCheckbox id="list" layout="pageDirection" selectedClass="selectedCheckBox" >
+                            <f:selectItems value="#{tabSet.toDoList}"
+                                           var="listItem"
+                                           itemValue="#{listItem.value}"
+                                           itemLabel="#{listItem.key}"/>
+                            <f:ajax execute="@this" render="@all"/>
+                        </h:selectManyCheckbox>
+                    </ace:tabPane>
+                    <ace:tabPane id="shoppingList" label="Shopping List">
+
+                    </ace:tabPane>
+                    <ace:tabPane id="picOfDay" label="Picture Of The Day">
+
+                    </ace:tabPane>
+                    <ace:tabPane id="calendar" label="Calendar">
+                        <h:panelGrid styleClass="centeredPanelGrid" >
+                            <ace:dateTimeEntry id="cal"
+                                               timeZone="Canada/Mountain"
+                                               pattern="MMM/dd/yyyy" />
+                        </h:panelGrid>
+                    </ace:tabPane>
+                </ace:tabSet>
+            </h:form>
+        </ui:define>
     </h:body>
 </html>
 

@@ -54,11 +54,9 @@ public class Login implements Serializable {
     }
 
     public void Cerrar() throws IOException {
-       // this.setConfirmar(true);
+        // this.setConfirmar(true);
         usuario.setEstadoSesion(false);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
         FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
-
     }
-
 }

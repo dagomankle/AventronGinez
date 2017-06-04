@@ -14,7 +14,7 @@
         <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion}">
             <ice:outputLabel style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; color: red; font-family: Verdana;" value="Bienvenido : #{login.usuario.nombreUsuario} (#{login.usuario.tipoUsuario})"></ice:outputLabel>
             <br></br>
-            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="CERRAR SESION" action="#{login.Cerrar()}"></ice:commandLink>
+            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="CERRAR SESION" action="#{login.Cerrar(1)}"></ice:commandLink>
             <br></br>
             <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="PERFIL" action="/VentanaPerfilUsuario_Ofertante.xhtml?faces-redirect=true"></ice:commandLink>
         </ice:form>
