@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+    <h:head>
+        <link rel="stylesheet" type="text/css" />
+        <title>CREAR CUENTA</title>
+             
+    </h:head>
+    
+    <h:body>
+         Bienvenido a Creacion de Cuentas Proto
+                <ace:tabSet clientSide="true" id="Cuerpo">
+            <ace:tabPane label="INGRESO DE USUARIOS">
+                <ice:form>
+                    <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+                        <ice:outputText id="out1" value="Ingrese CI de usuario:"></ice:outputText>
+                        <ace:textEntry id="Codigo" value="#{usuarioDP.ciUsuario}" label="Codigo" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
+                        </ace:textEntry>
+                        <ice:outputText id="out3" value="Ingrese nombre de usuario:"></ice:outputText>
+                        <ace:textEntry id="Nombre" value="#{usuarioDP.nombreUsuario}" label="Nombre" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
+                        </ace:textEntry>
+                        
+                        <ice:outputText id="out2" value="Seleccione el tipo de usuario:"></ice:outputText>
+                        <ace:comboBox id="smenu" value="#{usuarioDP.tipoUsuario}">
+                            <f:selectItem id="sele1" itemValue="Usuario"/>
+                            <f:selectItem id="sele2" itemValue="Ofertante"/>
+           
+                            <ace:ajax render="@this smenu"/>
+                        </ace:comboBox>
+                        
+                        <ice:outputText id="out5" value="Seleccione sexo de usuario:"></ice:outputText>
+                        <ace:comboBox id="smenu2" value="#{usuarioDP.sexoUsuario}">
+                            <f:selectItem id="sele5" itemValue="Masculino"/>
+                            <f:selectItem id="sele6" itemValue="Femenino"/>
+           
+                            <ace:ajax render="@this smenu"/>
+                        </ace:comboBox>
+                        
+                        
+                        <ice:outputText id="out4" value="Ingrese la contraseña del usuario:"></ice:outputText>
+                        <ace:textEntry id="Contraseña" value="#{usuarioDP.contrasenaUsuario}" label="Contraseña" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
+                        </ace:textEntry>
+                        <ice:commandButton id="insertar" value="Guardar" action="#{usuarioDP.guardar()}"></ice:commandButton>
+                    </ice:panelGrid>
+                    <h:panelGroup rendered="#{usuarioDP.verDialogo}">
+                        <ace:dialog id="dialogServer"
+                                    header="Mensaje"
+                                    closable="false"
+                                    modal="true"
+                                    draggable="false"
+                                    showEffect="clip"
+                                    hideEffect="fade"
+                                    width="400"
+                                    visible="true"
+                                    rendered="#{usuarioDP.verDialogo}"
+                                    widgetVar="dialogo">
+                            <h:panelGrid width="100%" style="text-align: center;" columns="1">
+                                <h:outputLabel id="firstNameLabel" style="color: black;" value="#{usuarioDP.error}"/>
+                                <h:commandButton id="submitServer" value="Aceptar"  onclick = "window.close('VentanaRegistroUsuario_Ofertante.xhtml');window.open('VentanaInicioAventron.xhtml');">
+                                   
+                                </h:commandButton>
+                            </h:panelGrid>
+                        </ace:dialog>
+                    </h:panelGroup>
+                </ice:form>
+            </ace:tabPane>
+        </ace:tabSet>
+    </h:body>
+    <ace:panel id="employeeInfoOutputPanel">
+        <ace:messages id="allMsgsA" />
+    </ace:panel>
+</html>

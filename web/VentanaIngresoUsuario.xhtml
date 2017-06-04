@@ -5,17 +5,8 @@
       xmlns:ace="http://www.icefaces.org/icefaces/components"
       xmlns:ice="http://www.icesoft.com/icefaces/component">
     <h:head>
-       
-        <title>Inicio de sesión</title>
-        
+        <title>INICIAR SESION</title>
     </h:head>
-    <script type="text/javascript">
-        function deshabilitaRetroceso(){
-    window.location.hash="no-back-button";
-    window.location.hash="Again-No-back-button" //chrome
-    window.onhashchange=function(){window.location.hash="no-back-button";}
-}
-    </script>
     <h:body onload="deshabilitaRetroceso();" onunload="Javascript:history.go(1);">
             <ice:form>
             <ace:panel id="Login" header="INICIO DE SESIÓN"  style="text-align: center;">
@@ -32,5 +23,4 @@
         </ice:form>
     </h:body>
 </html>
-
 
