@@ -27,7 +27,7 @@
                         </ace:textEntry>
                         
                         <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
-                        <ace:dateTimeEntry id="Codigo1" value="#{automovilDP.autoAnio}" label="Codigo" >
+                        <ace:dateTimeEntry id="Codigo1" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >
                             
                         </ace:dateTimeEntry>
                         
@@ -59,7 +59,7 @@
                         <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}">  
                         </ace:fileEntry>
                         
-                        <ice:commandButton id="insertar" value="Guardar" action="#{ofertanteDP.Insertar}"></ice:commandButton>
+                        <ice:commandButton id="insertar" value="Guardar" action="#{automovilDP.guardarAutomovil()}"></ice:commandButton>
                     </ice:panelGrid>
                     <h:panelGroup rendered="#{ofertanteDP.verDialogo}">
                         <ace:dialog id="dialogServer"

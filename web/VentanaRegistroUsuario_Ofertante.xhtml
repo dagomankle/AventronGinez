@@ -12,55 +12,46 @@
         <title>CREAR CUENTA</title>
              
     </h:head>
-    <!--Comentario -->
+    
     <h:body>
-        <ace:tabSet clientSide="true" id="Cuerpo">
-            <ace:tabPane label="CREAR NUEVA CUENTA">
+         Bienvenido a Creacion de Cuentas Proto
+                <ace:tabSet clientSide="true" id="Cuerpo">
+            <ace:tabPane label="INGRESO DE USUARIOS">
                 <ice:form>
                     <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
-                        
-                        <ice:outputText id="out1" value="Ingrese el CI del Usuario:"></ice:outputText>
-                        <ace:textEntry id="Codigo" value="#{ofertanteDP.usuarioCI}" label="Codigo" >
-                            <ace:ajax event="blur" render="allMsgsA"/>
+                        <ice:outputText id="out1" value="Ingrese CI de usuario:"></ice:outputText>
+                        <ace:textEntry id="Codigo" value="#{usuarioDP.ciUsuario}" label="Codigo" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
+                        </ace:textEntry>
+                        <ice:outputText id="out3" value="Ingrese nombre de usuario:"></ice:outputText>
+                        <ace:textEntry id="Nombre" value="#{usuarioDP.nombreUsuario}" label="Nombre" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
                         </ace:textEntry>
                         
-                        <ice:outputText id="out2" value="Ingrese su nombre:"></ice:outputText>
-                        <ace:textEntry id="Codigo1" value="#{ofertanteDP.usuarioNombre}" label="Codigo" >
-                            <ace:ajax event="blur" render="allMsgsA"/>
-                        </ace:textEntry>
-                        
-                        <ice:outputText id="out3" value="Seleccione el tipo:"></ice:outputText>
-                        <ace:comboBox id="smenu" value="#{ofertanteDP.usuarioTipo}">
+                        <ice:outputText id="out2" value="Seleccione el tipo de usuario:"></ice:outputText>
+                        <ace:comboBox id="smenu" value="#{usuarioDP.tipoUsuario}">
                             <f:selectItem id="sele1" itemValue="Usuario"/>
                             <f:selectItem id="sele2" itemValue="Ofertante"/>
+           
+                            <ace:ajax render="@this smenu"/>
+                        </ace:comboBox>
+                        
+                        <ice:outputText id="out5" value="Seleccione sexo de usuario:"></ice:outputText>
+                        <ace:comboBox id="smenu2" value="#{usuarioDP.sexoUsuario}">
+                            <f:selectItem id="sele5" itemValue="Masculino"/>
+                            <f:selectItem id="sele6" itemValue="Femenino"/>
+           
                             <ace:ajax render="@this smenu"/>
                         </ace:comboBox>
                         
                         
-                        <ice:outputText id="out4" value="Seleccione su sexo:"></ice:outputText>
-                        <ace:comboBox id="smenu1" value="#{ofertanteDP.usuarioSexo}">
-                            <f:selectItem id="sele1" itemValue="Masculino"/>
-                            <f:selectItem id="sele2" itemValue="Femenino"/>
-                            <ace:ajax render="@this smenu"/>
-                        </ace:comboBox>
-                        
-                        
-                        <ice:outputText id="out5" value="Ingrese la contraseña del usuario:"></ice:outputText>
-                        <ace:textEntry id="Contraseña" value="#{ofertanteDP.usuarioContrasena}" label="Contraseña" >
-                            <ace:ajax event="blur" render="allMsgsA"/>
+                        <ice:outputText id="out4" value="Ingrese la contraseña del usuario:"></ice:outputText>
+                        <ace:textEntry id="Contraseña" value="#{usuarioDP.contrasenaUsuario}" label="Contraseña" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
                         </ace:textEntry>
-                        
-                        <ice:outputText id="out6" value="Seleccione su tipo de licencia:"></ice:outputText>
-                        <ace:comboBox id="smenu2" value="#{ofertanteDP.ofertanteTipoLic}">
-                            <f:selectItem id="sele1" itemValue="A"/>
-                            <f:selectItem id="sele2" itemValue="B"/>
-                            <ace:ajax render="@this smenu"/>
-                        </ace:comboBox>
-                        
-                        
-                        <ice:commandButton id="insertar" value="Guardar" action="#{ofertanteDP.Insertar}"></ice:commandButton>
+                        <ice:commandButton id="insertar" value="Guardar" action="#{usuarioDP.guardar()}"></ice:commandButton>
                     </ice:panelGrid>
-                    <h:panelGroup rendered="#{ofertanteDP.verDialogo}">
+                    <h:panelGroup rendered="#{usuarioDP.verDialogo}">
                         <ace:dialog id="dialogServer"
                                     header="Mensaje"
                                     closable="false"
@@ -70,13 +61,13 @@
                                     hideEffect="fade"
                                     width="400"
                                     visible="true"
-                                    rendered="#{ofertanteDP.verDialogo}"
+                                    rendered="#{usuarioDP.verDialogo}"
                                     widgetVar="dialogo">
                             <h:panelGrid width="100%" style="text-align: center;" columns="1">
-                                <h:outputLabel id="firstNameLabel" style="color: white;" value="#{ofertanteDP.error}"/>
-                               <h:commandButton id="submitServer" value="Aceptar"  onclick="window.location.reload('index.xhtml');">
-                                    <ace:ajax render="@none"></ace:ajax>
-                                </h:commandButton> 
+                                <h:outputLabel id="firstNameLabel" style="color: black;" value="#{usuarioDP.error}"/>
+                                <h:commandButton id="submitServer" value="Aceptar"  onclick = "window.close('VentanaRegistroUsuario_Ofertante.xhtml');window.open('VentanaInicioAventron.xhtml');">
+                                   
+                                </h:commandButton>
                             </h:panelGrid>
                         </ace:dialog>
                     </h:panelGroup>

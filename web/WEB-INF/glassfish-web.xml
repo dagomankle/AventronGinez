@@ -6,6 +6,10 @@
     <res-ref-name>connection0</res-ref-name>
     <jndi-name>java:app/connection0</jndi-name>
   </resource-ref>
+  <resource-ref>
+    <res-ref-name>AventronPool</res-ref-name>
+    <jndi-name>jdbc/AventronPool</jndi-name>
+  </resource-ref>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
