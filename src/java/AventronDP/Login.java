@@ -75,7 +75,7 @@ public class Login implements Serializable {
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Usuario", usuario);
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/LoginGUI/VentanaInicioAventron.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
 
         } else {
 
@@ -96,7 +96,7 @@ public class Login implements Serializable {
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
 
-        FacesContext.getCurrentInstance().getExternalContext().redirect("../VentanaInicioAventron.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
 
     }
 

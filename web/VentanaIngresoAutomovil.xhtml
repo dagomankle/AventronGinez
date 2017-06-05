@@ -28,14 +28,12 @@
     <h:body>
          Bienvenido a Ingreso de automobil Proto
         <ace:tabSet clientSide="true" id="Cuerpo">
-            <ace:tabPane label="Ingresar Nuevo Automovil para: #{login.usuario.ciUsuario}">
+            <ace:tabPane label="Ingresar Nuevo Automovil">
                 <ice:form>
                     <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
                         
-                        <ice:outputText id="out1" value="Ingreso para el CI:"></ice:outputText>
-                        <ace:textEntry id="placa" value="#{automovilDP.usuarioCI}" label="Placa" >
-                            <ace:ajax event="blur" render="allMsgsA" />
-                        </ace:textEntry>     
+                        <ice:outputText id="out0" value="Ingreso para el CI:"></ice:outputText>
+                        <ice:outputText id="outcCI" value="#{login.usuario.ciUsuario}"></ice:outputText>  
                         
                         <ice:outputText id="out1" value="Ingrese la placa del Automovil:"></ice:outputText>
                         <ace:textEntry id="placa" value="#{automovilDP.autoPlaca}" label="Placa" >
