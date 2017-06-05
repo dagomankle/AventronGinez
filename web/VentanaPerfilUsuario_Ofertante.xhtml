@@ -7,7 +7,8 @@
       xmlns:icecore="http://www.icefaces.org/icefaces/core"
       xmlns:ace="http://www.icefaces.org/icefaces/components"
       xmlns:ice="http://www.icesoft.com/icefaces/component"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
 
         <title>PERFIL USUARIO</title>
@@ -40,8 +41,27 @@
 
 
                 </ace:tabPane>
-                <ace:tabPane id="shoppingList" label="Shopping List">
 
+                <ace:tabPane id="ModifCuenta" label="Modificar Cuenta">
+                    <ice:panelGrid id ="pnlGridUsuario2" columns="2" rowClasses="oddRow, evenRow">
+                        <h:outputLabel value="Número de Cédula: "></h:outputLabel> 
+                        <h:outputLabel value="#{login.usuario.ciUsuario}" ></h:outputLabel>               
+                        <h:outputLabel value="Nombre: #{login.usuario.nombreUsuario}"></h:outputLabel>
+                        <ice:inputText id="NombreO" value="#{usuarioDP.nombreUsuario}"></ice:inputText>  
+                        <h:outputLabel value="Tipo de cuenta: "></h:outputLabel>
+                        <h:outputLabel value="#{login.usuario.tipoUsuario}"></h:outputLabel>
+                        <ice:outputText id="out5" value="Seleccione sexo de usuario:"></ice:outputText>
+                        <ace:comboBox id="smenu2" value="#{usuarioDP.sexoUsuario}">
+                            <f:selectItem id="sele5" itemValue="Masculino"/>
+                            <f:selectItem id="sele6" itemValue="Femenino"/>
+                            <ace:ajax render="@this smenu"/>
+                        </ace:comboBox>
+                        <ice:outputText id ="inCodigMod" value="Ingrese la contraseña nueva: "></ice:outputText>
+                        <ace:textEntry id="Contraseña" value="#{usuarioDP.contrasenaUsuario}" label="Contraseña" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
+                        </ace:textEntry>
+                        <ice:commandButton value="Modificar" action="#{usuarioDP.modificar(login.usuario.ciUsuario,login.usuario.tipoUsuario)}" onclick="window.location.reload('VentanaInicioAventron.xhtml');"></ice:commandButton>
+                    </ice:panelGrid>
                 </ace:tabPane>
                 <ace:tabPane id="picOfDay" label="Picture Of The Day">
 

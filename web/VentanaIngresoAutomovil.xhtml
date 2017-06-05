@@ -73,9 +73,9 @@
                         <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}">  
                         </ace:fileEntry>
                         
-                        #{automovilDP.autoImagen} = #{login.usuario.ciUsuario}
                         
-                        <ice:commandButton id="insertar" value="Guardar" action="#{automovilDP.guardarAutomovil()}"></ice:commandButton>
+                        
+                        <ice:commandButton id="insertar" value="Guardar" action="#{automovilDP.usuarioCI} = #{login.usuario.ciUsuario};#{automovilDP.guardarAutomovil()}"></ice:commandButton>
                     </ice:panelGrid>
                     <h:panelGroup rendered="#{ofertanteDP.verDialogo}">
                         <ace:dialog id="dialogServer"

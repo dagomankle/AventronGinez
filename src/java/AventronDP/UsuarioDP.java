@@ -96,12 +96,17 @@ public class UsuarioDP {
         this.verpaginas = verpaginas;
     }
 
-    public void modificar() throws NamingException, SQLException {
+    public void modificar(String CI, String tipo) throws NamingException, SQLException {
         UsuarioMD usuario = new UsuarioMD();
-        Login nuevL = new Login();
-        ciUsuario = nuevL.usuario.getCiUsuario();
+        //Login nuevL = new Login();
+        //this.ciUsuario = nuevL.usuario.getCiUsuario();
+        this.ciUsuario = CI;
+        this.tipoUsuario=tipo;
         UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
-        
+        if(nueva.sexoUsuario.equals("Masculino")){
+            nueva.sexoUsuario="M";
+        }
+        else nueva.sexoUsuario = "F";
         usuario.Modificar(nueva);
         ciUsuario = "";
         tipoUsuario = "";
@@ -109,6 +114,8 @@ public class UsuarioDP {
         contrasenaUsuario = "";
         sexoUsuario ="";
     }
+    
+    
 
     public List<SelectItem> RetornarCodigos() throws NamingException, SQLException {
         ArrayList<SelectItem> retorno = new ArrayList<SelectItem>();
