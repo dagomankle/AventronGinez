@@ -26,34 +26,36 @@
         </ice:form>
     </h:head>
     <h:body>
-        <ui:define name="example">
-            <h:form id="form">
-                <ace:tabSet id="sampleTabSet" clientSide="false">
-                    <ace:tabPane id="toDoList" label="To Do List">
-                        <h:selectManyCheckbox id="list" layout="pageDirection" selectedClass="selectedCheckBox" >
-                            <f:selectItems value="#{tabSet.toDoList}"
-                                           var="listItem"
-                                           itemValue="#{listItem.value}"
-                                           itemLabel="#{listItem.key}"/>
-                            <f:ajax execute="@this" render="@all"/>
-                        </h:selectManyCheckbox>
-                    </ace:tabPane>
-                    <ace:tabPane id="shoppingList" label="Shopping List">
 
-                    </ace:tabPane>
-                    <ace:tabPane id="picOfDay" label="Picture Of The Day">
+        <h:form id="form">
+            <ace:tabSet id="sampleTabSet" clientSide="false">
+                <ace:tabPane id="toDoList" label="Perfil">
+                    <h:outputLabel value="Cédula: #{login.usuario.ciUsuario}"></h:outputLabel>
+                    <br></br>
+                    <h:outputLabel value="Nombre: #{login.usuario.nombreUsuario}"></h:outputLabel>
+                    <br></br>
+                    <h:outputLabel value="Tipo de cuenta: #{login.usuario.tipoUsuario}"></h:outputLabel>
+                    <br></br>
+                    <h:outputLabel value="Sexo: #{login.usuario.sexoUsuario}"></h:outputLabel>
 
-                    </ace:tabPane>
-                    <ace:tabPane id="calendar" label="Calendar">
-                        <h:panelGrid styleClass="centeredPanelGrid" >
-                            <ace:dateTimeEntry id="cal"
-                                               timeZone="Canada/Mountain"
-                                               pattern="MMM/dd/yyyy" />
-                        </h:panelGrid>
-                    </ace:tabPane>
-                </ace:tabSet>
-            </h:form>
-        </ui:define>
+
+                </ace:tabPane>
+                <ace:tabPane id="shoppingList" label="Shopping List">
+
+                </ace:tabPane>
+                <ace:tabPane id="picOfDay" label="Picture Of The Day">
+
+                </ace:tabPane>
+                <ace:tabPane id="calendar" label="Calendar">
+                    <h:panelGrid styleClass="centeredPanelGrid" >
+                        <ace:dateTimeEntry id="cal"
+                                           timeZone="Canada/Mountain"
+                                           pattern="MMM/dd/yyyy" />
+                    </h:panelGrid>
+                </ace:tabPane>
+            </ace:tabSet>
+        </h:form>
+
     </h:body>
 </html>
 

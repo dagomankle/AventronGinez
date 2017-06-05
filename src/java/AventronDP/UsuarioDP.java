@@ -98,7 +98,10 @@ public class UsuarioDP {
 
     public void modificar() throws NamingException, SQLException {
         UsuarioMD usuario = new UsuarioMD();
+        Login nuevL = new Login();
+        ciUsuario = nuevL.usuario.getCiUsuario();
         UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
+        
         usuario.Modificar(nueva);
         ciUsuario = "";
         tipoUsuario = "";
