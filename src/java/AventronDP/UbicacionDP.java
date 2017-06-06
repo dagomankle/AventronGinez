@@ -7,12 +7,15 @@ package AventronDP;
 
 import AventronMD.UbicacionMD;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author JUANCARLOS
  */
-
+@Named(value = "ubicacionDP")
+@RequestScoped
 public class UbicacionDP {
     private int ubicacionId;
     private int usuarioCI;
@@ -72,10 +75,10 @@ public class UbicacionDP {
     }
     
     //*********************************************************************************************************
-    public boolean GuardarUbicacion()
+    public void GuardarUbicacion()
     {
         UbicacionMD ubicacion=new UbicacionMD();
-        return ubicacion.GuardarUbicacion(this);
+        ubicacion.GuardarUbicacion(this);
     }
     public List<UbicacionDP> CargarUbicaciones()
     {
