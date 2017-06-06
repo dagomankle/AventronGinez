@@ -60,23 +60,21 @@
                         <ace:textEntry id="Contraseña" value="#{usuarioDP.contrasenaUsuario}" label="Contraseña" >
                             <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
                         </ace:textEntry>
-                        <ice:commandButton value="Modificar" action="#{usuarioDP.modificar(login.usuario.ciUsuario,login.usuario.tipoUsuario)}" onclick="window.location.reload('VentanaInicioAventron.xhtml');"></ice:commandButton>
+                        <ice:commandButton value="Modificar" onclick="Confirmacion.show()" type="button"></ice:commandButton>
 
-
-                        <ice:commandButton value="Eliminar" onclick="Confirmacion.show();" type="button"></ice:commandButton>
                         <ice:outputText id="outcome" value="#{usuarioDP.retorno}" rendered="#{usuarioDP.retorno != null}"></ice:outputText>
-                        <ace:confirmationDialog class="DialogoEliminar" widgetVar="Confirmacion"
+                        <ace:confirmationDialog class="DialogoModificar" widgetVar="Confirmacion"
                                                 message="Seguro desea modificar su esto?"
-                                                header="Eliminar"
+                                                header="Modificar"
                                                 width="350"
                                                 height="180"
                                                 closable="true"
                                                 position="center">
                             <ice:panelGrid columns="2" styleClass="centeredPanelGrid">
-                                <ice:commandButton id="Si" value="Si" onclick="Confirmacion.hide();" actionListener="#{usuario.SI}" >
+                                <ice:commandButton id="Si" value="Si" actionListener="#{usuarioDP.ConfModi(actionEvent, login.usuario.ciUsuario, login.usuario.tipoUsuario)}" onclick="Confirmacion.hide(); window.location.reload('VentanaInicioAventron.xhtml')">
                                     <f:ajax execute="@this" render="@all"/>
                                 </ice:commandButton>
-                                <ice:commandButton id="No" value="No" onclick="Confirmacion.hide(); window.location.reload('PaginaUsuarioEliminar.xhtml');" actionListener="#{usuario.No}" >
+                                <ice:commandButton id="No" value="No" onclick="window.close('VentanaPerfilUsuario_Ofertante.xhtml');window.open('VentanaInicioAventron.xhtml');" actionListener="#{usuarioDP.No}" >
                                     <f:ajax execute="@this" render="@all"/>
                                 </ice:commandButton>
                             </ice:panelGrid>
