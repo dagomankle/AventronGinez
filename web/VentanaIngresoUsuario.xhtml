@@ -1,26 +1,27 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ace="http://www.icefaces.org/icefaces/components"
-      xmlns:ice="http://www.icesoft.com/icefaces/component">
-    <h:head>
-        <title>INICIAR SESION</title>
-    </h:head>
-    <h:body onload="deshabilitaRetroceso();" onunload="Javascript:history.go(1);">
-            <ice:form>
-            <ace:panel id="Login" header="INICIO DE SESIÓN"  style="text-align: center;">
-                <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" style="margin: 0 auto;">
-                    <ice:outputText value="Usuario:"></ice:outputText>
-                    <ice:inputText value="#{login.usuario.ciUsuario}"></ice:inputText>
-                    <ice:outputText value="Contraseña:"></ice:outputText>
-                    <ice:inputSecret value="#{login.usuario.contrasenaUsuario}"></ice:inputSecret>
-                </ice:panelGrid>
-                <br />
-                <ice:commandButton value="Ingresar" type="submit" action="#{login.autenticar()}" ></ice:commandButton>
-
-            </ace:panel>
-        </ice:form>
-    </h:body>
-</html>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:ace="http://www.icefaces.org/icefaces/components" 
+      xmlns:ice="http://www.icesoft.com/icefaces/component"> 
+    <h:head> 
+        <title>INICIAR SESION</title> 
+    </h:head> 
+    <h:body onload="deshabilitaRetroceso();" onunload="Javascript:history.go(1);"> 
+            <ice:form> 
+            <ace:panel id="Login" header="INICIO DE SESIÓN"  style="text-align: center;"> 
+                <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" style="margin: 0 auto;"> 
+                    <ice:outputText value="Usuario:"></ice:outputText> 
+                    <ice:inputText value="#{login.usuario.ciUsuario}"></ice:inputText> 
+                    <ice:outputText value="Contraseña:"></ice:outputText> 
+                    <ice:inputSecret value="#{login.usuario.contrasenaUsuario}"></ice:inputSecret> 
+                </ice:panelGrid> 
+                <br /> 
+                <ice:commandButton value="Ingresar" type="submit" action="#{login.autenticar()}" ></ice:commandButton> 
+ 
+            </ace:panel> 
+        </ice:form> 
+    </h:body> 
+</html> 
+ 
 
