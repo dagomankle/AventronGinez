@@ -301,6 +301,7 @@
                     <ace:tabSet id="automoviles" clientSide="false">
                 
                         <ace:tabPane id="consultaAutomovil" label="Consulta de Automoviles">
+                            #{automovilDP.listarVecinos(login.usuario.ciUsuario)}
                             <h:dataTable id="dt1" value="#{automovilDP.vecinos}" var="item" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" rows="100" width="50%" dir="LTR" frame="hsides" rules="all" summary="This is a JSF code to create dataTable." >
 
                                 <f:facet name="header">
@@ -339,7 +340,56 @@
                                     <h:outputText value="" />
                                 </f:facet> 
 
-                         </h:dataTable> 
+                         </h:dataTable>
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+                                                        <ice:outputText id="gesoutci0" value="Ingreso para el CI:"></ice:outputText>
+                                                        <ice:outputText id="gesoutcCI" value="#{login.usuario.ciUsuario}"></ice:outputText> 
+                                                        
+                                                        <ice:outputText id="gesout1" value="Ingrese la placa del Automovil:"></ice:outputText>
+                                                        <ace:textEntry id="gesplaca" value="#{automovilDP.autoPlaca}" label="Placa" >
+                                                            <ace:ajax event="blur" render="allMsgsA"/>
+                                                        </ace:textEntry>
+
+                                                        <ice:outputText id="gesout2" value="Seleccione el Año:"></ice:outputText>
+                                                        <ace:dateTimeEntry id="gesiAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
+
+
+
+                                                        <ice:outputText id="gesout3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
+                                                        <ace:simpleSelectOneMenu id="gessmenu" value="#{automovilDP.autoAsientosMaximos}">
+                                                            <f:selectItem id="gessele1" itemValue="1"/>
+                                                            <f:selectItem id="gessele2" itemValue="2"/>
+                                                            <f:selectItem id="gessele3" itemValue="3"/>
+                                                            <f:selectItem id="gessele4" itemValue="4"/>
+                                                            <f:selectItem id="gessele5" itemValue="5"/>
+                                                            <f:selectItem id="gessele6" itemValue="6"/>
+                                                            <f:selectItem id="gessele7" itemValue="7"/>
+                                                            <f:selectItem id="gessele8" itemValue="8"/>
+                                                            <f:selectItem id="gessele9" itemValue="9"/>
+                                                            <f:selectItem id="gessele10" itemValue="10"/>
+                                                            <f:selectItem id="gessele11" itemValue="11"/>
+                                                            <f:selectItem id="gessele12" itemValue="12"/>
+                                                            <f:selectItem id="gessele13" itemValue="13"/>
+                                                            <f:selectItem id="gessele14" itemValue="14"/>
+                                                            <f:selectItem id="gessele15" itemValue="15"/>
+                                                            <f:selectItem id="gessele16" itemValue="16"/>
+                                                            <f:selectItem id="gessele17" itemValue="17"/>
+                                                            <f:selectItem id="gessele18" itemValue="18"/>
+                                                            <ace:ajax render="@this smenu"/>
+                                                        </ace:simpleSelectOneMenu>
+
+
+
+
+
+                                                        <ice:outputText id="gesout4" value="Imagen del Automovil:"></ice:outputText>
+                                                        <ace:fileEntry id="gessmenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
+
+
+                                                        <ice:commandButton id="modificarau" value="Modificar" action="#{automovilDP.modificarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton>
+                                                        <ice:commandButton id="eliminarau" value="Eliminar" action="#{automovilDP.descartarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton> 
+                                                    </ice:panelGrid>
                             
                         </ace:tabPane>             
 
@@ -394,11 +444,6 @@
                                                     </ice:panelGrid>
                         </ace:tabPane>
 
-                        <ace:tabPane id="modificarAutomovil" label="Modificar Automovil">
-                        </ace:tabPane>
-
-                        <ace:tabPane id="eliminarAutomovil" label="Eliminar Automovil">
-                        </ace:tabPane>    
                 
                     </ace:tabSet>
                 </ace:tabPane>
