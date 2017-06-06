@@ -261,25 +261,6 @@ public class UbicacionMD {
         return lista;
     }
     
-      /*
-    private String error;
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    
-
-  
-    private DataSource getConnection0() throws NamingException {
-        Context c = new InitialContext();
-        return (DataSource) c.lookup("java:comp/env/connection0");
-    }*/
-
     private DataSource getConnection0() throws NamingException {
         Context c = new InitialContext();
         return (DataSource) c.lookup("java:comp/env/connection0");

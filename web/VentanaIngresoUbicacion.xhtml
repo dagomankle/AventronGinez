@@ -22,17 +22,14 @@
                     <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
                         
                         <ice:outputText id="out1" value="Ingrese la descripción:"></ice:outputText>
-                        <ace:textEntry id="descripcion" value="#{ubicacionDP.ubicacionDescripcion}" label="Descripcion" >
-                        </ace:textEntry>
+                        <ice:inputText id="idescri"  value="##{ubicacionDP.ubicacionDescripcion}" />
                         
                         <ice:outputText id="out3" value="Ingrese la longitud:"></ice:outputText>
-                        <ace:textEntry id="longitud" value="#{ubicacionDP.ubicacionLongitud}" label="Longitud" >
-                         </ace:textEntry>
-                        
+                        <ice:inputText id="ilongitud"  value="##{ubicacionDP.ubicacionLongitud}" />
+                                               
                         <ice:outputText id="out2" value="Ingrese la latitud:"></ice:outputText>
-                        <ace:textEntry id="latitud" value="#{ubicacionDP.ubicacionLatitud}" label="Latitud" >
-                        </ace:textEntry>
-                                                
+                        <ice:inputText id="ilatitud"  value="##{ubicacionDP.ubicacionLatitud}" />
+                                                                        
                         <ice:commandButton id="insertar" value="Guardar" action="#{ubicacionDP.GuardarUbicacion}"></ice:commandButton>
                     </ice:panelGrid>
                     
