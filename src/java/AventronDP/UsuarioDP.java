@@ -249,9 +249,10 @@ public class UsuarioDP {
         this.verDialogo1 = verDialogo1;
     }
 
-    public void SI(ActionEvent actionEvent) throws SQLException, NamingException {
+    public void SI(String ci, ActionEvent actionEvent) throws SQLException, NamingException {
         UsuarioMD nuevo = new UsuarioMD();
         UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
+        nueva.setCiUsuario(ci);
         nuevo.Eliminar(nueva);
         this.setError(nuevo.getError());
         this.setLista(nuevo.getLista());

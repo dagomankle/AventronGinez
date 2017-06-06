@@ -43,7 +43,7 @@
                 </ace:tabPane>
 
                 <ace:tabPane id="ModifCuenta" label="Modificar Cuenta">
-                    <ice:panelGrid id ="pnlGridUsuario2" columns="2" rowClasses="oddRow, evenRow">
+                    <ice:panelGrid id ="pnlGridUsuario23" columns="2" rowClasses="oddRow, evenRow">
                         <h:outputLabel value="Número de Cédula: "></h:outputLabel> 
                         <h:outputLabel value="#{login.usuario.ciUsuario}" ></h:outputLabel>               
                         <h:outputLabel value="Nombre: #{login.usuario.nombreUsuario}"></h:outputLabel>
@@ -81,12 +81,73 @@
                         </ace:confirmationDialog>
                     </ice:panelGrid>
                 </ace:tabPane>
+
+
                 <ace:tabPane id="picOfDay" label="Eliminar Usuario">
+
+                    <ice:panelGrid id ="pnlGridUsuario1" columns="4" rowClasses="oddRow, evenRow">
+                        <ice:outputText id ="oIntCodigoM" value="CI del Usuario:"></ice:outputText>
+                        <h:outputLabel value="#{login.usuario.ciUsuario}" ></h:outputLabel>  
+                    </ice:panelGrid> 
+                    <ice:panelGrid id ="pnlGridUsuario2" columns="4" rowClasses="oddRow, evenRow">
+                        <ice:outputText value="Tipo del usuario:"></ice:outputText>
+                        <ice:inputText id="in15" title="Código" value ="#{login.usuario.tipoUsuario}" disabled="true" ></ice:inputText>
+                        <ice:outputText value="Nombre del usuario:"></ice:outputText>
+                        <ice:inputText id="smenu111" value="#{login.usuario.nombreUsuario}" disabled="true" >
+                        </ice:inputText >
+                    </ice:panelGrid>
+                    <ice:panelGrid id ="pnlGridUsuario443">
+                        <ice:commandButton value="Eliminar" onclick="Confirmacion.show();" type="button"></ice:commandButton>
+                        <ice:outputText id="outcome414" value="#{usuarioDP.retorno}" rendered="#{usuarioDP.retorno != null}"></ice:outputText>
+                        <ace:confirmationDialog class="DialogoEliminar" widgetVar="Confirmacion"
+                                                message="Seguro desea Eliminar esto?"
+                                                header="Eliminar"
+                                                width="350"
+                                                height="180"
+                                                closable="true"
+                                                position="center">
+                            <ice:panelGrid columns="2" styleClass="centeredPanelGrid">
+                                <ice:commandButton id="Si41" value="Si" onclick="Confirmacion.hide();" actionListener="#{usuarioDP.SI(login.usuario.ciUsuario, actionEvent)}" >
+                                    <f:ajax execute="@this" render="@all"/>
+                                </ice:commandButton>
+                                <ice:commandButton id="No414" value="No" onclick="Confirmacion.hide(); window.location.reload('VentanaInicioAventron.xhtml');" actionListener="#{usuarioDP.No}" >
+                                    <f:ajax execute="@this" render="@all"/>
+                                </ice:commandButton>
+                            </ice:panelGrid>
+                        </ace:confirmationDialog>
+                    </ice:panelGrid>
+                    <h:panelGroup rendered="#{usuarioDP.verDialogo1}">
+                        <ace:dialog id="dialogServer44"
+                                    header="Mensaje"
+                                    closable="false"
+                                    modal="true"
+                                    draggable="false"
+                                    showEffect="clip"
+                                    hideEffect="fade"
+                                    width="400"
+                                    visible="true"
+                                    rendered="#{usuarioDP.verDialogo1}"
+                                    widgetVar="dialogo">
+                            <h:panelGrid width="100%" style="text-align: center;" columns="1">
+                                <h:outputLabel id="firstNameLabel" style="color: white;" value="#{usuarioDP.error}"/>
+                                <h:outputLabel id="firstNameLabel1" style="color: white;" value="#{usuarioDP.lista}"/>
+                                <h:outputLabel id="firstNameLabel2" style="color: white;" value="#{usuarioDP.error1}"/>
+                                <h:commandButton id="submitServer441" value="Aceptar" onclick="dialogo.hide();
+                                                 #{usuario.setVerDialogo1(false)};
+                                        window.location.reload('VentanaPerfilUsuario_Ofertante.xhtml');
+                                                 ">
+                                    <ace:ajax render="@none"></ace:ajax>
+                                </h:commandButton>
+                            </h:panelGrid>
+                        </ace:dialog>
+                    </h:panelGroup>
+
+
 
                 </ace:tabPane>
                 <ace:tabPane id="InicioAutomovil" label="Gestionar Automoviles">
                     <ace:tabSet id="automoviles" clientSide="false">
-                
+
                         <ace:tabPane id="consultaAutomovil" label="Consulta de Automoviles">
                             <h:dataTable id="dt1" value="#{automovilDP.vecinos}" var="item" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" rows="100" width="50%" dir="LTR" frame="hsides" rules="all" summary="This is a JSF code to create dataTable." >
 
@@ -115,70 +176,70 @@
                                     <h:outputText value="#{automovilDP.autoAsientosMaximos}"></h:outputText>
                                 </h:column>
 
-                                 <h:column>
+                                <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Imagen"/>
                                     </f:facet> 
-                                     <h:outputText value="#{automovilDP.autoImagen}"></h:outputText>
+                                    <h:outputText value="#{automovilDP.autoImagen}"></h:outputText>
                                 </h:column>
 
                                 <f:facet name="footer">
                                     <h:outputText value="" />
                                 </f:facet> 
 
-                         </h:dataTable> 
-                            
+                            </h:dataTable> 
+
                         </ace:tabPane>             
 
                         <ace:tabPane id="ingresoAutomovil" label="Ingreso de Automovil">
-                                                    <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
 
-                                                        <ice:outputText id="outci0" value="Ingreso para el CI:"></ice:outputText>
-                                                        <ice:outputText id="outcCI" value="#{login.usuario.ciUsuario}"></ice:outputText> 
-                                                        
-                                                        <ice:outputText id="out1" value="Ingrese la placa del Automovil:"></ice:outputText>
-                                                        <ace:textEntry id="placa" value="#{automovilDP.autoPlaca}" label="Placa" >
-                                                            <ace:ajax event="blur" render="allMsgsA"/>
-                                                        </ace:textEntry>
+                                <ice:outputText id="outci0" value="Ingreso para el CI:"></ice:outputText>
+                                <ice:outputText id="outcCI" value="#{login.usuario.ciUsuario}"></ice:outputText> 
 
-                                                        <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
-                                                        <ace:dateTimeEntry id="iAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
+                                <ice:outputText id="out1" value="Ingrese la placa del Automovil:"></ice:outputText>
+                                <ace:textEntry id="placa" value="#{automovilDP.autoPlaca}" label="Placa" >
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+                                </ace:textEntry>
 
-
-
-                                                        <ice:outputText id="out3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
-                                                        <ace:simpleSelectOneMenu id="smenu" value="#{automovilDP.autoAsientosMaximos}">
-                                                            <f:selectItem id="sele1" itemValue="1"/>
-                                                            <f:selectItem id="sele2" itemValue="2"/>
-                                                            <f:selectItem id="sele3" itemValue="3"/>
-                                                            <f:selectItem id="sele4" itemValue="4"/>
-                                                            <f:selectItem id="sele5" itemValue="5"/>
-                                                            <f:selectItem id="sele6" itemValue="6"/>
-                                                            <f:selectItem id="sele7" itemValue="7"/>
-                                                            <f:selectItem id="sele8" itemValue="8"/>
-                                                            <f:selectItem id="sele9" itemValue="9"/>
-                                                            <f:selectItem id="sele10" itemValue="10"/>
-                                                            <f:selectItem id="sele11" itemValue="11"/>
-                                                            <f:selectItem id="sele12" itemValue="12"/>
-                                                            <f:selectItem id="sele13" itemValue="13"/>
-                                                            <f:selectItem id="sele14" itemValue="14"/>
-                                                            <f:selectItem id="sele15" itemValue="15"/>
-                                                            <f:selectItem id="sele16" itemValue="16"/>
-                                                            <f:selectItem id="sele17" itemValue="17"/>
-                                                            <f:selectItem id="sele18" itemValue="18"/>
-                                                            <ace:ajax render="@this smenu"/>
-                                                        </ace:simpleSelectOneMenu>
+                                <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
+                                <ace:dateTimeEntry id="iAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
 
 
 
+                                <ice:outputText id="out3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
+                                <ace:simpleSelectOneMenu id="smenu" value="#{automovilDP.autoAsientosMaximos}">
+                                    <f:selectItem id="sele1" itemValue="1"/>
+                                    <f:selectItem id="sele2" itemValue="2"/>
+                                    <f:selectItem id="sele3" itemValue="3"/>
+                                    <f:selectItem id="sele4" itemValue="4"/>
+                                    <f:selectItem id="sele5" itemValue="5"/>
+                                    <f:selectItem id="sele6" itemValue="6"/>
+                                    <f:selectItem id="sele7" itemValue="7"/>
+                                    <f:selectItem id="sele8" itemValue="8"/>
+                                    <f:selectItem id="sele9" itemValue="9"/>
+                                    <f:selectItem id="sele10" itemValue="10"/>
+                                    <f:selectItem id="sele11" itemValue="11"/>
+                                    <f:selectItem id="sele12" itemValue="12"/>
+                                    <f:selectItem id="sele13" itemValue="13"/>
+                                    <f:selectItem id="sele14" itemValue="14"/>
+                                    <f:selectItem id="sele15" itemValue="15"/>
+                                    <f:selectItem id="sele16" itemValue="16"/>
+                                    <f:selectItem id="sele17" itemValue="17"/>
+                                    <f:selectItem id="sele18" itemValue="18"/>
+                                    <ace:ajax render="@this smenu"/>
+                                </ace:simpleSelectOneMenu>
 
 
-                                                        <ice:outputText id="out4" value="Imagen del Automovil:"></ice:outputText>
-                                                        <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
 
 
-                                                        <ice:commandButton id="insertar" value="Guardar" action="#{automovilDP.guardarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton>
-                                                    </ice:panelGrid>
+
+                                <ice:outputText id="out4" value="Imagen del Automovil:"></ice:outputText>
+                                <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
+
+
+                                <ice:commandButton id="insertar" value="Guardar" action="#{automovilDP.guardarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton>
+                            </ice:panelGrid>
                         </ace:tabPane>
 
                         <ace:tabPane id="modificarAutomovil" label="Modificar Automovil">
@@ -186,17 +247,17 @@
 
                         <ace:tabPane id="eliminarAutomovil" label="Eliminar Automovil">
                         </ace:tabPane>    
-                
+
                     </ace:tabSet>
                 </ace:tabPane>
-                
+
                 <ace:tabPane id="viajes" label="Viajes">
-                <ice:commandButton id="ubicacion" value="  ProtoUbicación  " onclick=" window.close('VentanaPerfilUsuaraio_Ofertante.xhtml');window.open('VentanaInicioUbicacion.xhtml');"></ice:commandButton>
+                    <ice:commandButton id="ubicacion" value="  ProtoUbicación  " onclick=" window.close('VentanaPerfilUsuaraio_Ofertante.xhtml');window.open('VentanaInicioUbicacion.xhtml');"></ice:commandButton>
 
 
                 </ace:tabPane>                
-                
-               
+
+
 
             </ace:tabSet>
         </h:form>
