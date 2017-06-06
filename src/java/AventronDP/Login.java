@@ -64,10 +64,19 @@ public class Login implements Serializable {
     }
 
     public void autenticar() throws NamingException, SQLException, IOException {
+        
+        
 
         UsuarioMD comprobar = new UsuarioMD();
+        
+        if(usuario.getCiUsuario()==null)
+        {
+            usuario.setCiUsuario(usuario.getNombreUsuario());
+        }
+        
+        //usuario.setCiUsuario(conf);
 
-        usuario = comprobar.Autenticar(usuario.getNombreUsuario(), usuario.getContrasenaUsuario());
+        usuario = comprobar.Autenticar(usuario.getCiUsuario(), usuario.getContrasenaUsuario());
 
         usuario.setEstadoSesion(true);
 

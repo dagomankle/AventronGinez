@@ -258,6 +258,23 @@ public class UsuarioDP {
         this.setError1(nuevo.getError1());
         this.setVerDialogo1(true);
     }
+    
+    public void ConfModi(ActionEvent actionEvent, String ci, String tipo) throws SQLException, NamingException {
+        this.ciUsuario=ci;
+        this.tipoUsuario=tipo;
+        UsuarioMD nuevo = new UsuarioMD();
+        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
+        if(nueva.sexoUsuario.equals("Masculino")){
+            nueva.sexoUsuario="M";
+        }
+        else nueva.sexoUsuario = "F";
+        nuevo.Modificar(nueva);
+        
+        this.setError(nuevo.getError());
+        this.setLista(nuevo.getLista());
+        this.setError1(nuevo.getError1());
+        this.setVerDialogo1(true);
+    }
     private String retorno;
 
     public String getRetorno() {
