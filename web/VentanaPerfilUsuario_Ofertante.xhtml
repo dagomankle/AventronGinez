@@ -229,11 +229,14 @@
                     </h:panelGroup>
 
                 </ace:tabPane>
+                
+                <ace:tabPane id="viajes" label=" Gestionar Viajes">
 
+                </ace:tabPane> 
+                
                 <ace:tabPane id="InicioAutomovil" label="Gestionar Automoviles">
 
                     <ace:tabSet id="automoviles" clientSide="false">
-
 
 
                         <ace:tabPane id="consultaAutomovil" label="Consulta de Automoviles">
@@ -248,28 +251,28 @@
                                     <f:facet name="header">
                                         <h:outputText value="Placa del Vehiculo" />
                                     </f:facet> 
-                                    <h:outputText style="" value="#{automovilDP.autoPlaca}" ></h:outputText>
+                                    <h:outputText style="" value="#{item.autoPlaca}" ></h:outputText>
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Año del Vehiculo"/>
                                     </f:facet> 
-                                    <h:outputText value="#{automovilDP.autoAnio}"></h:outputText>
+                                    <h:outputText value="#{item.autoAnio}"></h:outputText>
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Asientos Maximos"/>
                                     </f:facet> 
-                                    <h:outputText value="#{automovilDP.autoAsientosMaximos}"></h:outputText>
+                                    <h:outputText value="#{item.autoAsientosMaximos}"></h:outputText>
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Imagen"/>
                                     </f:facet> 
-                                    <h:outputText value="#{automovilDP.autoImagen}"></h:outputText>
+                                    <h:outputText value="#{item.autoImagen}"></h:outputText>
                                 </h:column>
 
                                 <f:facet name="footer">
@@ -315,10 +318,6 @@
                                     <ace:ajax render="@this smenu"/>
                                 </ace:simpleSelectOneMenu>
 
-
-
-
-
                                 <ice:outputText id="gesout4" value="Imagen del Automovil:"></ice:outputText>
                                 <ace:fileEntry id="gessmenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
 
@@ -355,11 +354,6 @@
                                 <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
 
                                 <ace:dateTimeEntry id="iAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
-
-
-
-
-
 
 
                                 <ice:outputText id="out3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
@@ -407,15 +401,6 @@
                                 </ace:simpleSelectOneMenu>
 
 
-
-
-
-
-
-
-
-
-
                                 <ice:outputText id="out4" value="Imagen del Automovil:"></ice:outputText>
 
                                 <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
@@ -433,24 +418,13 @@
                     </ace:tabSet>
 
                 </ace:tabPane>
+       
+               
+                
+                <ace:tabPane id="rutas" label=" Gestionar Rutas">
+                     <ice:commandButton id="ubicacion" value="  ProtoUbicación  " onclick=" window.close('VentanaPerfilUsuaraio_Ofertante.xhtml');window.open('VentanaInicioUbicacion.xhtml');"></ice:commandButton>
 
-
-
-                <ace:tabPane id="viajes" label="Viajes">
-
-                    <ice:commandButton id="ubicacion" value="  ProtoUbicación  " onclick=" window.close('VentanaPerfilUsuaraio_Ofertante.xhtml');window.open('VentanaInicioUbicacion.xhtml');"></ice:commandButton>
-
-
-
-
-
-                </ace:tabPane>                
-
-
-
-
-
-
+                </ace:tabPane>  
 
             </ace:tabSet>
             
