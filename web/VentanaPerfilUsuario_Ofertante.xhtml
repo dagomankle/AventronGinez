@@ -365,16 +365,9 @@
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Asientos Maximos"/>
+                                        <h:outputText value="Ubicaciones de Ruta"/>
                                     </f:facet> 
-                                    <h:outputText value="#{item.autoAsientosMaximos}"></h:outputText>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Imagen"/>
-                                    </f:facet> 
-                                    <h:outputText value="#{item.autoImagen}"></h:outputText>
+                                    <h:outputText value="#{item.rutaNombresUbicaciones}"></h:outputText>
                                 </h:column>
 
                                 <f:facet name="footer">
@@ -382,20 +375,46 @@
                                 </f:facet> 
 
                             </h:dataTable>                           
+
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+                                <ice:outputText id="rutaNomE" value="Ingrese el nombre de ruta:"></ice:outputText>
+                                <ace:textEntry id="rutaNOmS" value="#{rutaDP.rutaNombre}" label="Nombre" >
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+                                </ace:textEntry>
+
+                                <ice:commandButton id="eliminarNom" value="Eliminar" action="#{rutaDP.descartarRuta()}"></ice:commandButton> 
+                            </ice:panelGrid>                            
                             
                             
                         </ace:tabPane>
                         
                         <ace:tabPane id="ingresoRutas" label="Ingreso de Rutas">
+
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+                                <ice:outputText id="outci0r" value="Ingreso para el CI:"></ice:outputText>
+                                <ice:outputText id="outcCIr" value="#{login.usuario.ciUsuario}"></ice:outputText> 
+
+                                <ice:outputText id="out1r" value="Ingrese la placa del Automovil:"></ice:outputText>
+                                <ace:textEntry id="nombreru" value="#{rutaDP.rutaNombre}" label="Nombre" >
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+                                </ace:textEntry>
+
+                                <ice:outputText id="out2ru" value="Ingrese los nombres de las ubicaciones separados por coma y espacio:"></ice:outputText>
+                                <ace:textEntry id="nombresubu" value="#{rutaDP.rutaNombresUbicaciones}" label="Nombre" >
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+                                </ace:textEntry> 
+
+                                <ice:commandButton id="insertarruu" value="Guardaru" action="#{rutaDP.guardarRuta(login.usuario.ciUsuario)}"></ice:commandButton>
+
+                            </ice:panelGrid>                            
                             
                         </ace:tabPane>
                                                 
                     </ace:tabSet>
-
-                    
-                    
-                     <ice:commandButton id="ubicacion" value="  ProtoUbicación  " onclick=" window.close('VentanaPerfilUsuaraio_Ofertante.xhtml');window.open('VentanaInicioUbicacion.xhtml');"></ice:commandButton>
-
+                  
+                     
                 </ace:tabPane>  
             </ace:tabSet>                 
         </h:form>
