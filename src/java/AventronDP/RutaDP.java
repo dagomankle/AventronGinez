@@ -22,6 +22,7 @@ public class RutaDP {
     private String rutaDescripcion;
     private LinkedList<UbicacionDP> rutaUbicaciones;
     private LinkedList<RutaDP> rutaVecinos;
+    private String usuarioCI;
 
     /**
      * Creates a new instance of RutaDP
@@ -34,6 +35,14 @@ public class RutaDP {
         this.rutaDescripcion = rutaDescripcion;
         this.rutaUbicaciones = rutaUbicaciones;
         this.rutaVecinos = null;
+    }
+
+    public void setUsuarioCI(String usuarioCI) {
+        this.usuarioCI = usuarioCI;
+    }
+
+    public String getUsuarioCI() {
+        return usuarioCI;
     }
 
     public String getRutaNombre() {
@@ -70,49 +79,41 @@ public class RutaDP {
     
     public void guardarAutomovil(String ci){
         this.usuarioCI = ci;
-        AutomovilMD controlMD = new AutomovilMD(this);
+        RutaMD controlMD = new RutaMD(this);
 
-        if(controlMD.validarAutomovil())
-            controlMD.insertarAutomovil();
+        if(controlMD.validarRuta())
+            controlMD.insertarRuta();
     }
 
-    public void modificarAutomovil(String ci){
-        this.usuarioCI = ci;
-        AutomovilMD controlMD = new AutomovilMD(this);
-        if(controlMD.validarAutomovil())
-            controlMD.actualizarAutomovil();
+   
+    public void cargarRuta(){
+        RutaMD controlMD = new RutaMD(this);
+        RutaDP sera = controlMD.recuperarRuta();
+        this.rutaNombre = sera.rutaNombre;
+        this.rutaDescripcion = sera.rutaDescripcion;
+        this.rutaUbicaciones = sera.rutaUbicaciones;
     }
     
-    public void cargarAutomovil(){
+    public LinkedList<RutaDP> cargarRutas(){
         RutaMD controlMD = new RutaMD(this);
-        /*AutomovilDP sera = controlMD.recuperarAutomovil();
-        this.autoPlaca = sera.autoPlaca;
-        this.usuarioCI = sera.usuarioCI;
-        this.autoAnio = sera.autoAnio;
-        this.autoAsientosMaximos = sera.autoAsientosMaximos;
-        this.autoImagen = sera.autoImagen;*/
-    }
-    
-    public LinkedList<AutomovilDP> cargarAutomoviles(){
-        RutaMD controlMD = new RutaMD(this);
-        return controlMD.recuperarRutas(this);
+        return controlMD.recuperarRutas();
     }
   
-    public void descartarAutomovil(String nombre){
+    public void descartarRuta(String nombre){
         this.rutaNombre = nombre;
-        RutaMD controlMD = new AutomovilMD(this);
-        controlMD.eliminarAutomovil();
+        RutaMD controlMD = new RutaMD(this);
+        controlMD.eliminarRuta();
     }
    
-    public boolean verificarAutomovil(){
-        AutomovilMD controlMD = new AutomovilMD(this);
-        return controlMD.validarAutomovil();
+    public boolean verificarRuta(){
+        RutaMD controlMD = new RutaMD(this);
+        return controlMD.validarRuta();
     }   
 
-    public LinkedList<AutomovilDP> listarVecinos(String ci){
+    public LinkedList<RutaDP> listarVecinos(String ci){
         this.usuarioCI = ci;
-        this.vecinos = this.cargarAutomoviles();
-        return this.vecinos;
+        this.rutaVecinos = this.cargarRutas();
+        return this.rutaVecinos;
     }    
     
     
