@@ -36,4 +36,12 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <context-param>
+        <param-name>org.icefaces.ace.gmapKey</param-name>
+        <param-value>AIzaSyAfQ57dQFtQc2oMsXRdyju9ijF5BMMpjgg</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.icesoft.faces.gmapKey</param-name>
+        <param-value>AIzaSyAfQ57dQFtQc2oMsXRdyju9ijF5BMMpjgg</param-value>
+    </context-param>
 </web-app>
