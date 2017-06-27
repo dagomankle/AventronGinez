@@ -23,6 +23,7 @@ public class RutaDP {
     private LinkedList<UbicacionDP> rutaUbicaciones;
     private LinkedList<RutaDP> rutaVecinos;
     private String usuarioCI;
+    private String rutaNombresUbicaciones;
 
     /**
      * Creates a new instance of RutaDP
@@ -35,6 +36,14 @@ public class RutaDP {
         this.rutaDescripcion = rutaDescripcion;
         this.rutaUbicaciones = rutaUbicaciones;
         this.rutaVecinos = null;
+    }
+
+    public String getRutaNombresUbicaciones() {
+        return rutaNombresUbicaciones;
+    }
+
+    public void setRutaNombresUbicaciones(String rutaNombresUbicaciones) {
+        this.rutaNombresUbicaciones = rutaNombresUbicaciones;
     }
 
     public void setUsuarioCI(String usuarioCI) {
@@ -77,7 +86,7 @@ public class RutaDP {
         this.rutaVecinos = rutaVecinos;
     }
     
-    public void guardarAutomovil(String ci){
+    public void guardarRuta(String ci){
         this.usuarioCI = ci;
         RutaMD controlMD = new RutaMD(this);
 
