@@ -1,397 +1,771 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:icecore="http://www.icefaces.org/icefaces/core"
-      xmlns:ace="http://www.icefaces.org/icefaces/components"
-      xmlns:ice="http://www.icesoft.com/icefaces/component"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-
-    <h:head>
-        <title>PERFIL USUARIO</title>
-
-        <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion}">
-            <ice:outputLabel style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; color: red; font-family: Verdana;" value="Bienvenido : #{login.usuario.nombreUsuario} (#{login.usuario.tipoUsuario})"></ice:outputLabel>
-
-            <br></br>
-            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="CERRAR SESION" action="#{login.Cerrar()}"></ice:commandLink>
-
-            <br></br>
-            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="PERFIL" action="/VentanaPerfilUsuario_Ofertante.xhtml?faces-redirect=true"></ice:commandLink>
-
-        </ice:form>
-        
-        <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion==false}">
-            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="REGISTRARSE" action="/VentanaRegistroUsuario_Ofertante.xhtml?faces-redirect=true"></ice:commandLink>
-
-            <br></br>
-            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="INICIAR SESION" action="/VentanaIngresoUsuario.xhtml?faces-redirect=true"></ice:commandLink>
-
-        </ice:form>
-
-    </h:head>
-    <h:body>
-
-
-
-        <h:form id="form">
-            <ace:tabSet id="sampleTabSet" clientSide="true" >
-                <ace:tabPane id="toDoList" label="Perfil">
-
-                    <h:outputLabel value="Cédula: #{login.usuario.ciUsuario}"></h:outputLabel>
-                    <br></br>
-
-                    <h:outputLabel value="Nombre: #{login.usuario.nombreUsuario}"></h:outputLabel>
-                    <br></br>
-
-                    <h:outputLabel value="Tipo de cuenta: #{login.usuario.tipoUsuario}"></h:outputLabel>
-                    <br></br>
-
-                    <h:outputLabel value="Sexo: #{login.usuario.sexoUsuario}"></h:outputLabel>
-
-                </ace:tabPane>
-
-                <ace:tabPane id="ModifCuenta" label="Modificar Cuenta">
-
-                    <ice:panelGrid id ="pnlGridUsuario238" columns="2" rowClasses="oddRow, evenRow">
-
-                        <h:outputLabel value="Número de Cédula: "></h:outputLabel> 
-                        <h:outputLabel value="#{login.usuario.ciUsuario}" ></h:outputLabel>             
-                        <h:outputLabel value="Nombre: #{login.usuario.nombreUsuario}"></h:outputLabel>
-                        <ice:inputText id="NombreO" value="#{usuarioDP.nombreUsuario}"></ice:inputText>  
-                        <h:outputLabel value="Tipo de cuenta: "></h:outputLabel>
-                        <h:outputLabel value="#{login.usuario.tipoUsuario}"></h:outputLabel>
-                        
-                        <ice:outputText id="out5" value="Seleccione sexo de usuario:"></ice:outputText>
-                        <ace:comboBox id="smenu2" value="#{usuarioDP.sexoUsuario}">
-                            <f:selectItem id="sele5" itemValue="Masculino"/>
-                            <f:selectItem id="sele6" itemValue="Femenino"/>
-                            <ace:ajax render="@this smenu"/>
-
-                        </ace:comboBox>
-
-                        <ice:outputText id ="inCodigMod" value="Ingrese la contraseña nueva: "></ice:outputText>
-                        <ace:textEntry id="Contraseña" value="#{usuarioDP.contrasenaUsuario}" label="Contraseña" >
-
-                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
-
-                        </ace:textEntry>
-
-                        <ice:commandButton value="Modificar" action="#{usuarioDP.modificar(login.usuario.ciUsuario,login.usuario.tipoUsuario)}" onclick="window.location.reload('VentanaInicioAventron.xhtml');"></ice:commandButton>
-
-
-
-
-
-                       
-
-                        <ice:outputText id="outcome" value="#{usuarioDP.retorno}" rendered="#{usuarioDP.retorno != null}"></ice:outputText>
-
-                        <ace:confirmationDialog class="DialogoEliminar" widgetVar="Confirmacion"
-                                                message="Seguro desea modificar su esto?"
-                                                header="Eliminar"
-                                                width="350"
-                                                height="180"
-                                                closable="true"
-                                                position="center">
-
-                            <ice:panelGrid columns="2" styleClass="centeredPanelGrid">
-
-                                <ice:commandButton id="Si" value="Si" onclick="Confirmacion.hide();" actionListener="#{usuario.SI}" >
-                                    <f:ajax execute="@this" render="@all"/>
-
-                                </ice:commandButton>
-
-                                <ice:commandButton id="No" value="No" onclick="Confirmacion.hide(); window.location.reload('PaginaUsuarioEliminar.xhtml');" actionListener="#{usuario.No}" >
-
-                                    <f:ajax execute="@this" render="@all"/>
-
-                                </ice:commandButton>
-                            </ice:panelGrid>
-                        </ace:confirmationDialog>
-                    </ice:panelGrid>
-                </ace:tabPane>
-
-                <ace:tabPane id="picOfDay" label="Eliminar Usuario">
-
-
-                    <ice:panelGrid id ="pnlGridUsuario1" columns="4" rowClasses="oddRow, evenRow">
-                        <ice:outputText id ="oIntCodigoM" value="CI del Usuario:"></ice:outputText>
-                        <h:outputLabel value="#{login.usuario.ciUsuario}" ></h:outputLabel>  
-                    </ice:panelGrid> 
-                    <ice:panelGrid id ="pnlGridUsuario2" columns="4" rowClasses="oddRow, evenRow">
-                        <ice:outputText value="Tipo del usuario:"></ice:outputText>
-                        <ice:inputText id="in15" title="Código" value ="#{login.usuario.tipoUsuario}" disabled="true" ></ice:inputText>
-                        <ice:outputText value="Nombre del usuario:"></ice:outputText>
-                        <ice:inputText id="smenu111" value="#{login.usuario.nombreUsuario}" disabled="true" >
-                        </ice:inputText >
-                    </ice:panelGrid>
-                    <ice:panelGrid id ="pnlGridUsuario443">
-                        <ice:commandButton value="Eliminar" onclick="Confirmacion.show();" type="button"></ice:commandButton>
-                        <ice:outputText id="outcome414" value="#{usuarioDP.retorno}" rendered="#{usuarioDP.retorno != null}"></ice:outputText>
-                        <ace:confirmationDialog class="DialogoEliminar" widgetVar="Confirmacion"
-                                                message="Seguro desea Eliminar esto?"
-                                                header="Eliminar"
-                                                width="350"
-                                                height="180"
-                                                closable="true"
-                                                position="center">
-                            <ice:panelGrid columns="2" styleClass="centeredPanelGrid">
-                                <ice:commandButton id="Si41" value="Si" onclick="Confirmacion.hide();" actionListener="#{usuarioDP.SI(login.usuario.ciUsuario, actionEvent)}" >
-                                    <f:ajax execute="@this" render="@all"/>
-                                </ice:commandButton>
-                                <ice:commandButton id="No414" value="No" onclick="Confirmacion.hide(); window.location.reload('VentanaInicioAventron.xhtml');" actionListener="#{usuarioDP.No}" >
-                                    <f:ajax execute="@this" render="@all"/>
-                                </ice:commandButton>
-                            </ice:panelGrid>
-                        </ace:confirmationDialog>
-                    </ice:panelGrid>
-                    <h:panelGroup rendered="#{usuarioDP.verDialogo1}">
-                        <ace:dialog id="dialogServer44"
-                                    header="Mensaje"
-                                    closable="false"
-                                    modal="true"
-                                    draggable="false"
-                                    showEffect="clip"
-                                    hideEffect="fade"
-                                    width="400"
-                                    visible="true"
-                                    rendered="#{usuarioDP.verDialogo1}"
-                                    widgetVar="dialogo">
-                            <h:panelGrid width="100%" style="text-align: center;" columns="1">
-                                <h:outputLabel id="firstNameLabel" style="color: white;" value="#{usuarioDP.error}"/>
-                                <h:outputLabel id="firstNameLabel1" style="color: white;" value="#{usuarioDP.lista}"/>
-                                <h:outputLabel id="firstNameLabel2" style="color: white;" value="#{usuarioDP.error1}"/>
-                                <h:commandButton id="submitServer441" value="Aceptar" onclick="dialogo.hide();
-                                                 #{usuario.setVerDialogo1(false)};
-                                        window.location.reload('VentanaPerfilUsuario_Ofertante.xhtml');
-                                                 ">
-                                    <ace:ajax render="@none"></ace:ajax>
-                                </h:commandButton>
-                            </h:panelGrid>
-                        </ace:dialog>
-                    </h:panelGroup>
-
-                </ace:tabPane>
-                
-                <ace:tabPane id="viajes" label=" Gestionar Viajes">
-
-                </ace:tabPane> 
-                
-                <ace:tabPane id="InicioAutomovil" label="Gestionar Automoviles">
-
-                    <ace:tabSet id="automoviles" clientSide="true">
-
-
-                        <ace:tabPane id="consultaAutomovil" label="Consulta de Automoviles">
-                            
-                            <h:dataTable id="dt1" value="#{automovilDP.listarVecinos(login.usuario.ciUsuario)}" var="item" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" rows="100" width="50%" dir="LTR" frame="hsides" rules="all" summary="This is a JSF code to create dataTable." >
-
-                                <f:facet name="header">
-                                    <h:outputText value="Mis Automoviles" />
-                                </f:facet> 
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Placa del Vehiculo" />
-                                    </f:facet> 
-                                    <h:outputText style="" value="#{item.autoPlaca}" ></h:outputText>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Año del Vehiculo"/>
-                                    </f:facet> 
-                                    <h:outputText value="#{item.autoAnio}"></h:outputText>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Asientos Maximos"/>
-                                    </f:facet> 
-                                    <h:outputText value="#{item.autoAsientosMaximos}"></h:outputText>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Imagen"/>
-                                    </f:facet> 
-                                    <h:outputText value="#{item.autoImagen}"></h:outputText>
-                                </h:column>
-
-                                <f:facet name="footer">
-                                    <h:outputText value="" />
-                                </f:facet> 
-
-                            </h:dataTable>
-                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
-
-                                <ice:outputText id="gesoutci0" value="Ingreso para el CI:"></ice:outputText>
-                                <ice:outputText id="gesoutcCI" value="#{login.usuario.ciUsuario}"></ice:outputText> 
-
-                                <ice:outputText id="gesout1" value="Ingrese la placa del Automovil:"></ice:outputText>
-                                <ace:textEntry id="gesplaca" value="#{automovilDP.autoPlaca}" label="Placa" >
-                                    <ace:ajax event="blur" render="allMsgsA"/>
-                                </ace:textEntry>
-
-                                <ice:outputText id="gesout2" value="Seleccione el Año:"></ice:outputText>
-                                <ace:dateTimeEntry id="gesiAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
-
-
-
-                                <ice:outputText id="gesout3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
-                                <ace:simpleSelectOneMenu id="gessmenu" value="#{automovilDP.autoAsientosMaximos}">
-                                    <f:selectItem id="gessele1" itemValue="1"/>
-                                    <f:selectItem id="gessele2" itemValue="2"/>
-                                    <f:selectItem id="gessele3" itemValue="3"/>
-                                    <f:selectItem id="gessele4" itemValue="4"/>
-                                    <f:selectItem id="gessele5" itemValue="5"/>
-                                    <f:selectItem id="gessele6" itemValue="6"/>
-                                    <f:selectItem id="gessele7" itemValue="7"/>
-                                    <f:selectItem id="gessele8" itemValue="8"/>
-                                    <f:selectItem id="gessele9" itemValue="9"/>
-                                    <f:selectItem id="gessele10" itemValue="10"/>
-                                    <f:selectItem id="gessele11" itemValue="11"/>
-                                    <f:selectItem id="gessele12" itemValue="12"/>
-                                    <f:selectItem id="gessele13" itemValue="13"/>
-                                    <f:selectItem id="gessele14" itemValue="14"/>
-                                    <f:selectItem id="gessele15" itemValue="15"/>
-                                    <f:selectItem id="gessele16" itemValue="16"/>
-                                    <f:selectItem id="gessele17" itemValue="17"/>
-                                    <f:selectItem id="gessele18" itemValue="18"/>
-                                    <ace:ajax render="@this smenu"/>
-                                </ace:simpleSelectOneMenu>
-
-                                <ice:outputText id="gesout4" value="Imagen del Automovil:"></ice:outputText>
-                                <ace:fileEntry id="gessmenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
-
-
-                                <ice:commandButton id="modificarau" value="Modificar" action="#{automovilDP.modificarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton>
-                                <ice:commandButton id="eliminarau" value="Eliminar" action="#{automovilDP.descartarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton> 
-                            </ice:panelGrid>
-                        </ace:tabPane>
-
-
-
-                        <ace:tabPane id="ingresoAutomovil" label="Ingreso de Automovil">
-
-                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
-
-                                <ice:outputText id="outci0" value="Ingreso para el CI:"></ice:outputText>
-                                <ice:outputText id="outcCI" value="#{login.usuario.ciUsuario}"></ice:outputText> 
-
-
-
-                                <ice:outputText id="out1" value="Ingrese la placa del Automovil:"></ice:outputText>
-                                <ace:textEntry id="placa" value="#{automovilDP.autoPlaca}" label="Placa" >
-
-                                    <ace:ajax event="blur" render="allMsgsA"/>
-
-                                </ace:textEntry>
-
-
-
-                                <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
-
-                                <ace:dateTimeEntry id="iAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
-
-
-                                <ice:outputText id="out3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
-
-                                <ace:simpleSelectOneMenu id="smenu" value="#{automovilDP.autoAsientosMaximos}">
-                                    <f:selectItem id="sele1" itemValue="1"/>
-                                    <f:selectItem id="sele2" itemValue="2"/>
-                                    <f:selectItem id="sele3" itemValue="3"/>
-                                    <f:selectItem id="sele4" itemValue="4"/>
-                                    <f:selectItem id="sele5" itemValue="5"/>
-                                    <f:selectItem id="sele6" itemValue="6"/>
-                                    <f:selectItem id="sele7" itemValue="7"/>
-                                    <f:selectItem id="sele8" itemValue="8"/>
-                                    <f:selectItem id="sele9" itemValue="9"/>
-                                    <f:selectItem id="sele10" itemValue="10"/>
-                                    <f:selectItem id="sele11" itemValue="11"/>
-                                    <f:selectItem id="sele12" itemValue="12"/>
-                                    <f:selectItem id="sele13" itemValue="13"/>
-                                    <f:selectItem id="sele14" itemValue="14"/>
-                                    <f:selectItem id="sele15" itemValue="15"/>
-                                    <f:selectItem id="sele16" itemValue="16"/>
-                                    <f:selectItem id="sele17" itemValue="17"/>
-                                    <f:selectItem id="sele18" itemValue="18"/>
-                                    <ace:ajax render="@this smenu"/>
-
-                                </ace:simpleSelectOneMenu>
-
-
-                                <ice:outputText id="out4" value="Imagen del Automovil:"></ice:outputText>
-                                <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
-                                <ice:commandButton id="insertar" value="Guardar" action="#{automovilDP.guardarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton>
-
-                            </ice:panelGrid>
-                        </ace:tabPane>
-                    </ace:tabSet>
-                </ace:tabPane>
-       
-               
-                
-                <ace:tabPane id="rutas" label=" Gestionar Rutas">
-                    <ace:tabSet id="rutass" clientSide="true">
-        <ace:tabPane label="Insertar Ubicación">
-       
-            <ice:panelGrid id="Panel" columns="2" rowClasses="sddRow,evenRow">
-                    <ice:outputText id="oCodigo" value="Codigo: "/>
-                    <ice:inputText id="iCodigo"  value="#{ubicacionDP.codigo}" />
-
-
-                           <ice:outputText id="CodigoUsuario" value="Codigo Usuario "/>
-                           <ice:outputText id="CdUsuario"  value="#{ubicacionDP.ciUsuario}" />
-
-
-                <ice:outputText id="oDescripcion" value="Descripcion: "/>
-                <ice:inputText id="iDescripcion"  value="#{ubicacionDP.ubiDescripcion}" />
-
-                <ice:outputText id="latitud" value="Latitud: "/>
-                <ice:inputText id="ilat"  value="#{ubicacionDP.ubiLatitud}" />
-
-                <ice:outputText id="longitud" value="Longitud: "/>
-                <ice:inputText id="ilong"  value="#{ubicacionDP.ubiLongitud}" />
-                <ice:commandButton id="boton" value="Grabar" action="#{ubicacionDP.guardar(login.usuario.ciUsuario)}"/>    <br></br>
-                 <ace:gMap id="gMapper" style="width: 500px; height: 500px" latitude="62.82259" longitude="-96.6790" type="Map" zoomLevel="4"/> 
-            </ice:panelGrid>
-       
-        </ace:tabPane> 
-                    <ace:tabPane label="Eliminar Ubicación">
-            <ice:panelGrid id="PanelBU" columns="2" rowClasses="sddRow,evenRow">
-                    <ice:outputText id="oDCodigo" value="Codigo: "/>
-                    <ice:inputText id="iJCodigo"  value="#{ubicacionDP.codigo}" />
-
-
-                           <ice:outputText id="CodigoUsuario3" value="Codigo Usuario "/>
-                           <ice:inputText id="CdUsuario3"  value="#{ubicacionDP.ciUsuario}" />
-
-
-                <ice:outputText id="oDescripcion3" value="Descripcion: "/>
-                <ice:inputText id="iDescripcioN3"  value="#{ubicacionDP.ubiDescripcion}" />
-
-                <ice:outputText id="latitud3" value="Latitud: "/>
-                <ice:inputText id="ilat33"  value="#{ubicacionDP.ubiLatitud}" />
-
-                <ice:outputText id="longitud3" value="Longitud: "/>
-                <ice:inputText id="ilong3"  value="#{ubicacionDP.ubiLongitud}" />
-                <ice:commandButton id="boton2" value="Borrar" action="#{ubicacionDP.borrar()}"/>
-            </ice:panelGrid>
-   </ace:tabPane>
-                        </ace:tabSet> 
-               </ace:tabPane>  
-            </ace:tabSet>                 
-        </h:form>
-    </h:body>
-
-</html>
-
-
-
+<?xml version='1.0' encoding='UTF-8' ?>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core"
+
+      xmlns:h="http://java.sun.com/jsf/html"
+
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+    <h:head>
+
+        <title>PERFIL USUARIO</title>
+
+
+
+        <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion}">
+
+            <ice:outputLabel style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; color: red; font-family: Verdana;" value="Bienvenido : #{login.usuario.nombreUsuario} (#{login.usuario.tipoUsuario})"></ice:outputLabel>
+
+
+
+            <br></br>
+
+            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="CERRAR SESION" action="#{login.Cerrar()}"></ice:commandLink>
+
+
+
+            <br></br>
+
+            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="PERFIL" action="/VentanaPerfilUsuario_Ofertante.xhtml?faces-redirect=true"></ice:commandLink>
+
+
+
+        </ice:form>
+
+        
+
+        <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion==false}">
+
+            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="REGISTRARSE" action="/VentanaRegistroUsuario_Ofertante.xhtml?faces-redirect=true"></ice:commandLink>
+
+
+
+            <br></br>
+
+            <ice:commandLink style="letter-spacing: 2px; font-size: 75%; text-decoration: underline; text-align: center; font-family: Verdana; color: red;" value="INICIAR SESION" action="/VentanaIngresoUsuario.xhtml?faces-redirect=true"></ice:commandLink>
+
+
+
+        </ice:form>
+
+
+
+    </h:head>
+
+    <h:body>
+
+
+
+
+
+
+
+        <h:form id="form">
+
+            <ace:tabSet id="sampleTabSet" clientSide="true" >
+
+                <ace:tabPane id="toDoList" label="Perfil">
+
+
+
+                    <h:outputLabel value="Cédula: #{login.usuario.ciUsuario}"></h:outputLabel>
+
+                    <br></br>
+
+
+
+                    <h:outputLabel value="Nombre: #{login.usuario.nombreUsuario}"></h:outputLabel>
+
+                    <br></br>
+
+
+
+                    <h:outputLabel value="Tipo de cuenta: #{login.usuario.tipoUsuario}"></h:outputLabel>
+
+                    <br></br>
+
+
+
+                    <h:outputLabel value="Sexo: #{login.usuario.sexoUsuario}"></h:outputLabel>
+
+
+
+                </ace:tabPane>
+
+
+
+                <ace:tabPane id="ModifCuenta" label="Modificar Cuenta">
+
+
+
+                    <ice:panelGrid id ="pnlGridUsuario238" columns="2" rowClasses="oddRow, evenRow">
+
+
+
+                        <h:outputLabel value="Número de Cédula: "></h:outputLabel> 
+
+                        <h:outputLabel value="#{login.usuario.ciUsuario}" ></h:outputLabel>             
+
+                        <h:outputLabel value="Nombre: #{login.usuario.nombreUsuario}"></h:outputLabel>
+
+                        <ice:inputText id="NombreO" value="#{usuarioDP.nombreUsuario}"></ice:inputText>  
+
+                        <h:outputLabel value="Tipo de cuenta: "></h:outputLabel>
+
+                        <h:outputLabel value="#{login.usuario.tipoUsuario}"></h:outputLabel>
+
+                        
+
+                        <ice:outputText id="out5" value="Seleccione sexo de usuario:"></ice:outputText>
+
+                        <ace:comboBox id="smenu2" value="#{usuarioDP.sexoUsuario}">
+
+                            <f:selectItem id="sele5" itemValue="Masculino"/>
+
+                            <f:selectItem id="sele6" itemValue="Femenino"/>
+
+                            <ace:ajax render="@this smenu"/>
+
+
+
+                        </ace:comboBox>
+
+
+
+                        <ice:outputText id ="inCodigMod" value="Ingrese la contraseña nueva: "></ice:outputText>
+
+                        <ace:textEntry id="Contraseña" value="#{usuarioDP.contrasenaUsuario}" label="Contraseña" >
+
+
+
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
+
+
+
+                        </ace:textEntry>
+
+
+
+                        <ice:commandButton value="Modificar" action="#{usuarioDP.modificar(login.usuario.ciUsuario,login.usuario.tipoUsuario)}" onclick="window.location.reload('VentanaInicioAventron.xhtml');"></ice:commandButton>
+
+
+
+
+
+
+
+
+
+
+
+                       
+
+
+
+                        <ice:outputText id="outcome" value="#{usuarioDP.retorno}" rendered="#{usuarioDP.retorno != null}"></ice:outputText>
+
+
+
+                        <ace:confirmationDialog class="DialogoEliminar" widgetVar="Confirmacion"
+
+                                                message="Seguro desea modificar su esto?"
+
+                                                header="Eliminar"
+
+                                                width="350"
+
+                                                height="180"
+
+                                                closable="true"
+
+                                                position="center">
+
+
+
+                            <ice:panelGrid columns="2" styleClass="centeredPanelGrid">
+
+
+
+                                <ice:commandButton id="Si" value="Si" onclick="Confirmacion.hide();" actionListener="#{usuario.SI}" >
+
+                                    <f:ajax execute="@this" render="@all"/>
+
+
+
+                                </ice:commandButton>
+
+
+
+                                <ice:commandButton id="No" value="No" onclick="Confirmacion.hide(); window.location.reload('PaginaUsuarioEliminar.xhtml');" actionListener="#{usuario.No}" >
+
+
+
+                                    <f:ajax execute="@this" render="@all"/>
+
+
+
+                                </ice:commandButton>
+
+                            </ice:panelGrid>
+
+                        </ace:confirmationDialog>
+
+                    </ice:panelGrid>
+
+                </ace:tabPane>
+
+
+
+                <ace:tabPane id="picOfDay" label="Eliminar Usuario">
+
+
+
+
+
+                    <ice:panelGrid id ="pnlGridUsuario1" columns="4" rowClasses="oddRow, evenRow">
+
+                        <ice:outputText id ="oIntCodigoM" value="CI del Usuario:"></ice:outputText>
+
+                        <h:outputLabel value="#{login.usuario.ciUsuario}" ></h:outputLabel>  
+
+                    </ice:panelGrid> 
+
+                    <ice:panelGrid id ="pnlGridUsuario2" columns="4" rowClasses="oddRow, evenRow">
+
+                        <ice:outputText value="Tipo del usuario:"></ice:outputText>
+
+                        <ice:inputText id="in15" title="Código" value ="#{login.usuario.tipoUsuario}" disabled="true" ></ice:inputText>
+
+                        <ice:outputText value="Nombre del usuario:"></ice:outputText>
+
+                        <ice:inputText id="smenu111" value="#{login.usuario.nombreUsuario}" disabled="true" >
+
+                        </ice:inputText >
+
+                    </ice:panelGrid>
+
+                    <ice:panelGrid id ="pnlGridUsuario443">
+
+                        <ice:commandButton value="Eliminar" onclick="Confirmacion.show();" type="button"></ice:commandButton>
+
+                        <ice:outputText id="outcome414" value="#{usuarioDP.retorno}" rendered="#{usuarioDP.retorno != null}"></ice:outputText>
+
+                        <ace:confirmationDialog class="DialogoEliminar" widgetVar="Confirmacion"
+
+                                                message="Seguro desea Eliminar esto?"
+
+                                                header="Eliminar"
+
+                                                width="350"
+
+                                                height="180"
+
+                                                closable="true"
+
+                                                position="center">
+
+                            <ice:panelGrid columns="2" styleClass="centeredPanelGrid">
+
+                                <ice:commandButton id="Si41" value="Si" onclick="Confirmacion.hide();" actionListener="#{usuarioDP.SI(login.usuario.ciUsuario, actionEvent)}" >
+
+                                    <f:ajax execute="@this" render="@all"/>
+
+                                </ice:commandButton>
+
+                                <ice:commandButton id="No414" value="No" onclick="Confirmacion.hide(); window.location.reload('VentanaInicioAventron.xhtml');" actionListener="#{usuarioDP.No}" >
+
+                                    <f:ajax execute="@this" render="@all"/>
+
+                                </ice:commandButton>
+
+                            </ice:panelGrid>
+
+                        </ace:confirmationDialog>
+
+                    </ice:panelGrid>
+
+                    <h:panelGroup rendered="#{usuarioDP.verDialogo1}">
+
+                        <ace:dialog id="dialogServer44"
+
+                                    header="Mensaje"
+
+                                    closable="false"
+
+                                    modal="true"
+
+                                    draggable="false"
+
+                                    showEffect="clip"
+
+                                    hideEffect="fade"
+
+                                    width="400"
+
+                                    visible="true"
+
+                                    rendered="#{usuarioDP.verDialogo1}"
+
+                                    widgetVar="dialogo">
+
+                            <h:panelGrid width="100%" style="text-align: center;" columns="1">
+
+                                <h:outputLabel id="firstNameLabel" style="color: white;" value="#{usuarioDP.error}"/>
+
+                                <h:outputLabel id="firstNameLabel1" style="color: white;" value="#{usuarioDP.lista}"/>
+
+                                <h:outputLabel id="firstNameLabel2" style="color: white;" value="#{usuarioDP.error1}"/>
+
+                                <h:commandButton id="submitServer441" value="Aceptar" onclick="dialogo.hide();
+
+                                                 #{usuario.setVerDialogo1(false)};
+
+                                        window.location.reload('VentanaPerfilUsuario_Ofertante.xhtml');
+
+                                                 ">
+
+                                    <ace:ajax render="@none"></ace:ajax>
+
+                                </h:commandButton>
+
+                            </h:panelGrid>
+
+                        </ace:dialog>
+
+                    </h:panelGroup>
+
+
+
+                </ace:tabPane>
+
+                
+
+                <ace:tabPane id="viajes" label=" Gestionar Viajes">
+
+
+
+                </ace:tabPane> 
+
+                
+
+                <ace:tabPane id="InicioAutomovil" label="Gestionar Automoviles">
+
+
+
+                    <ace:tabSet id="automoviles" clientSide="true">
+
+
+
+
+
+                        <ace:tabPane id="consultaAutomovil" label="Consulta de Automoviles">
+
+                            
+
+                            <h:dataTable id="dt1" value="#{automovilDP.listarVecinos(login.usuario.ciUsuario)}" var="item" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" rows="100" width="50%" dir="LTR" frame="hsides" rules="all" summary="This is a JSF code to create dataTable." >
+
+
+
+                                <f:facet name="header">
+
+                                    <h:outputText value="Mis Automoviles" />
+
+                                </f:facet> 
+
+
+
+                                <h:column>
+
+                                    <f:facet name="header">
+
+                                        <h:outputText value="Placa del Vehiculo" />
+
+                                    </f:facet> 
+
+                                    <h:outputText style="" value="#{item.autoPlaca}" ></h:outputText>
+
+                                </h:column>
+
+
+
+                                <h:column>
+
+                                    <f:facet name="header">
+
+                                        <h:outputText value="Año del Vehiculo"/>
+
+                                    </f:facet> 
+
+                                    <h:outputText value="#{item.autoAnio}"></h:outputText>
+
+                                </h:column>
+
+
+
+                                <h:column>
+
+                                    <f:facet name="header">
+
+                                        <h:outputText value="Asientos Maximos"/>
+
+                                    </f:facet> 
+
+                                    <h:outputText value="#{item.autoAsientosMaximos}"></h:outputText>
+
+                                </h:column>
+
+
+
+                                <h:column>
+
+                                    <f:facet name="header">
+
+                                        <h:outputText value="Imagen"/>
+
+                                    </f:facet> 
+
+                                    <h:outputText value="#{item.autoImagen}"></h:outputText>
+
+                                </h:column>
+
+
+
+                                <f:facet name="footer">
+
+                                    <h:outputText value="" />
+
+                                </f:facet> 
+
+
+
+                            </h:dataTable>
+
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+
+
+                                <ice:outputText id="gesoutci0" value="Ingreso para el CI:"></ice:outputText>
+
+                                <ice:outputText id="gesoutcCI" value="#{login.usuario.ciUsuario}"></ice:outputText> 
+
+
+
+                                <ice:outputText id="gesout1" value="Ingrese la placa del Automovil:"></ice:outputText>
+
+                                <ace:textEntry id="gesplaca" value="#{automovilDP.autoPlaca}" label="Placa" >
+
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+
+                                </ace:textEntry>
+
+
+
+                                <ice:outputText id="gesout2" value="Seleccione el Año:"></ice:outputText>
+
+                                <ace:dateTimeEntry id="gesiAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
+
+
+
+
+
+
+
+                                <ice:outputText id="gesout3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
+
+                                <ace:simpleSelectOneMenu id="gessmenu" value="#{automovilDP.autoAsientosMaximos}">
+
+                                    <f:selectItem id="gessele1" itemValue="1"/>
+
+                                    <f:selectItem id="gessele2" itemValue="2"/>
+
+                                    <f:selectItem id="gessele3" itemValue="3"/>
+
+                                    <f:selectItem id="gessele4" itemValue="4"/>
+
+                                    <f:selectItem id="gessele5" itemValue="5"/>
+
+                                    <f:selectItem id="gessele6" itemValue="6"/>
+
+                                    <f:selectItem id="gessele7" itemValue="7"/>
+
+                                    <f:selectItem id="gessele8" itemValue="8"/>
+
+                                    <f:selectItem id="gessele9" itemValue="9"/>
+
+                                    <f:selectItem id="gessele10" itemValue="10"/>
+
+                                    <f:selectItem id="gessele11" itemValue="11"/>
+
+                                    <f:selectItem id="gessele12" itemValue="12"/>
+
+                                    <f:selectItem id="gessele13" itemValue="13"/>
+
+                                    <f:selectItem id="gessele14" itemValue="14"/>
+
+                                    <f:selectItem id="gessele15" itemValue="15"/>
+
+                                    <f:selectItem id="gessele16" itemValue="16"/>
+
+                                    <f:selectItem id="gessele17" itemValue="17"/>
+
+                                    <f:selectItem id="gessele18" itemValue="18"/>
+
+                                    <ace:ajax render="@this smenu"/>
+
+                                </ace:simpleSelectOneMenu>
+
+
+
+                                <ice:outputText id="gesout4" value="Imagen del Automovil:"></ice:outputText>
+
+                                <ace:fileEntry id="gessmenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
+
+
+
+
+
+                                <ice:commandButton id="modificarau" value="Modificar" action="#{automovilDP.modificarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton>
+
+                                <ice:commandButton id="eliminarau" value="Eliminar" action="#{automovilDP.descartarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton> 
+
+                            </ice:panelGrid>
+
+                        </ace:tabPane>
+
+
+
+
+
+
+
+                        <ace:tabPane id="ingresoAutomovil" label="Ingreso de Automovil">
+
+
+
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+
+
+                                <ice:outputText id="outci0" value="Ingreso para el CI:"></ice:outputText>
+
+                                <ice:outputText id="outcCI" value="#{login.usuario.ciUsuario}"></ice:outputText> 
+
+
+
+
+
+
+
+                                <ice:outputText id="out1" value="Ingrese la placa del Automovil:"></ice:outputText>
+
+                                <ace:textEntry id="placa" value="#{automovilDP.autoPlaca}" label="Placa" >
+
+
+
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+
+
+
+                                </ace:textEntry>
+
+
+
+
+
+
+
+                                <ice:outputText id="out2" value="Seleccione el Año:"></ice:outputText>
+
+
+
+                                <ace:dateTimeEntry id="iAnio" value="#{automovilDP.autoAnio}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
+
+
+
+
+
+                                <ice:outputText id="out3" value="Seleccione Asientos Maximos del Automovil:"></ice:outputText>
+
+
+
+                                <ace:simpleSelectOneMenu id="smenu" value="#{automovilDP.autoAsientosMaximos}">
+
+                                    <f:selectItem id="sele1" itemValue="1"/>
+
+                                    <f:selectItem id="sele2" itemValue="2"/>
+
+                                    <f:selectItem id="sele3" itemValue="3"/>
+
+                                    <f:selectItem id="sele4" itemValue="4"/>
+
+                                    <f:selectItem id="sele5" itemValue="5"/>
+
+                                    <f:selectItem id="sele6" itemValue="6"/>
+
+                                    <f:selectItem id="sele7" itemValue="7"/>
+
+                                    <f:selectItem id="sele8" itemValue="8"/>
+
+                                    <f:selectItem id="sele9" itemValue="9"/>
+
+                                    <f:selectItem id="sele10" itemValue="10"/>
+
+                                    <f:selectItem id="sele11" itemValue="11"/>
+
+                                    <f:selectItem id="sele12" itemValue="12"/>
+
+                                    <f:selectItem id="sele13" itemValue="13"/>
+
+                                    <f:selectItem id="sele14" itemValue="14"/>
+
+                                    <f:selectItem id="sele15" itemValue="15"/>
+
+                                    <f:selectItem id="sele16" itemValue="16"/>
+
+                                    <f:selectItem id="sele17" itemValue="17"/>
+
+                                    <f:selectItem id="sele18" itemValue="18"/>
+
+                                    <ace:ajax render="@this smenu"/>
+
+
+
+                                </ace:simpleSelectOneMenu>
+
+
+
+
+
+                                <ice:outputText id="out4" value="Imagen del Automovil:"></ice:outputText>
+
+                                <ace:fileEntry id="smenu1" fileEntryListener="#{automovilDP.autoImagen}"></ace:fileEntry>
+
+                                <ice:commandButton id="insertar" value="Guardar" action="#{automovilDP.guardarAutomovil(login.usuario.ciUsuario)}"></ice:commandButton>
+
+
+
+                            </ice:panelGrid>
+
+                        </ace:tabPane>
+
+                    </ace:tabSet>
+
+                </ace:tabPane>
+
+       
+
+               
+
+                
+
+                <ace:tabPane id="rutas" label=" Gestionar Rutas">
+
+                    <ace:tabSet id="rutass" clientSide="true">
+
+        <ace:tabPane label="Insertar Ubicación">
+       
+            <ice:panelGrid id="Panel" columns="2" rowClasses="sddRow,evenRow">
+                    <ice:outputText id="oCodigo" value="Codigo: "/>
+                    <ice:inputText id="iCodigo"  value="#{ubicacionDP.codigo}" />
+
+
+                           <ice:outputText id="CodigoUsuario" value="Codigo Usuario "/>
+                           <ice:outputText id="CdUsuario"  value="#{login.usuario.ciUsuario}" />
+
+
+                <ice:outputText id="oDescripcion" value="Descripcion: "/>
+                <ice:inputText id="iDescripcion"  value="#{ubicacionDP.ubiDescripcion}" />
+
+                <ice:outputText id="latitud" value="Latitud: "/>
+                <ice:inputText id="ilat"  value="#{ubicacionDP.ubiLatitud}" />
+
+                <ice:outputText id="longitud" value="Longitud: "/>
+                <ice:inputText id="ilong"  value="#{ubicacionDP.ubiLongitud}" />
+                <ice:commandButton id="boton" value="Grabar" action="#{ubicacionDP.guardar(login.usuario.ciUsuario)}"/>    <br></br>
+                 <ace:gMap id="gMapper" style="width: 500px; height: 500px" latitude="62.82259" longitude="-96.6790" type="Map" zoomLevel="4"/> 
+            </ice:panelGrid>
+       
+        </ace:tabPane> 
+
+                    <ace:tabPane label="Eliminar Ubicación">
+
+            <ice:panelGrid id="PanelBU" columns="2" rowClasses="sddRow,evenRow">
+
+                    <ice:outputText id="oDCodigo" value="Codigo: "/>
+
+                    <ice:inputText id="iJCodigo"  value="#{ubicacionDP.codigo}" />
+
+
+
+
+
+                           <ice:outputText id="CodigoUsuario3" value="Codigo Usuario "/>
+
+                           <ice:inputText id="CdUsuario3"  value="#{ubicacionDP.ciUsuario}" />
+
+
+
+
+
+                <ice:outputText id="oDescripcion3" value="Descripcion: "/>
+
+                <ice:inputText id="iDescripcioN3"  value="#{ubicacionDP.ubiDescripcion}" />
+
+
+
+                <ice:outputText id="latitud3" value="Latitud: "/>
+
+                <ice:inputText id="ilat33"  value="#{ubicacionDP.ubiLatitud}" />
+
+
+
+                <ice:outputText id="longitud3" value="Longitud: "/>
+
+                <ice:inputText id="ilong3"  value="#{ubicacionDP.ubiLongitud}" />
+
+                <ice:commandButton id="boton2" value="Borrar" action="#{ubicacionDP.borrar()}"/>
+
+            </ice:panelGrid>
+
+   </ace:tabPane>
+
+                        </ace:tabSet> 
+
+               </ace:tabPane>  
+
+            </ace:tabSet>                 
+
+        </h:form>
+
+    </h:body>
+
+
+
+</html>
+
+
+
+
+
+
+
