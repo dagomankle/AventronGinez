@@ -52,7 +52,7 @@
 
         </ice:form>
 
-        
+
 
         <ice:form style="text-align: right;" rendered="#{login.usuario.estadoSesion==false}">
 
@@ -134,7 +134,7 @@
 
                         <h:outputLabel value="#{login.usuario.tipoUsuario}"></h:outputLabel>
 
-                        
+
 
                         <ice:outputText id="out5" value="Seleccione sexo de usuario:"></ice:outputText>
 
@@ -178,7 +178,7 @@
 
 
 
-                       
+
 
 
 
@@ -358,7 +358,7 @@
 
                 </ace:tabPane>
 
-                
+
 
                 <ace:tabPane id="viajes" label=" Gestionar Viajes">
 
@@ -366,7 +366,7 @@
 
                 </ace:tabPane> 
 
-                
+
 
                 <ace:tabPane id="InicioAutomovil" label="Gestionar Automoviles">
 
@@ -380,7 +380,7 @@
 
                         <ace:tabPane id="consultaAutomovil" label="Consulta de Automoviles">
 
-                            
+
 
                             <h:dataTable id="dt1" value="#{automovilDP.listarVecinos(login.usuario.ciUsuario)}" var="item" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" rows="100" width="50%" dir="LTR" frame="hsides" rules="all" summary="This is a JSF code to create dataTable." >
 
@@ -672,86 +672,183 @@
 
                 </ace:tabPane>
 
-       
 
-               
 
-                
+
+
+
 
                 <ace:tabPane id="rutas" label=" Gestionar Rutas">
 
                     <ace:tabSet id="rutass" clientSide="true">
 
-        <ace:tabPane label="Insertar Ubicación">
-       
-            <ice:panelGrid id="Panel" columns="2" rowClasses="sddRow,evenRow">
-                    <ice:outputText id="oCodigo" value="Codigo: "/>
-                    <ice:inputText id="iCodigo"  value="#{ubicacionDP.codigo}" />
 
 
-                           <ice:outputText id="CodigoUsuario" value="Codigo Usuario "/>
-                           <ice:outputText id="CdUsuario"  value="#{login.usuario.ciUsuario}" />
+                        <ace:tabPane id="consultaRutas" label="Consulta de Rutas">
+                            <h:dataTable id="dtR" value="#{rutaDP.listarVecinos(login.usuario.ciUsuario)}" var="item" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" rows="100" width="50%" dir="LTR" frame="hsides" rules="all" summary="This is a JSF code to create dataTable." >
+
+                                <f:facet name="header">
+                                    <h:outputText value="Mis Rutas" />
+                                </f:facet> 
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre de la Ruta" />
+                                    </f:facet> 
+                                    <h:outputText style="" value="#{item.rutaNombre}" ></h:outputText>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Descripcion de la ruta"/>
+                                    </f:facet> 
+                                    <h:outputText value="#{item.rutaDescripcion}"></h:outputText>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ubicaciones de Ruta"/>
+                                    </f:facet> 
+                                    <h:outputText value="#{item.rutaNombresUbicaciones}"></h:outputText>
+                                </h:column>
+
+                                <f:facet name="footer">
+                                    <h:outputText value="" />
+                                </f:facet> 
+
+                            </h:dataTable>                           
+
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+                                <ice:outputText id="rutaNomE" value="Ingrese el nombre de ruta:"></ice:outputText>
+                                <ace:textEntry id="rutaNOmS" value="#{rutaDP.rutaNombre}" label="Nombre" >
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+                                </ace:textEntry>
+
+                                <ice:commandButton id="eliminarNom" value="Eliminar" action="#{rutaDP.descartarRuta()}"></ice:commandButton> 
+                            </ice:panelGrid>                            
 
 
-                <ice:outputText id="oDescripcion" value="Descripcion: "/>
-                <ice:inputText id="iDescripcion"  value="#{ubicacionDP.ubiDescripcion}" />
+                        </ace:tabPane>
 
-                <ice:outputText id="latitud" value="Latitud: "/>
-                <ice:inputText id="ilat"  value="#{ubicacionDP.ubiLatitud}" />
+                        <ace:tabPane id="ingresoRutas" label="Ingreso de Rutas">
 
-                <ice:outputText id="longitud" value="Longitud: "/>
-                <ice:inputText id="ilong"  value="#{ubicacionDP.ubiLongitud}" />
-                <ice:commandButton id="boton" value="Grabar" action="#{ubicacionDP.guardar(login.usuario.ciUsuario)}"/>    <br></br>
-                 <ace:gMap id="gMapper" style="width: 500px; height: 500px" latitude="62.82259" longitude="-96.6790" type="Map" zoomLevel="4"/> 
-            </ice:panelGrid>
-       
-        </ace:tabPane> 
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
 
-                    <ace:tabPane label="Eliminar Ubicación">
+                                <ice:outputText id="outci0r" value="Ingreso para el CI:"></ice:outputText>
+                                <ice:outputText id="outcCIr" value="#{login.usuario.ciUsuario}"></ice:outputText> 
 
-            <ice:panelGrid id="PanelBU" columns="2" rowClasses="sddRow,evenRow">
+                                <ice:outputText id="out1r" value="Ingrese la placa del Automovil:"></ice:outputText>
+                                <ace:textEntry id="nombreru" value="#{rutaDP.rutaNombre}" label="Nombre" >
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+                                </ace:textEntry>
 
-                    <ice:outputText id="oDCodigo" value="Codigo: "/>
+                                <ice:outputText id="out2ru" value="Ingrese los nombres de las ubicaciones separados por coma y espacio:"></ice:outputText>
+                                <ace:textEntry id="nombresubu" value="#{rutaDP.rutaNombresUbicaciones}" label="Nombre" >
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+                                </ace:textEntry> 
 
-                    <ice:inputText id="iJCodigo"  value="#{ubicacionDP.codigo}" />
+                                <ice:commandButton id="insertarruu" value="Guardar" action="#{rutaDP.guardarRuta(login.usuario.ciUsuario)}"></ice:commandButton>
+
+                            </ice:panelGrid>                            
+
+                        </ace:tabPane>
 
 
-
-
-
-                           <ice:outputText id="CodigoUsuario3" value="Codigo Usuario "/>
-
-                           <ice:inputText id="CdUsuario3"  value="#{ubicacionDP.ciUsuario}" />
+                        <ace:tabPane label="Insertar Ubicación">
 
 
 
+                            <ice:panelGrid id="Panel" columns="2" rowClasses="sddRow,evenRow">
 
+                                <ice:outputText id="oCodigo" value="Codigo: "/>
 
-                <ice:outputText id="oDescripcion3" value="Descripcion: "/>
-
-                <ice:inputText id="iDescripcioN3"  value="#{ubicacionDP.ubiDescripcion}" />
-
-
-
-                <ice:outputText id="latitud3" value="Latitud: "/>
-
-                <ice:inputText id="ilat33"  value="#{ubicacionDP.ubiLatitud}" />
+                                <ice:inputText id="iCodigo"  value="#{ubicacionDP.codigo}" />
 
 
 
-                <ice:outputText id="longitud3" value="Longitud: "/>
 
-                <ice:inputText id="ilong3"  value="#{ubicacionDP.ubiLongitud}" />
 
-                <ice:commandButton id="boton2" value="Borrar" action="#{ubicacionDP.borrar()}"/>
+                                <ice:outputText id="CodigoUsuario" value="Codigo Usuario "/>
 
-            </ice:panelGrid>
+                           <!--<ice:outputText id="CdUsuario"  value="#{ubicacionDP.ciUsuario}" />-->
+                                <ice:inputText id="iCodigo2"  value="#{ubicacionDP.ciUsuario}" />
 
-   </ace:tabPane>
 
-                        </ace:tabSet> 
 
-               </ace:tabPane>  
+
+
+                                <ice:outputText id="oDescripcion" value="Descripcion: "/>
+
+                                <ice:inputText id="iDescripcion"  value="#{ubicacionDP.ubiDescripcion}" />
+
+
+
+                                <ice:outputText id="latitud" value="Latitud: "/>
+
+                                <ice:inputText id="ilat"  value="#{ubicacionDP.ubiLatitud}" />
+
+
+
+                                <ice:outputText id="longitud" value="Longitud: "/>
+
+                                <ice:inputText id="ilong"  value="#{ubicacionDP.ubiLongitud}" />
+
+                                <ice:commandButton id="boton" value="Grabar" action="#{ubicacionDP.guardar()}"/>    <br></br>
+
+                                <ace:gMap id="gMapper" style="width: 500px; height: 500px" latitude="62.82259" longitude="-96.6790" type="Map" zoomLevel="4"/> 
+
+                            </ice:panelGrid>
+
+
+
+                        </ace:tabPane> 
+
+                        <ace:tabPane label="Eliminar Ubicación">
+
+                            <ice:panelGrid id="PanelBU" columns="2" rowClasses="sddRow,evenRow">
+
+                                <ice:outputText id="oDCodigo" value="Codigo: "/>
+
+                                <ice:inputText id="iJCodigo"  value="#{ubicacionDP.codigo}" />
+
+
+
+
+
+                                <ice:outputText id="CodigoUsuario3" value="Codigo Usuario "/>
+
+                                <ice:inputText id="CdUsuario3"  value="#{ubicacionDP.ciUsuario}" />
+
+
+
+
+
+                                <ice:outputText id="oDescripcion3" value="Descripcion: "/>
+
+                                <ice:inputText id="iDescripcioN3"  value="#{ubicacionDP.ubiDescripcion}" />
+
+
+
+                                <ice:outputText id="latitud3" value="Latitud: "/>
+
+                                <ice:inputText id="ilat33"  value="#{ubicacionDP.ubiLatitud}" />
+
+
+
+                                <ice:outputText id="longitud3" value="Longitud: "/>
+
+                                <ice:inputText id="ilong3"  value="#{ubicacionDP.ubiLongitud}" />
+
+                                <ice:commandButton id="boton2" value="Borrar" action="#{ubicacionDP.borrar()}"/>
+
+                            </ice:panelGrid>
+
+                        </ace:tabPane>
+
+                    </ace:tabSet> 
+
+                </ace:tabPane>  
 
             </ace:tabSet>                 
 

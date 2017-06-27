@@ -68,9 +68,9 @@ private String ciUsuario; //
     public void setCiUsuario(String ciUsuario) {
         this.ciUsuario = ciUsuario;
     }
-    public void guardar(String ci)
+    public void guardar()
     {
-        this.setCiUsuario(ci);
+        //this.setCiUsuario(ci);
         UbicacionMD ubicacionmd=new UbicacionMD(this);
         ubicacionmd.guardar();
     }
