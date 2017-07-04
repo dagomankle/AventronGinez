@@ -112,12 +112,12 @@ public class RutaMD {
     public void insertarRuta() {
 
         try {
-            DataSource DSAutomovil = this.getAventronPool();
-            this.con = DSAutomovil.getConnection();
+            DataSource DSRuta = this.getAventronPool();
+            this.con = DSRuta.getConnection();
             this.stm = this.con.createStatement();
             cadena = "INSERT INTO RUTA  (RUTANOMBRE, RUTADESCRIPCION) values('"
                     + this.rutaDP.getRutaNombre() + "','"
-                    + this.rutaDP.getUsuarioCI()
+                    + this.rutaDP.getRutaDescripcion()
                     + ")";
 
             this.stm.executeUpdate(this.cadena);
@@ -134,15 +134,35 @@ public class RutaMD {
     }
 
     public void insertarUbicacionesDebiles() {
+        
+        for (UbicacionDP item : this.rutaDP.getRutaUbicaciones()) {
+            try {
+                DataSource DSRuta = this.getAventronPool();
+                this.con = DSRuta.getConnection();
+                this.stm = this.con.createStatement();
+                cadena = "INSERT INTO FORMA  (RUTANOMBRE, UBICACIONID) values('"
+                        + this.rutaDP.getRutaNombre() + "','"
+                        + item.getCodigo()
+                        + ")";
 
+                this.stm.executeUpdate(this.cadena);
+                this.con.close();
+                this.stm.close();
+
+            } catch (NamingException ex) {
+                /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+            }  
+        }  
     }
 
     public void eliminarRuta() {
         try {
             this.eliminarUbicacionesDebiles();
 
-            DataSource DSAutomovil = this.getAventronPool();
-            this.con = DSAutomovil.getConnection();
+            DataSource DSRuta = this.getAventronPool();
+            this.con = DSRuta.getConnection();
             this.stm = this.con.createStatement();
             this.cadena = "DELETE FROM RUTA WHERE NOMBRERUTA = " + this.rutaDP.getRutaNombre();
             this.stm.executeUpdate(this.cadena);
@@ -205,7 +225,8 @@ public class RutaMD {
             while (rs.next()) {
                 String rutanom = rs.getString("RUTANOMBRE");
                 String rutadesc = rs.getString("RUTADESCRIPCION");
-                rutaDP = new RutaDP(rutanom, rutadesc, null);
+                LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
+                rutaDP = new RutaDP(rutanom, rutadesc, ubicaciones);
             }
             con.close();
             this.stm.close();

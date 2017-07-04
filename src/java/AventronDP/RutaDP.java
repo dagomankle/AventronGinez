@@ -9,6 +9,7 @@ import AventronMD.AutomovilMD;
 import AventronMD.RutaMD;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Named;
@@ -42,9 +43,42 @@ public class RutaDP {
         this.rutaNombre = rutaNombre;
         this.rutaDescripcion = rutaDescripcion;
         this.rutaUbicaciones = rutaUbicaciones;
+         this.rutaNombresUbicaciones = this.determinarRutaUbicacionesNombres();
         this.rutaVecinos = null;
     }
 
+    public RutaDP(String rutaNombre, String rutaDescripcion, String rutaNombresUbicaciones) {
+        this.rutaNombre = rutaNombre;
+        this.rutaDescripcion = rutaDescripcion;
+        this.rutaNombresUbicaciones = rutaNombresUbicaciones;
+        this.rutaUbicaciones = this.determinarRutaUbicaciones();
+        this.rutaVecinos = null;
+    }    
+   
+    private String determinarRutaUbicacionesNombres(){
+        String nombres = "";
+        for (UbicacionDP item : this.rutaUbicaciones) {
+                  nombres = nombres +item.getCodigo()+", ";
+        }    
+        nombres = nombres.substring(0, nombres.length() -2);
+        return nombres;
+    }
+
+
+    private LinkedList<UbicacionDP> determinarRutaUbicaciones(){
+        LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
+        
+        List<String> ids = Arrays.asList(this.rutaNombresUbicaciones.split(", "));
+        for (String item : ids) {
+            UbicacionDP ubication = new UbicacionDP();
+             
+            
+            ubicaciones.add(ubication);
+        }     
+
+        return ubicaciones;
+    }    
+    
     public String getRutaNombresUbicaciones() {
         return rutaNombresUbicaciones;
     }
@@ -100,7 +134,6 @@ public class RutaDP {
         if(controlMD.validarRuta())
             controlMD.insertarRuta();
     }
-
    
     public void cargarRuta(){
         RutaMD controlMD = new RutaMD(this);
