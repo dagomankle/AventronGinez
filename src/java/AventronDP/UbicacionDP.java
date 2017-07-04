@@ -90,4 +90,14 @@ private String ciUsuario; //
         return ubicacionmd.consultarubicaciones();
     }
     
+    public void cargarUbicacion(String nombre, String ci){
+        UbicacionMD controlMD = new UbicacionMD(this);
+        UbicacionDP sera = controlMD.recuperarUbicacion(nombre, ci);
+        this.Codigo= sera.Codigo;
+        this.ubiLatitud = sera.ubiLatitud;
+        this.ubiLongitud = sera.ubiLongitud;
+        this.ubiDescripcion = sera.ubiDescripcion;
+        this.ciUsuario = sera.ciUsuario;        
+    }
+    
 }

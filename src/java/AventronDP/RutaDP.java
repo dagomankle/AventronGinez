@@ -64,18 +64,15 @@ public class RutaDP {
         return nombres;
     }
 
-
     private LinkedList<UbicacionDP> determinarRutaUbicaciones(){
         LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
         
         List<String> ids = Arrays.asList(this.rutaNombresUbicaciones.split(", "));
         for (String item : ids) {
             UbicacionDP ubication = new UbicacionDP();
-             
-            
+            ubication.cargarUbicacion(item, this.usuarioCI);            
             ubicaciones.add(ubication);
-        }     
-
+        }
         return ubicaciones;
     }    
     
