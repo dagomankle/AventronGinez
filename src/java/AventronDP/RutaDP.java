@@ -24,7 +24,7 @@ import javax.naming.NamingException;
 @Named(value = "rutaDP")
 @RequestScoped
 public class RutaDP {
-    
+
     private String rutaNombre;
     private String rutaDescripcion;
     private LinkedList<UbicacionDP> rutaUbicaciones;
@@ -42,7 +42,7 @@ public class RutaDP {
         this.rutaNombre = rutaNombre;
         this.rutaDescripcion = rutaDescripcion;
         this.rutaUbicaciones = rutaUbicaciones;
-         this.rutaNombresUbicaciones = this.determinarRutaUbicacionesNombres();
+        this.rutaNombresUbicaciones = this.determinarRutaUbicacionesNombres();
         this.rutaVecinos = null;
     }
 
@@ -52,39 +52,42 @@ public class RutaDP {
         this.rutaNombresUbicaciones = rutaNombresUbicaciones;
         this.rutaUbicaciones = this.determinarRutaUbicaciones();
         this.rutaVecinos = null;
-    }    
-   
-    public String determinarRutaUbicacionesNombres(){
+    }
+
+    public String determinarRutaUbicacionesNombres() {
         String nombres = "";
         for (UbicacionDP item : this.rutaUbicaciones) {
-                  nombres = nombres +item.getCodigo()+", ";
+            nombres = nombres + item.getCodigo() + ", ";
         }
-        if(nombres != "")
-            nombres = nombres.substring(0, nombres.length() -2);
+        if (nombres != "") {
+            nombres = nombres.substring(0, nombres.length() - 2);
+        }
         return nombres;
     }
 
-    public LinkedList<UbicacionDP> determinarRutaUbicaciones(){
+    public LinkedList<UbicacionDP> determinarRutaUbicaciones() {
         LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
-        
+
         List<String> ids = Arrays.asList(this.rutaNombresUbicaciones.split(", "));
         for (String item : ids) {
             UbicacionDP ubication = new UbicacionDP();
-            ubication.cargarUbicacion(item, this.usuarioCI);            
+            ubication.cargarUbicacion(item, this.usuarioCI);
             ubicaciones.add(ubication);
         }
         return ubicaciones;
-    }    
-    
+    }
+
     public String getRutaNombresUbicaciones() {
         return rutaNombresUbicaciones;
     }
 
     public void setRutaNombresUbicaciones(String rutaNombresUbicaciones) {
         this.rutaNombresUbicaciones = rutaNombresUbicaciones;
-        if (this.rutaNombresUbicaciones != null)
-            if (this.rutaUbicaciones == null)
-                this.rutaUbicaciones= this.determinarRutaUbicaciones();
+        if (this.rutaNombresUbicaciones != null) {
+            if (this.rutaUbicaciones == null) {
+                this.rutaUbicaciones = this.determinarRutaUbicaciones();
+            }
+        }
     }
 
     public void setUsuarioCI(String usuarioCI) {
@@ -121,54 +124,59 @@ public class RutaDP {
 
     public void setRutaUbicaciones(LinkedList<UbicacionDP> rutaUbicaciones) {
         this.rutaUbicaciones = rutaUbicaciones;
-        if(this.rutaUbicaciones != null)
-            if (this.rutaNombresUbicaciones == null)
+        if (this.rutaUbicaciones != null) {
+            if (this.rutaNombresUbicaciones == null) {
                 this.rutaNombresUbicaciones = this.determinarRutaUbicacionesNombres();
+            }
+        }
     }
 
     public void setRutaVecinos(LinkedList<RutaDP> rutaVecinos) {
         this.rutaVecinos = rutaVecinos;
     }
-    
-    public void guardarRuta(String ci){
+
+    public void guardarRuta(String ci) {
         this.usuarioCI = ci;
         RutaMD controlMD = new RutaMD(this);
 
         //if(controlMD.validarRuta())
-            controlMD.insertarRuta();
+        controlMD.insertarRuta();
     }
-   
-    public void cargarRuta(){
+
+    public void cargarRuta() {
         RutaMD controlMD = new RutaMD(this);
         RutaDP sera = controlMD.recuperarRuta("nombreeee");
         this.rutaNombre = sera.rutaNombre;
         this.rutaDescripcion = sera.rutaDescripcion;
         this.rutaUbicaciones = sera.rutaUbicaciones;
     }
-    
-    public LinkedList<RutaDP> cargarRutas() throws NamingException, SQLException{
+
+    public LinkedList<RutaDP> cargarRutas() throws NamingException, SQLException {
         RutaMD controlMD = new RutaMD(this);
         return controlMD.recuperarRutas();
     }
-  
-    public void descartarRuta(String nombre){
+
+    public void descartarRuta(String nombre) {
         this.rutaNombre = nombre;
         RutaMD controlMD = new RutaMD(this);
         controlMD.eliminarRuta();
     }
-   
-    public boolean verificarRuta(){
+
+    public boolean verificarRuta() {
         RutaMD controlMD = new RutaMD(this);
         return controlMD.validarRuta();
-    }   
+    }
 
-    public LinkedList<RutaDP> listarVecinos(String ci) throws NamingException, SQLException{
-        this.usuarioCI = ci;
-        this.rutaVecinos = this.cargarRutas();
-        return this.rutaVecinos;
-    }    
-    
-     public void validar1(ValueChangeEvent event) throws NamingException, SQLException {
+    public LinkedList<RutaDP> listarVecinos(String ci) throws NamingException, SQLException {
+        if (this.rutaVecinos == null) {
+            this.usuarioCI = ci;
+            this.rutaVecinos = this.cargarRutas();
+            return this.rutaVecinos;
+        }
+        else return this.rutaVecinos;
+    }
+
+    public void validar1(ValueChangeEvent event) throws NamingException, SQLException {
         Object valor = event.getNewValue();
         if (valor != null) {
             RutaMD nuevo = new RutaMD(this);
@@ -179,7 +187,7 @@ public class RutaDP {
                 this.setRutaDescripcion(nueva.getRutaDescripcion());
                 this.setRutaUbicaciones(nueva.getRutaUbicaciones());
                 this.setRutaVecinos(nueva.getRutaVecinos());
-              
+
                 this.setValidar(true);
                 return;
             }
@@ -205,6 +213,5 @@ public class RutaDP {
         }
         return retorno;
     }
-    
-    
+
 }

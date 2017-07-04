@@ -246,6 +246,7 @@ public class RutaMD {
     }
 
     public RutaDP ConsultaporParametros2(String nombre) {
+        RutaDP rutaDPL = new RutaDP();
         try {
             DataSource DSAutomovil = this.getAventronPool();
             this.con = DSAutomovil.getConnection();
@@ -258,11 +259,11 @@ public class RutaMD {
                 String rutanom = rs.getString("RUTANOMBRE");
                 String rutadesc = rs.getString("RUTADESCRIPCION");
                 LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
-                rutaDP = new RutaDP(rutanom, rutadesc, ubicaciones);
+                rutaDPL = new RutaDP(rutanom, rutadesc, ubicaciones);
             }
             con.close();
             this.stm.close();
-            return rutaDP;
+            return rutaDPL;
 
         } catch (NamingException ex) {
             /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
