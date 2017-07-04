@@ -34,13 +34,23 @@ public class UsuarioDP {
     private String tipoUsuario;
     private String sexoUsuario;
     private String contrasenaUsuario;
+    private Integer celularUsuario;
 
-    public UsuarioDP(String ciUsuario, String nombreUsuario, String tipoUsuario, String sexoUsuario, String contrasenaUsuario) {
+    public UsuarioDP(String ciUsuario, String nombreUsuario, String tipoUsuario, String sexoUsuario, String contrasenaUsuario, Integer celular) {
         this.ciUsuario = ciUsuario;
         this.nombreUsuario = nombreUsuario;
         this.tipoUsuario = tipoUsuario;
         this.sexoUsuario = sexoUsuario;
         this.contrasenaUsuario = contrasenaUsuario;
+        this.celularUsuario = celular;
+    }
+
+    public Integer getCelularUsuario() {
+        return celularUsuario;
+    }
+
+    public void setCelularUsuario(Integer celular) {
+        this.celularUsuario = celular;
     }
 
     public String getCiUsuario() {
@@ -102,7 +112,7 @@ public class UsuarioDP {
         //this.ciUsuario = nuevL.usuario.getCiUsuario();
         this.ciUsuario = CI;
         this.tipoUsuario=tipo;
-        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
+        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario, celularUsuario);
         if(nueva.sexoUsuario.equals("Masculino")){
             nueva.sexoUsuario="M";
         }
@@ -251,7 +261,7 @@ public class UsuarioDP {
 
     public void SI(String ci, ActionEvent actionEvent) throws SQLException, NamingException {
         UsuarioMD nuevo = new UsuarioMD();
-        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
+        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario,celularUsuario);
         nueva.setCiUsuario(ci);
         nuevo.Eliminar(nueva);
         this.setError(nuevo.getError());
@@ -264,7 +274,7 @@ public class UsuarioDP {
         this.ciUsuario=ci;
         this.tipoUsuario=tipo;
         UsuarioMD nuevo = new UsuarioMD();
-        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
+        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario,celularUsuario);
         if(nueva.sexoUsuario.equals("Masculino")){
             nueva.sexoUsuario="M";
         }
@@ -380,7 +390,7 @@ public class UsuarioDP {
 
     public void guardar() {
         UsuarioMD usuario = new UsuarioMD();
-        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario);
+        UsuarioDP nueva = new UsuarioDP(ciUsuario, nombreUsuario, tipoUsuario, sexoUsuario, contrasenaUsuario, celularUsuario);
         
         if(nueva.sexoUsuario.equals("Masculino")){
             nueva.sexoUsuario="M";
@@ -395,6 +405,7 @@ public class UsuarioDP {
             this.setContrasenaUsuario("");
             this.setNombreUsuario("");
             this.setSexoUsuario("");
+            this.setCelularUsuario(0);
 
         } else {
             this.setVerDialogo(true);

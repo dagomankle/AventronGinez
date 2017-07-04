@@ -54,16 +54,85 @@
 
 
 
-
-
     <h:body>
-        Bienvenido a AventronProto!!!!
-        <ace:tabSet clientSide="true" id="Cuerpo" >
-            <ace:tabPane label="Inicio Aventron">
+
+        <br></br>
+        <h:form id="prs">
+
+            <ace:tabSet id="viajes1" clientSide="true">
+                <ace:tabPane id="pubviajes" label="Buscar viajes">
+
+
+
+                    <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+
+
+                        <ice:outputText id="outr3" value="Ciudad de salida:"></ice:outputText>
+
+                        <ace:textEntry id="ciusal" value="#{viajeDP.salidaViaje}" label="CiudadSalida" >
+
+
+
+                            <ace:ajax event="blur" render="allMsgsA"/>
+
+
+
+                        </ace:textEntry>
+
+                        <ice:outputText id="outr4" value="Ciudad de llegada:"></ice:outputText>
+
+                        <ace:textEntry id="ciulleg" value="#{viajeDP.llegadaViaje}" label="CiudadLlegada" >
+
+
+
+                            <ace:ajax event="blur" render="allMsgsA"/>
+
+
+
+                        </ace:textEntry>
+
+
+                        <ice:outputText id="out5r" value="Seleccione la fecha:"></ice:outputText>
+
+
+
+                        <ace:dateTimeEntry id="iAnio1" value="#{viajeDP.fechaViaje}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
+
+
+
+                        <ice:commandButton id="BuscarViajer" value="Buscar" onclick="#{viajeDP.cambiarEstadoBus()}"></ice:commandButton>
+
+                      
+
+                    </ice:panelGrid>
+
+                </ace:tabPane>
+            </ace:tabSet>
+        </h:form>
+        
+        <h:form id="prs2" rendered="#{viajeDP.estadoBusqueda == true}">
+
+            <ace:tabSet id="viajes12" clientSide="true">
+                <ace:tabPane id="pubviajes21" label="Resultado">
+
+
+
+                    <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+
+                        <p>Prueba</p>
                         
-                         Para iniciar Registrate o inicia sesion!!!!!
-            </ace:tabPane>
-        </ace:tabSet>
+
+                      
+
+                    </ice:panelGrid>
+
+                </ace:tabPane>
+            </ace:tabSet>
+        </h:form>
+        
+
     </h:body>
     <ace:panel id="employeeInfoOutputPanel">
         <ace:messages id="allMsgsA" />

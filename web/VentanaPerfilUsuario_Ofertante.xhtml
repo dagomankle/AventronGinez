@@ -168,20 +168,6 @@
 
                         <ice:commandButton value="Modificar" action="#{usuarioDP.modificar(login.usuario.ciUsuario,login.usuario.tipoUsuario)}" onclick="window.location.reload('VentanaInicioAventron.xhtml');"></ice:commandButton>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <ice:outputText id="outcome" value="#{usuarioDP.retorno}" rendered="#{usuarioDP.retorno != null}"></ice:outputText>
 
 
@@ -362,8 +348,118 @@
 
                 <ace:tabPane id="viajes" label=" Gestionar Viajes">
 
+                    <!--*********************************************************************************************-->     
 
 
+                    <ace:tabSet id="viajes1" clientSide="true">
+
+
+
+
+
+                        <ace:tabPane id="pubviajes" label="Publicar Viajes">
+
+
+
+                            <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
+
+
+
+                                <ice:outputText id="outcir0" value="ID de viaje:"></ice:outputText>
+
+                                <ace:textEntry id="viajeID" value="#{viajeDP.idViaje}" label="ID" >
+
+
+
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+
+
+
+                                </ace:textEntry>
+
+
+                                <ice:outputText id ="oIntPlacaoAuto" value="Seleccione la placa del auto: "></ice:outputText>
+                                <ace:comboBox id="smenu0" value="#{viajeDP.autoPlaca}" valueChangeListener="#{automovilDP.validar1}" filterMatchMode="startWith">
+                                    <f:selectItems id ="seleccion" value="#{automovilDP.RetornarPlacasU(login.usuario.ciUsuario)}"/>
+                                   </ace:comboBox> 
+
+
+
+                                <ice:outputText id ="oIntRutaa" value="Seleccione la ruta a realizar: "></ice:outputText>
+                                <ace:comboBox id="smenu0Ruta" value="#{viajeDP.rutaNombre}" valueChangeListener="#{rutaDP.validar1}" filterMatchMode="startWith">
+                                    <f:selectItems id ="seleccionRutaa" value="#{rutaDP.RetornarRutasU(login.usuario.ciUsuario)}"/>
+                                    </ace:comboBox> 
+
+                                <ice:outputText id="outr3" value="Ciudad de salida:"></ice:outputText>
+
+                                <ace:textEntry id="ciusal" value="#{viajeDP.salidaViaje}" label="CiudadSalida" >
+
+
+
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+
+
+
+                                </ace:textEntry>
+
+                                <ice:outputText id="outr4" value="Ciudad de llegada:"></ice:outputText>
+
+                                <ace:textEntry id="ciulleg" value="#{viajeDP.llegadaViaje}" label="CiudadLlegada" >
+
+
+
+                                    <ace:ajax event="blur" render="allMsgsA"/>
+
+
+
+                                </ace:textEntry>
+
+
+                                <ice:outputText id="out5r" value="Seleccione la fecha:"></ice:outputText>
+
+
+
+                                <ace:dateTimeEntry id="iAnio1" value="#{viajeDP.fechaViaje}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
+
+
+
+                                <ice:commandButton id="insertarViajer" value="Guardar" action="#{viajeDP.InsertarViaje(login.usuario.ciUsuario)}"></ice:commandButton>
+
+                                <h:panelGroup rendered="#{viajeDP.verDialogo}">
+                                    <ace:dialog id="dialogServer"
+                                                header="Mensaje"
+                                                closable="false"
+                                                modal="true"
+                                                draggable="false"
+                                                showEffect="clip"
+                                                hideEffect="fade"
+                                                width="400"
+                                                visible="true"
+                                                rendered="#{viajeDP.verDialogo}"
+                                                widgetVar="dialogo">
+                                        <h:panelGrid width="100%" style="text-align: center;" columns="1">
+                                            <h:outputLabel id="fLabel2" style="color: black;" value="#{viajeDP.error}"/>
+                                            <h:commandButton id="submitServer" value="Aceptar"  onclick = "window.close('VentanaPerfilUsuario_Ofertante.xhtml');window.open('VentanaInicioAventron.xhtml');">
+
+                                            </h:commandButton>
+                                        </h:panelGrid>
+                                    </ace:dialog>
+
+                                </h:panelGroup>
+
+                            </ice:panelGrid>
+
+                        </ace:tabPane>
+
+                    </ace:tabSet>
+
+
+
+
+
+
+
+                    <!--*********************************************************************************************-->   
                 </ace:tabPane> 
 
 

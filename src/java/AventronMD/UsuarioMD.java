@@ -37,12 +37,13 @@ public class UsuarioMD {
             usuario = usuario1;
             String Query = "";
             this.setRenderizar(true);
-            Query = "insert into usuario(CIUSUARIO,NOMBREUSUARIO,TIPOUSUARIO,SEXOUSUARIO,CONTRASENAUSUARIO) values('"
+            Query = "insert into usuario(CIUSUARIO,NOMBREUSUARIO,TIPOUSUARIO,SEXOUSUARIO,CONTRASENAUSUARIO, CELULARUSUARIO) values('"
                     + usuario.getCiUsuario() + "','"
                     + usuario.getNombreUsuario() + "','"
                     + usuario.getTipoUsuario() + "','"
                     + usuario.getSexoUsuario() + "','"
-                    + usuario.getContrasenaUsuario() + "')";
+                    + usuario.getContrasenaUsuario() + "',"
+                    + usuario.getCelularUsuario() + ")";
 
             st.executeUpdate(Query);
             error = "Ingreso Exitoso";
@@ -74,7 +75,8 @@ public class UsuarioMD {
                 + "',nombreusuario='" + usuario.getNombreUsuario()
                 + "',contrasenausuario= '" + usuario.getContrasenaUsuario()
                 + "',sexousuario= '" + usuario.getSexoUsuario()
-                + "' where ciusuario='" + usuario.getCiUsuario() + "'";
+                + "',celularusuario= " + usuario.getCelularUsuario()
+                + " where ciusuario='" + usuario.getCiUsuario() + "'";
         st.executeUpdate(Query);
         con.close();
         st.close();
@@ -164,8 +166,9 @@ public class UsuarioMD {
             String tipouser = rs.getString("TIPOUSUARIO");
             String sexuser = rs.getString("SEXOUSUARIO");
             String passuser = rs.getString("CONTRASENAUSUARIO");
+            Integer celuser = rs.getInt("CELULARUSUARIO");
 
-            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser);
+            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser,celuser);
             this.nueva.add(usuario);
         }
         con.close();
@@ -186,7 +189,8 @@ public class UsuarioMD {
             String tipouser = rs.getString("TIPOUSUARIO");
             String sexuser = rs.getString("SEXOUSUARIO");
             String passuser = rs.getString("CONTRASENAUSUARIO");
-            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser);
+            Integer celuser = rs.getInt("CELULARUSUARIO");
+            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser, celuser);
         }
         con.close();
         st.close();
@@ -206,7 +210,8 @@ public class UsuarioMD {
             String tipouser = rs.getString("TIPOUSUARIO");
             String sexuser = rs.getString("SEXOUSUARIO");
             String passuser = rs.getString("CONTRASENAUSUARIO");
-            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser);
+            Integer celuser = rs.getInt("CELULARUSUARIO");
+            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser, celuser);
         }
         con.close();
         st.close();
@@ -291,7 +296,8 @@ public class UsuarioMD {
             String tipouser = rs.getString("TIPOUSUARIO");
             String sexuser = rs.getString("SEXOUSUARIO");
             String passuser = rs.getString("CONTRASENAUSUARIO");
-            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser);
+            Integer celuser = rs.getInt("CELULARUSUARIO");
+            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser, celuser);
             this.nueva.add(usuario);
         }
         con.close();
@@ -312,7 +318,8 @@ public class UsuarioMD {
             String tipouser = rs.getString("TIPOUSUARIO");
             String sexuser = rs.getString("SEXOUSUARIO");
             String passuser = rs.getString("CONTRASENAUSUARIO");
-            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser);
+            Integer celuser = rs.getInt("CELULARUSUARIO");
+            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser, celuser);
             this.nueva.add(usuario);
         }
         con.close();
@@ -333,7 +340,8 @@ public class UsuarioMD {
             String tipouser = rs.getString("TIPOUSUARIO");
             String sexuser = rs.getString("SEXOUSUARIO");
             String passuser = rs.getString("CONTRASENAUSUARIO");
-            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser);
+            Integer celuser = rs.getInt("CELULARUSUARIO");
+            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser, celuser);
 
         }
         con.close();
@@ -416,6 +424,7 @@ public class UsuarioMD {
             String tipouser = rs.getString("TIPOUSUARIO");
             String sexuser = rs.getString("SEXOUSUARIO");
             String passuser = rs.getString("CONTRASENAUSUARIO");
+            Integer celuser = rs.getInt("CELULARUSUARIO");
             /*boolean usuario0 = rs.getBoolean("usuario0");
             boolean usuario1 = rs.getBoolean("usuario1");
             boolean usuario2 = rs.getBoolean("usuario2");
@@ -463,7 +472,7 @@ public class UsuarioMD {
             boolean proceso3 = rs.getBoolean("proceso3");
             boolean proceso4 = rs.getBoolean("proceso4");*/
 
-            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser);
+            usuario = new UsuarioDP(ciuser, nomuser, tipouser, sexuser, passuser, celuser);
         }
         con.close();
         st.close();

@@ -49,6 +49,12 @@
                         <ace:textEntry id="Contraseña" value="#{usuarioDP.contrasenaUsuario}" label="Contraseña" >
                             <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
                         </ace:textEntry>
+                        
+                        <ice:outputText id="outcelu" value="Ingrese su celular:"></ice:outputText>
+                        <ace:textEntry id="NumCelu" value="#{usuarioDP.celularUsuario}" label="Celular" >
+                            <ace:ajax event="blur" render="allMsgsA" listener="#{usuarioDP.blurListener}"/>
+                        </ace:textEntry>
+                        
                         <ice:commandButton id="insertar" value="Guardar" action="#{usuarioDP.guardar()}"></ice:commandButton>
                     </ice:panelGrid>
                     <h:panelGroup rendered="#{usuarioDP.verDialogo}">

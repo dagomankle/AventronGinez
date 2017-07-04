@@ -5,10 +5,17 @@
  */
 package AventronDP;
 
+import AventronMD.AutomovilMD;
 import AventronMD.RutaMD;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
+import javax.naming.NamingException;
 
 /**
  *
@@ -124,6 +131,44 @@ public class RutaDP {
         this.rutaVecinos = this.cargarRutas();
         return this.rutaVecinos;
     }    
+    
+     public void validar1(ValueChangeEvent event) throws NamingException, SQLException {
+        Object valor = event.getNewValue();
+        if (valor != null) {
+            RutaMD nuevo = new RutaMD(this);
+            RutaDP nueva = new RutaDP();
+            nueva = nuevo.ConsultaporParametros2(valor.toString());
+            if (nueva != null) {
+                this.setRutaNombre(nueva.getRutaNombre());
+                this.setRutaDescripcion(nueva.getRutaDescripcion());
+                this.setRutaUbicaciones(nueva.getRutaUbicaciones());
+                this.setRutaVecinos(nueva.getRutaVecinos());
+              
+                this.setValidar(true);
+                return;
+            }
+        }
+        setValidar(false);
+    }
+    private boolean validar;
+
+    public boolean isValidar() {
+        return validar;
+    }
+
+    public void setValidar(boolean validar) {
+        this.validar = validar;
+    }
+
+    public List<SelectItem> RetornarRutasU(String userCI) throws NamingException, SQLException {
+        ArrayList<SelectItem> retorno = new ArrayList<SelectItem>();
+        RutaMD nuevo = new RutaMD(this);
+        List<String> rutas = nuevo.consultaPorUsuario(userCI);
+        for (int i = 0; i < rutas.size(); i++) {
+            retorno.add(new SelectItem(rutas.get(i)));
+        }
+        return retorno;
+    }
     
     
 }
