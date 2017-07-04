@@ -40,13 +40,14 @@ public class RutaMD {
         this.rutaDP = rutaDP;
     }
 
-    public RutaDP recuperarRuta() {
+    public RutaDP recuperarRuta(String nombre) {
         RutaDP rutaDPL = new RutaDP();
+        rutaDPL.setRutaNombre(nombre);
         try {
             DataSource DSAutomovil = this.getAventronPool();
             this.con = DSAutomovil.getConnection();
             this.stm = this.con.createStatement();
-            this.cadena = "SELECT * FROM RUTA WHERE RUTANOMBRE = '" + rutaDP.getRutaNombre()
+            this.cadena = "SELECT * FROM RUTA WHERE RUTANOMBRE = '" + rutaDPL.getRutaNombre()
                     + "'";
             rs = this.stm.executeQuery(this.cadena);
             while (rs.next()) {
@@ -101,32 +102,17 @@ public class RutaMD {
         return rutita.determinarRutaUbicaciones();
     }
     
-    public LinkedList<RutaDP> recuperarRutas() {
+    public LinkedList<RutaDP> recuperarRutas() throws NamingException, SQLException {
         LinkedList<RutaDP> retorno1 = new LinkedList<>();
         RutaDP rutaDPL = new RutaDP();
-        try {
-            DataSource DSAutomovil = this.getAventronPool();
-            this.con = DSAutomovil.getConnection();
-            this.stm = this.con.createStatement();
-            this.cadena = "SELECT * FROM AUTOMOVIL WHERE CIUSUARIO = '" + rutaDP.getUsuarioCI()
-                    + "'";
-            rs = this.stm.executeQuery(this.cadena);
-            while (rs.next()) {
-                String rutaNombre = rs.getString("RUTANOMBRE");
-                String rutaDescripcion = rs.getString("RUTADESCRIPCION");
-                LinkedList<UbicacionDP> ubicaciones = this.obtenerUbicaciones(rutaNombre);
-
-                rutaDPL = new RutaDP(rutaNombre, rutaDescripcion, ubicaciones);
-                retorno1.add(rutaDPL);
-            }
-            con.close();
-            this.stm.close();
-
-        } catch (NamingException ex) {
-            /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);    }   
+        ArrayList codigos = consultaPorUsuario(this.rutaDP.getUsuarioCI());
+        for (Object i: codigos){
+            String b = i.toString();
+            rutaDPL=this.recuperarRuta(b);
+            rutaDPL.setUsuarioCI(this.rutaDP.getUsuarioCI());
+            retorno1.add(rutaDPL);
         }
+        
         return retorno1;
     }
 
