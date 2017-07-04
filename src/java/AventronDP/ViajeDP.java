@@ -312,11 +312,11 @@ public class ViajeDP {
                 this.setLlegadaViaje(nueva.getLlegadaViaje());
                 this.setFechaViaje(nueva.getFechaViaje());
                 this.setPlazasViaje(nueva.getPlazasViaje());
-                this.setValidar(true);
+                this.setValidar1(true);
                 return;
             }
         }
-        setValidar(false);
+        setValidar1(false);
     }
     
     public List<SelectItem> RetornarCodigos(String UserCI) throws NamingException, SQLException {

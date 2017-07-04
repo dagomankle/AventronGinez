@@ -133,7 +133,7 @@ public class RutaDP {
         this.usuarioCI = ci;
         RutaMD controlMD = new RutaMD(this);
 
-        if(controlMD.validarRuta())
+        //if(controlMD.validarRuta())
             controlMD.insertarRuta();
     }
    
