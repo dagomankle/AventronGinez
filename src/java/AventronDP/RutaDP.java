@@ -82,8 +82,9 @@ public class RutaDP {
 
     public void setRutaNombresUbicaciones(String rutaNombresUbicaciones) {
         this.rutaNombresUbicaciones = rutaNombresUbicaciones;
-        if (this.rutaUbicaciones == null)
-            this.rutaUbicaciones= this.determinarRutaUbicaciones();
+        if (this.rutaNombresUbicaciones != null)
+            if (this.rutaUbicaciones == null)
+                this.rutaUbicaciones= this.determinarRutaUbicaciones();
     }
 
     public void setUsuarioCI(String usuarioCI) {
@@ -120,8 +121,9 @@ public class RutaDP {
 
     public void setRutaUbicaciones(LinkedList<UbicacionDP> rutaUbicaciones) {
         this.rutaUbicaciones = rutaUbicaciones;
-        if (this.rutaNombresUbicaciones == null)
-            this.rutaNombresUbicaciones = this.determinarRutaUbicacionesNombres();
+        if(this.rutaUbicaciones != null)
+            if (this.rutaNombresUbicaciones == null)
+                this.rutaNombresUbicaciones = this.determinarRutaUbicacionesNombres();
     }
 
     public void setRutaVecinos(LinkedList<RutaDP> rutaVecinos) {
