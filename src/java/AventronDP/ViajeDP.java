@@ -9,8 +9,13 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import AventronMD.ViajeMD;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 import javax.naming.NamingException;
 
 /**
@@ -23,21 +28,45 @@ public class ViajeDP {
 
     private String idViaje;
     private String autoPlaca;
+    private String ciUsuario;
     private String rutaNombre;
     private String salidaViaje;
     private String llegadaViaje;
     private Date fechaViaje;
     private int plazasViaje;
+    private LinkedList<ViajeDP> viajesDP;
 
-    public ViajeDP(String idViaje, String autoPlaca, String rutaNombre, String salidaViaje, String llegadaViaje, Date fechaViaje, int plazasViaje) {
+    public ViajeDP(String idViaje, String autoPlaca, String ciUsuario, String rutaNombre, String salidaViaje, String llegadaViaje, Date fechaViaje, int plazasViaje) {
         this.idViaje = idViaje;
         this.autoPlaca = autoPlaca;
+        this.ciUsuario = ciUsuario;
         this.rutaNombre = rutaNombre;
         this.salidaViaje = salidaViaje;
         this.llegadaViaje = llegadaViaje;
         this.fechaViaje = fechaViaje;
         this.plazasViaje = plazasViaje;
     }
+
+    public String getCiUsuario() {
+        return ciUsuario;
+    }
+
+    public void setCiUsuario(String ciUsuario) {
+        this.ciUsuario = ciUsuario;
+    }
+
+    
+
+    public LinkedList<ViajeDP> getViajesDP() {
+        return viajesDP;
+    }
+
+    public void setViajesDP(LinkedList<ViajeDP> viajesDP) {
+        this.viajesDP = viajesDP;
+    }
+
+
+    
 
     public int getPlazasViaje() {
         return plazasViaje;
@@ -214,6 +243,85 @@ public class ViajeDP {
     
     public void generarBusqueda(){
         
+    }
+    
+    public LinkedList<ViajeDP> ConsultaPorParametros(String userCI) throws NamingException, SQLException{
+    
+        ViajeMD Consulta = new ViajeMD();
+        
+        this.viajesDP=Consulta.consultaPorUsuario(userCI);
+        
+        
+        return viajesDP;
+    }
+    
+    public void validar1(ValueChangeEvent event) throws NamingException, SQLException {
+        Object valor = event.getNewValue();
+        if (valor != null) {
+            ViajeMD nuevo = new ViajeMD();
+            ViajeDP nueva = new ViajeDP();
+            nueva = nuevo.ConsultaporParametros(valor.toString());
+            if (nueva != null) {
+                this.setIdViaje(nueva.getIdViaje());
+                this.setAutoPlaca(nueva.getAutoPlaca());
+                this.setRutaNombre(nueva.getRutaNombre());
+                this.setCiUsuario(nueva.getCiUsuario());
+                this.setSalidaViaje(nueva.getSalidaViaje());
+                this.setLlegadaViaje(nueva.getLlegadaViaje());
+                this.setFechaViaje(nueva.getFechaViaje());
+                this.setPlazasViaje(nueva.getPlazasViaje());
+                this.setValidar(true);
+                return;
+            }
+        }
+        setValidar(false);
+    }
+    
+    public List<SelectItem> RetornarCodigos(String UserCI) throws NamingException, SQLException {
+        ArrayList<SelectItem> retorno = new ArrayList<SelectItem>();
+        ViajeMD nuevo = new ViajeMD();
+        List<ViajeDP> viajes = nuevo.consultaPorUsuarioF(UserCI);
+        for (int i = 0; i < viajes.size(); i++) {
+            retorno.add(new SelectItem(viajes.get(i).getIdViaje()));
+        }
+        return retorno;
+    }
+    public String aprobar() {
+        if (validar == true) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    
+    private String retorno;
+
+    public String getRetorno() {
+        return retorno;
+    }
+
+    public void setRetorno(String retorno) {
+        this.retorno = retorno;
+    }
+    
+    public void SI(ActionEvent actionEvent) throws SQLException, NamingException {
+        ViajeMD nuevo = new ViajeMD();
+        ViajeDP nueva = new ViajeDP(idViaje, autoPlaca, ciUsuario, rutaNombre, salidaViaje, llegadaViaje, fechaViaje, plazasViaje);
+        nuevo.Eliminar(nueva);
+        this.setError(nuevo.getError());
+        //this.setLista(nuevo.getLista());
+        //this.setError1(nuevo.getError1());
+        this.setVerDialogo1(true);
+    }
+    
+     private boolean verDialogo1;
+
+    public boolean isVerDialogo1() {
+        return verDialogo1;
+    }
+
+    public void setVerDialogo1(boolean verDialogo1) {
+        this.verDialogo1 = verDialogo1;
     }
  
 
