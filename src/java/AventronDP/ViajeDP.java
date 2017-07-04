@@ -143,9 +143,10 @@ public class ViajeDP {
         
         if(this.idViaje.equals(""))
         {
-            int i = this.fechaViaje.getMinutes();
-            String str = Integer.toString(i);
-            String id = ""+str+this.autoPlaca;
+            //int i = this.fechaViaje.getMinutes();
+            String mon=""+this.fechaViaje.getDay()+this.fechaViaje.getMonth();
+            //String str = Integer.toString(i);
+            String id = ""+mon+this.autoPlaca;
             this.idViaje=id;
         }
 
