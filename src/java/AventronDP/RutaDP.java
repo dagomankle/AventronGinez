@@ -5,7 +5,6 @@
  */
 package AventronDP;
 
-import AventronMD.AutomovilMD;
 import AventronMD.RutaMD;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -139,13 +138,13 @@ public class RutaDP {
    
     public void cargarRuta(){
         RutaMD controlMD = new RutaMD(this);
-        RutaDP sera = controlMD.recuperarRuta();
+        RutaDP sera = controlMD.recuperarRuta("nombreeee");
         this.rutaNombre = sera.rutaNombre;
         this.rutaDescripcion = sera.rutaDescripcion;
         this.rutaUbicaciones = sera.rutaUbicaciones;
     }
     
-    public LinkedList<RutaDP> cargarRutas(){
+    public LinkedList<RutaDP> cargarRutas() throws NamingException, SQLException{
         RutaMD controlMD = new RutaMD(this);
         return controlMD.recuperarRutas();
     }
@@ -161,7 +160,7 @@ public class RutaDP {
         return controlMD.validarRuta();
     }   
 
-    public LinkedList<RutaDP> listarVecinos(String ci){
+    public LinkedList<RutaDP> listarVecinos(String ci) throws NamingException, SQLException{
         this.usuarioCI = ci;
         this.rutaVecinos = this.cargarRutas();
         return this.rutaVecinos;
