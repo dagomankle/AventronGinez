@@ -55,7 +55,7 @@ public class RutaDP {
         this.rutaVecinos = null;
     }    
    
-    private String determinarRutaUbicacionesNombres(){
+    public String determinarRutaUbicacionesNombres(){
         String nombres = "";
         for (UbicacionDP item : this.rutaUbicaciones) {
                   nombres = nombres +item.getCodigo()+", ";
@@ -65,7 +65,7 @@ public class RutaDP {
         return nombres;
     }
 
-    private LinkedList<UbicacionDP> determinarRutaUbicaciones(){
+    public LinkedList<UbicacionDP> determinarRutaUbicaciones(){
         LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
         
         List<String> ids = Arrays.asList(this.rutaNombresUbicaciones.split(", "));
@@ -83,6 +83,8 @@ public class RutaDP {
 
     public void setRutaNombresUbicaciones(String rutaNombresUbicaciones) {
         this.rutaNombresUbicaciones = rutaNombresUbicaciones;
+        if (this.rutaUbicaciones == null)
+            this.rutaUbicaciones= this.determinarRutaUbicaciones();
     }
 
     public void setUsuarioCI(String usuarioCI) {
