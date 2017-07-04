@@ -365,17 +365,8 @@
 
 
 
-                                <ice:outputText id="outcir0" value="ID de viaje:"></ice:outputText>
-
-                                <ace:textEntry id="viajeID" value="#{viajeDP.idViaje}" label="ID" >
-
-
-
-                                    <ace:ajax event="blur" render="allMsgsA"/>
-
-
-
-                                </ace:textEntry>
+                                
+                                
 
 
                                 <ice:outputText id ="oIntPlacaoAuto" value="Seleccione la placa del auto: "></ice:outputText>
@@ -502,70 +493,48 @@
 
 
                         </ace:tabPane>
-
+                        
                         <ace:tabPane id="ElimViajes" label="Eliminar Viajes">
 
                             <ice:panelGrid id ="pnlGridEliminarV1" columns="4" rowClasses="oddRow, evenRow">
                                 <ice:outputText id ="oIntCodigoM" value="Seleccione el ID del Viaje a eliminar:"></ice:outputText>
-                                <ace:comboBox id="smenuElimV" value="#{viajeDP.idViaje}" valueChangeListener="#{viajeDP.validar1}" filterMatchMode="startWith">
+                                <ace:comboBox id="smenuElimV" value="#{viajeDP.idViaje}" valueChangeListener="#{viajeDP.validar2}" filterMatchMode="startWith">
                                     <f:selectItems id ="seleccionViaE" value="#{viajeDP.RetornarCodigos(login.usuario.ciUsuario)}"/>
                                     <ace:ajax execute="@this smenu0"/>
                                 </ace:comboBox>
                             </ice:panelGrid> 
-                            <ice:panelGrid id ="pnlGridElimV2" columns="4" rowClasses="oddRow, evenRow" visible="#{viajeDP.aprobar()}">
+                            <ice:panelGrid id ="pnlGridElimV2" columns="4" rowClasses="oddRow, evenRow" visible="#{viajeDP.aprobar1()}">
                                 <ice:outputText value="Auto:"></ice:outputText>
                                 <ice:inputText id="inAuto5" title="PlacaAuto" value ="#{viajeDP.autoPlaca}" disabled="true" ></ice:inputText>
                                 <ice:outputText value="Ruta:"></ice:outputText>
                                 <ice:inputText id="smenuRutaN1" value="#{viajeDP.rutaNombre}" disabled="true" >
                                 </ice:inputText >
                             </ice:panelGrid>
-                            <ice:panelGrid id ="pnlGridUsuarioElimViaje3" visible="#{viajeDP.aprobar()}" >
+                            <ice:panelGrid id ="pnlGridUsuarioElimViaje3" visible="#{viajeDP.aprobar1()}" >
                                 <ice:commandButton value="Eliminar" onclick="Confirmacion.show();" type="button"></ice:commandButton>
                                 <ice:outputText id="outcomeElimV" value="#{viajeDP.retorno}" rendered="#{viajeDP.retorno != null}"></ice:outputText>
                                 <ace:confirmationDialog class="DialogoEliminar" widgetVar="Confirmacion"
-                                                        message="Seguro desea Eliminar esto?"
+                                                        message="Seguro desea Eliminar este viaje?"
                                                         header="Eliminar"
                                                         width="350"
                                                         height="180"
                                                         closable="true"
                                                         position="center">
                                     <ice:panelGrid columns="2" styleClass="centeredPanelGrid">
-                                        <ice:commandButton id="Siss" value="Si" onclick="Confirmacion.hide();" actionListener="#{viajeDP.SI}" >
+                                        <ice:commandButton id="Siss" value="Si" onclick="Confirmacion.hide(); window.location.reload('VentanaPerfilUsuario_Ofertante.xhtml');" actionListener="#{viajeDP.SI}" >
                                             <f:ajax execute="@this" render="@all"/>
                                         </ice:commandButton>
-                                        <ice:commandButton id="Nosno" value="No" onclick="Confirmacion.hide(); window.location.reload('VentanaPerfilUsuario_Ofertante.xhtml');" actionListener="#{usuario.No}" >
+                                        <ice:commandButton id="Nosno" value="No" onclick="Confirmacion.hide(); window.location.reload('VentanaPerfilUsuario_Ofertante.xhtml');">
                                             <f:ajax execute="@this" render="@all"/>
                                         </ice:commandButton>
                                     </ice:panelGrid>
                                 </ace:confirmationDialog>
                             </ice:panelGrid>
-                            <h:panelGroup rendered="#{viajeDP.verDialogo1}">
-                                <ace:dialog id="dialogServer122"
-                                            header="Mensaje"
-                                            closable="false"
-                                            modal="true"
-                                            draggable="false"
-                                            showEffect="clip"
-                                            hideEffect="fade"
-                                            width="400"
-                                            visible="true"
-                                            rendered="#{viajeDP.verDialogo1}"
-                                            widgetVar="dialogo">
-                                    <h:panelGrid width="100%" style="text-align: center;" columns="1">
-                                        <h:outputLabel id="firstNameLabel22" style="color: white;" value="#{viajeDP.error}"/>
-                                    
-                                        <h:outputLabel id="firstNa2" style="color: white;" value="#{viajeDP.error1}"/>
-                                        <h:commandButton id="submitServer32" value="Aceptar" onclick="dialogo.hide();
-                                                         #{viajeDP.setVerDialogo1(false)};
-                                                window.location.reload('VentanaPerfilUsuario_Ofertante.xhtml');
-                                                         ">
-                                            <ace:ajax render="@none"></ace:ajax>
-                                        </h:commandButton>
-                                    </h:panelGrid>
-                                </ace:dialog>
-                            </h:panelGroup>
+                            
 
                         </ace:tabPane>
+
+                        
 
 
 

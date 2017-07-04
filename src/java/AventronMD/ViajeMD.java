@@ -103,7 +103,7 @@ public class ViajeMD {
 
         return elementos[5] + "-" + elementos[1] + "-" + elementos[2];
     }
-    
+
     /*public ViajeDP ConsultaporParametros(String idv) throws NamingException, SQLException {
         DataSource DSViaje = this.getAventronPool();
         Connection con = DSViaje.getConnection();
@@ -122,7 +122,6 @@ public class ViajeMD {
         st.close();
         return usuario;
     }*/
-    
     public LinkedList consultaPorUsuario(String userCI) throws NamingException, SQLException {
         DataSource DSUsuario = this.getAventronPool();
         Connection con = DSUsuario.getConnection();
@@ -147,7 +146,7 @@ public class ViajeMD {
         st.close();
         return this.viajesDP;
     }
-    
+
     public LinkedList consultaPorUsuarioF(String userCI) throws NamingException, SQLException {
         DataSource DSUsuario = this.getAventronPool();
         Connection con = DSUsuario.getConnection();
@@ -172,9 +171,7 @@ public class ViajeMD {
         st.close();
         return this.viajesDP;
     }
-    
-    
-    
+
     public ViajeDP ConsultaporParametros(String codigo) throws NamingException, SQLException {
         DataSource DSUsuario = this.getAventronPool();
         Connection con = DSUsuario.getConnection();
@@ -220,57 +217,16 @@ public class ViajeMD {
             System.out.println("error1");
         } catch (SQLException ex) {
 
-            /*System.out.println("error2");
-            int codigoError = ex.getErrorCode();
-            if (codigoError == 1451) {
-                try {
-                    String error = ex.getMessage();
-                    String tablaAsociada = "";
-                    int i = 0;
-                    while (error.substring(i, i + 1).compareTo(".") != 0) {
-                        if (error.substring(i + 1, i + 2).compareTo(".") == 0) {
-                            while (error.substring(i + 3, i + 4).compareTo("`") != 0) {
-                                tablaAsociada = tablaAsociada + error.substring(i + 3, i + 4);
-                                i++;
-                            }
-                            break;
-                        }
-                        i++;
-                    }
-                    String[] Separacion = error.split(" ");
-                    String TablaPrincipal = "";
-                    for (int j = 0; j < Separacion.length; j++) {
-                        if (Separacion[j].compareTo("REFERENCES") == 0) {
-                            TablaPrincipal = Separacion[j + 1];
-                        }
-                    }
-                    TablaPrincipal = TablaPrincipal.substring(1, TablaPrincipal.length() - 1);
-                    try {
-                        DataSource DSUsuario = this.getConexion();
-                        Connection con = DSUsuario.getConnection();
-                        Statement st = con.createStatement();
-                        String Query = "select * from " + tablaAsociada + " where codigousuario='" + usuario.getCodigousuarios() + "'";
-                        ResultSet rs = st.executeQuery(Query);
-
-                        while (rs.next()) {
-                            if (tablaAsociada.compareTo("actividad") == 0) {
-                                Lista.add(rs.getString("detalleactividad"));
-                            }
-                            if (tablaAsociada.compareTo("proyecto") == 0) {
-                                Lista.add(rs.getString("tituloproyecto"));
-                            }
-                        }
-                        con.close();
-                        st.close();
-                    } catch (SQLException ex1) {
-            Logger.getLogger(ProcesoMD.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                    setError("El " + TablaPrincipal + " esta asociado a: " + tablaAsociada);
-                    setError1("por lo que no es posible eliminar");
-                } catch (NamingException ex1) {
-            Logger.getLogger(ProcesoMD.class.getName()).log(Level.SEVERE, null, ex1);
-                }
-            }*/
         }
+    }
+    
+    private ArrayList<String> Lista = new ArrayList();
+
+    public ArrayList<String> getLista() {
+        return Lista;
+    }
+
+    public void setLista(ArrayList<String> Lista) {
+        this.Lista = Lista;
     }
 }

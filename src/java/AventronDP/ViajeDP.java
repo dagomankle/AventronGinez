@@ -134,11 +134,20 @@ public class ViajeDP {
         UsuarioDP user = new UsuarioDP();
         user.setCiUsuario(ciusuario);
 
+        
         AutomovilDP auto = new AutomovilDP();
         auto.setAutoPlaca(this.autoPlaca);
         auto = auto.obtenerPlazas(auto);
 
         this.plazasViaje = auto.getAutoAsientosMaximos();
+        
+        if(this.idViaje.equals(""))
+        {
+            int i = this.fechaViaje.getMinutes();
+            String str = Integer.toString(i);
+            String id = ""+str+this.autoPlaca;
+            this.idViaje=id;
+        }
 
         ViajeMD viaje = new ViajeMD();
         viaje.InsertarMD(this, user);
@@ -176,6 +185,16 @@ public class ViajeDP {
         this.validar = validar;
     }
 
+    private boolean validar1;
+
+    public boolean isValidar1() {
+        return validar1;
+    }
+
+    public void setValidar1(boolean validar1) {
+        this.validar1 = validar1;
+    }
+    
     public void setVerDialogo(boolean verDialogo) {
         this.verDialogo = verDialogo;
     }
@@ -270,6 +289,28 @@ public class ViajeDP {
                 this.setLlegadaViaje(nueva.getLlegadaViaje());
                 this.setFechaViaje(nueva.getFechaViaje());
                 this.setPlazasViaje(nueva.getPlazasViaje());
+                this.setValidar1(true);
+                return;
+            }
+        }
+        setValidar1(false);
+    }
+    
+    public void validar2(ValueChangeEvent event) throws NamingException, SQLException {
+        Object valor = event.getNewValue();
+        if (valor != null) {
+            ViajeMD nuevo = new ViajeMD();
+            ViajeDP nueva = new ViajeDP();
+            nueva = nuevo.ConsultaporParametros(valor.toString());
+            if (nueva != null) {
+                this.setIdViaje(nueva.getIdViaje());
+                this.setAutoPlaca(nueva.getAutoPlaca());
+                this.setRutaNombre(nueva.getRutaNombre());
+                this.setCiUsuario(nueva.getCiUsuario());
+                this.setSalidaViaje(nueva.getSalidaViaje());
+                this.setLlegadaViaje(nueva.getLlegadaViaje());
+                this.setFechaViaje(nueva.getFechaViaje());
+                this.setPlazasViaje(nueva.getPlazasViaje());
                 this.setValidar(true);
                 return;
             }
@@ -288,6 +329,14 @@ public class ViajeDP {
     }
     public String aprobar() {
         if (validar == true) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    
+    public String aprobar1() {
+        if (validar1 == true) {
             return "true";
         } else {
             return "false";
@@ -324,5 +373,8 @@ public class ViajeDP {
         this.verDialogo1 = verDialogo1;
     }
  
+    public void No(ActionEvent actionEvent) {
+        retorno = "No se ha eliminado el Viaje";
+    }
 
 }
