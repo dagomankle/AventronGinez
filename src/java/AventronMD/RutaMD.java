@@ -52,7 +52,7 @@ public class RutaMD {
             while (rs.next()) {
                 String rutaNombre = rs.getString("RUTANOMBRE");
                 String rutaDescripcion = rs.getString("RUTADESCRIPCION");
-                LinkedList<UbicacionDP> ubicaciones = recuperarUbicaciones();
+                LinkedList<UbicacionDP> ubicaciones = this.obtenerUbicaciones();
 
                 rutaDPL = new RutaDP(rutaNombre, rutaDescripcion, ubicaciones);
             }
@@ -67,13 +67,13 @@ public class RutaMD {
 
         return rutaDPL;
     }
-
-    public LinkedList<UbicacionDP> recuperarUbicaciones() {
-        LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
-
-        return ubicaciones;
+    
+    public LinkedList<UbicacionDP> obtenerUbicaciones(){
+        LinkedList<UbicacionDP> porfa = new  LinkedList<>();
+        
+        return porfa;
     }
-
+    
     public LinkedList<RutaDP> recuperarRutas() {
         LinkedList<RutaDP> retorno1 = new LinkedList<>();
         RutaDP rutaDPL = new RutaDP();
@@ -87,7 +87,7 @@ public class RutaMD {
             while (rs.next()) {
                 String rutaNombre = rs.getString("RUTANOMBRE");
                 String rutaDescripcion = rs.getString("RUTADESCRIPCION");
-                LinkedList<UbicacionDP> ubicaciones = recuperarUbicaciones();
+                LinkedList<UbicacionDP> ubicaciones = null;
 
                 rutaDPL = new RutaDP(rutaNombre, rutaDescripcion, ubicaciones);
                 retorno1.add(rutaDPL);
