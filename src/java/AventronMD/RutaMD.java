@@ -185,6 +185,8 @@ public class RutaMD {
     }
 
     public void eliminarRuta() {
+        this.eliminarUbicacionesDebiles();
+        
         try {
             this.eliminarUbicacionesDebiles();
 
@@ -204,6 +206,23 @@ public class RutaMD {
     }
 
     public void eliminarUbicacionesDebiles() {
+        try {
+            this.eliminarUbicacionesDebiles();
+
+            DataSource DSRuta = this.getAventronPool();
+            this.con = DSRuta.getConnection();
+            this.stm = this.con.createStatement();
+            this.cadena = "DELETE FROM FORM WHERE NOMBRERUTA = " + this.rutaDP.getRutaNombre();
+            this.stm.executeUpdate(this.cadena);
+            con.close();
+            this.stm.close();
+
+        } catch (NamingException ex) {
+            /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
 
     }
 
