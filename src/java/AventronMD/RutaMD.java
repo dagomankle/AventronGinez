@@ -52,7 +52,7 @@ public class RutaMD {
             while (rs.next()) {
                 String rutaNombre = rs.getString("RUTANOMBRE");
                 String rutaDescripcion = rs.getString("RUTADESCRIPCION");
-                LinkedList<UbicacionDP> ubicaciones = this.obtenerUbicaciones();
+                LinkedList<UbicacionDP> ubicaciones = this.obtenerUbicaciones(rutaNombre);
 
                 rutaDPL = new RutaDP(rutaNombre, rutaDescripcion, ubicaciones);
             }
@@ -68,8 +68,34 @@ public class RutaMD {
         return rutaDPL;
     }
     
-    public LinkedList<UbicacionDP> obtenerUbicaciones(){
+    public LinkedList<UbicacionDP> obtenerUbicaciones(String nom){
         LinkedList<UbicacionDP> porfa = new  LinkedList<>();
+        String nombres = "";
+        try {
+            DataSource DSAutomovil = this.getAventronPool();
+            this.con = DSAutomovil.getConnection();
+            this.stm = this.con.createStatement();
+            this.cadena = "SELECT * FROM FORM WHERE RUTANOMBRE = '" + nom
+                    + "'";
+            rs = this.stm.executeQuery(this.cadena);
+            while (rs.next()) {
+                String rutaNombre = rs.getString("RUTANOMBRE");
+                String ubicacionNombre = rs.getString("UBICACIONID");
+
+                nombres = nombres+ubicacionNombre+", ";
+            }
+            
+            if(nombres != "")
+                nombres = nombres.substring(0, nombres.length() -2);
+            con.close();
+            this.stm.close();
+
+        } catch (NamingException ex) {
+            /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);    }   
+        }        
+        
         
         return porfa;
     }
