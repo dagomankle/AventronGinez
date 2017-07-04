@@ -71,6 +71,8 @@ public class RutaMD {
     public LinkedList<UbicacionDP> obtenerUbicaciones(){
         LinkedList<UbicacionDP> porfa = new  LinkedList<>();
         
+        
+        
         return porfa;
     }
     
