@@ -121,6 +121,8 @@ public class RutaDP {
 
     public void setRutaUbicaciones(LinkedList<UbicacionDP> rutaUbicaciones) {
         this.rutaUbicaciones = rutaUbicaciones;
+        if (this.rutaNombresUbicaciones == null)
+            this.rutaNombresUbicaciones = this.determinarRutaUbicacionesNombres();
     }
 
     public void setRutaVecinos(LinkedList<RutaDP> rutaVecinos) {

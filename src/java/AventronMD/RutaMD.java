@@ -69,8 +69,8 @@ public class RutaMD {
     }
     
     public LinkedList<UbicacionDP> obtenerUbicaciones(String nom){
-        LinkedList<UbicacionDP> porfa = new  LinkedList<>();
         String nombres = "";
+        RutaDP rutita = new RutaDP();
         try {
             DataSource DSAutomovil = this.getAventronPool();
             this.con = DSAutomovil.getConnection();
@@ -96,8 +96,9 @@ public class RutaMD {
             //Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);    }   
         }        
         
-        
-        return porfa;
+        rutita.setRutaNombresUbicaciones(nombres);
+ 
+        return rutita.determinarRutaUbicaciones();
     }
     
     public LinkedList<RutaDP> recuperarRutas() {
@@ -113,7 +114,7 @@ public class RutaMD {
             while (rs.next()) {
                 String rutaNombre = rs.getString("RUTANOMBRE");
                 String rutaDescripcion = rs.getString("RUTADESCRIPCION");
-                LinkedList<UbicacionDP> ubicaciones = null;
+                LinkedList<UbicacionDP> ubicaciones = this.obtenerUbicaciones(rutaNombre);
 
                 rutaDPL = new RutaDP(rutaNombre, rutaDescripcion, ubicaciones);
                 retorno1.add(rutaDPL);
