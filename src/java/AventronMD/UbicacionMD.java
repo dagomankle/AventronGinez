@@ -80,6 +80,34 @@ public class UbicacionMD {
             System.out.println(">>>>"+ex.getMessage());
         }
     }
+ 
+    
+    public UbicacionDP recuperarUbicacion(String nombre, String ci){
+        UbicacionDP nuevo=new UbicacionDP();
+        try {
+            DataSource dataSource = this.getGetLabJDBC();
+            con = dataSource.getConnection();
+            stm = con.createStatement(); 
+            cadena = "select * from ubicaciones  WHERE CIUSUARIO ='"+ci+"' and UBICODIGO="+nombre+"'";
+            ResultSet rs=stm.executeQuery(cadena);
+            System.out.println("Cadena SQL: " + cadena);
+            while (rs.next()) {
+              
+              nuevo.setCodigo(rs.getString("CODIGO"));
+              nuevo.setUbiLongitud(rs.getDouble(1));
+              nuevo.setUbiLatitud(rs.getDouble(2));
+              nuevo.setUbiDescripcion(rs.getString(3));
+              nuevo.setCiUsuario(rs.getString(4));
+            }
+            
+        } catch (Exception ex) {
+            System.out.println(">>>>"+ex.getMessage());
+        }
+        System.out.println(">>>>>>>>>>>>>");       
+        
+        
+        return nuevo;
+    }
     
     public List<UbicacionDP> consultarubicaciones()
     {
