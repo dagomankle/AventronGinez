@@ -59,8 +59,9 @@ public class RutaDP {
         String nombres = "";
         for (UbicacionDP item : this.rutaUbicaciones) {
                   nombres = nombres +item.getCodigo()+", ";
-        }    
-        nombres = nombres.substring(0, nombres.length() -2);
+        }
+        if(nombres != "")
+            nombres = nombres.substring(0, nombres.length() -2);
         return nombres;
     }
 
