@@ -134,6 +134,7 @@ public class ViajeDP {
         UsuarioDP user = new UsuarioDP();
         user.setCiUsuario(ciusuario);
 
+        this.idViaje="";
         
         AutomovilDP auto = new AutomovilDP();
         auto.setAutoPlaca(this.autoPlaca);
@@ -275,6 +276,16 @@ public class ViajeDP {
         return viajesDP;
     }
     
+    public LinkedList<ViajeDP> ConsultaPrincipal() throws NamingException, SQLException{
+    
+        ViajeMD Consulta = new ViajeMD();
+        
+        this.viajesDP=Consulta.consultaPorParametrosPrin(this.salidaViaje, this.llegadaViaje, this.fechaViaje);
+        
+        
+        return viajesDP;
+    }
+    
     public void validar1(ValueChangeEvent event) throws NamingException, SQLException {
         Object valor = event.getNewValue();
         if (valor != null) {
@@ -354,7 +365,7 @@ public class ViajeDP {
         this.retorno = retorno;
     }
     
-    public void SI(ActionEvent actionEvent) throws SQLException, NamingException {
+    /*public void SI(ActionEvent actionEvent) throws SQLException, NamingException {
         ViajeMD nuevo = new ViajeMD();
         ViajeDP nueva = new ViajeDP(idViaje, autoPlaca, ciUsuario, rutaNombre, salidaViaje, llegadaViaje, fechaViaje, plazasViaje);
         nuevo.Eliminar(nueva);
@@ -362,7 +373,16 @@ public class ViajeDP {
         //this.setLista(nuevo.getLista());
         //this.setError1(nuevo.getError1());
         this.setVerDialogo1(true);
+    }*/
+    
+    public void Eliminar()
+    {
+        ViajeMD nuevo = new ViajeMD();
+        ViajeDP nueva = new ViajeDP(idViaje, autoPlaca, ciUsuario, rutaNombre, salidaViaje, llegadaViaje, fechaViaje, plazasViaje);
+        nuevo.Eliminar(nueva);
+        
     }
+    
     
      private boolean verDialogo1;
 
@@ -376,6 +396,24 @@ public class ViajeDP {
  
     public void No(ActionEvent actionEvent) {
         retorno = "No se ha eliminado el Viaje";
+    }
+    
+    
+    
+    ////Activar busqueda general/////////
+    private boolean activarBusqueda;
+
+    public boolean isActivarBusqueda() {
+        return activarBusqueda;
+    }
+
+    public void setActivarBusqueda(boolean activarBusqueda) {
+        this.activarBusqueda = activarBusqueda;
+    }
+    
+    public void activarBus(){
+       // if(this.llegadaViaje || this.salidaViaje || this.fechaViaje)
+        this.setEstadoBusqueda(true);
     }
 
 }

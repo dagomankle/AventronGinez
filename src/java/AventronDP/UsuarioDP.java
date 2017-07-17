@@ -440,4 +440,22 @@ public class UsuarioDP {
         else this.setEstadoSesion(true);
                 
     }
+    
+    ////////////////////PARA PERMISOS DE OFERTANTE//////////////////////////////
+    private boolean esOfertante;
+
+    public boolean isEsOfertante() {
+        return esOfertante;
+    }
+
+    public void setEsOfertante(boolean esOfertante) {
+        this.esOfertante = esOfertante;
+    }
+    /*public void MarcarOfer(){
+    
+        this.setEsOfertante(true);
+                
+    }*/
+    
+    
 }

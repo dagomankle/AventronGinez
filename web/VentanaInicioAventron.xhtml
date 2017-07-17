@@ -97,41 +97,83 @@
 
 
 
-                        <ace:dateTimeEntry id="iAnio1" value="#{viajeDP.fechaViaje}" renderAsPopup ="true" label="Codigo" >                                                        </ace:dateTimeEntry>
-
-
-
-                        <!--<ice:commandButton id="BuscarViajer" value="Buscar" onclick="#{viajeDP.cambiarEstadoBus}"></ice:commandButton>-->
-
-                      
-
-                    </ice:panelGrid>
-
-                </ace:tabPane>
-            </ace:tabSet>
-        </h:form>
-        
-        <h:form id="prs2" rendered="#{viajeDP.estadoBusqueda == true}">
-
-            <ace:tabSet id="viajes12" clientSide="true">
-                <ace:tabPane id="pubviajes21" label="Resultado">
-
-
-
-                    <ice:panelGrid columns="2" rowClasses="oddRow, evenRow" >
-
-
-                        <p>Prueba</p>
+                        <ace:dateTimeEntry id="iAnio1" value="#{viajeDP.fechaViaje}" renderAsPopup ="true" label="Codigo" >
                         
-
-                      
-
+                        </ace:dateTimeEntry>
+                        
+                        <ice:commandButton id="ActivarBusqueda"
+                                           action="#{viajeDP.activarBus()}"
+                                           value="Buscar">
+                        </ice:commandButton>
+                        
                     </ice:panelGrid>
+
+                    <ace:tabPane id="ConsViajes" label="Consulta Viajes" rendered="#{viajeDP.estadoBusqueda}">
+                        <h:form id="formConsultaViajes">
+                            <style type="text/css">
+                                /* Important required because row */
+                                .ui-datatable-odd {
+                                    background-color:lightgray !important;
+                                    background-position-y: -1400px; /* IE7 hack */
+                                }
+                            </style>
+                            <ace:dataTable id="ViajeTable"
+                                           value="#{viajeDP.ConsultaPrincipal()}"
+                                           var="Viaje"
+                                           paginator="true"
+                                           paginatorPosition="bottom"
+                                           rows="10">
+                                <ace:column id="id" headerText="ID" sortBy="#{Viaje.idViaje}"
+                                            filterBy="#{Viaje.idViaje}" filterMatchMode="contains">
+                                    <h:outputText id="idCell" value="#{Viaje.idViaje}"/>
+                                </ace:column>
+                                <ace:column id="idusua" headerText="USUARIO" sortBy="#{Viaje.ciUsuario}"
+                                            filterBy="#{Viaje.ciUsuario}" filterMatchMode="contains">
+                                    <h:outputText id="idCedUsu" value="#{Viaje.ciUsuario}"/>
+                                </ace:column>
+                                <ace:column id="autoPlaca1" headerText="Automovil" sortBy="#{Viaje.autoPlaca}"
+                                            filterBy="#{Viaje.autoPlaca}" filterMatchMode="contains">
+                                    <h:outputText id="autoplacaCell" value="#{Viaje.autoPlaca}"/>
+                                </ace:column>
+                                <ace:column id="rutaViajes" headerText="Ruta" sortBy="#{Viaje.rutaNombre}"
+                                            filterBy="#{Viaje.rutaNombre}" filterMatchMode="contains">
+                                    <h:outputText id="rutaNomCell" value="#{Viaje.rutaNombre}"/>
+                                </ace:column>
+                                <ace:column id="salidaViaje" headerText="Ciudad Salida" sortBy="#{Viaje.salidaViaje}"
+                                            filterBy="#{Viaje.salidaViaje}" filterMatchMode="contains">
+                                    <h:outputText id="ciuSalidaCell" value="#{Viaje.salidaViaje}"/>
+                                </ace:column>
+                                <ace:column id="llegadaViaje" headerText="Ciudad LLegada" sortBy="#{Viaje.llegadaViaje}"
+                                            filterBy="#{Viaje.llegadaViaje}" filterMatchMode="contains">
+                                    <h:outputText id="llegadaViajeCell" value="#{Viaje.llegadaViaje}"/>
+                                </ace:column>
+                                <ace:column id="FechaViaje2" headerText="FechaViaje" sortBy="#{Viaje.fechaViaje}"
+                                            filterBy="#{Viaje.fechaViaje}" filterMatchMode="contains">
+                                    <h:outputText id="fechaViajeCell" value="#{Viaje.fechaViaje}"/>
+                                </ace:column>
+
+                                <ace:column id="PazasViaje" headerText="Plazas" sortBy="#{Viaje.plazasViaje}"
+                                            filterBy="#{Viaje.plazasViaje}" filterMatchMode="contains">
+                                    <h:outputText id="plazasViajeCell" value="#{Viaje.plazasViaje}"/>
+                                </ace:column>
+
+                            </ace:dataTable>
+                        </h:form>
+
+
+
+                    </ace:tabPane>
+
+
+
+
 
                 </ace:tabPane>
             </ace:tabSet>
         </h:form>
+
         
+
 
     </h:body>
     <ace:panel id="employeeInfoOutputPanel">

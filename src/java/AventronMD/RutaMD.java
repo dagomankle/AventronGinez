@@ -259,11 +259,11 @@ public class RutaMD {
                 String rutanom = rs.getString("RUTANOMBRE");
                 String rutadesc = rs.getString("RUTADESCRIPCION");
                 LinkedList<UbicacionDP> ubicaciones = new LinkedList<>();
-                rutaDPL = new RutaDP(rutanom, rutadesc, ubicaciones);
+                rutaDP = new RutaDP(rutanom, rutadesc, ubicaciones);
             }
             con.close();
             this.stm.close();
-            return rutaDPL;
+            return rutaDP;
 
         } catch (NamingException ex) {
             /////Logger.getLogger(Actividad.class.getName()).log(Level.SEVERE, null, ex);

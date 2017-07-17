@@ -42,71 +42,73 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 
 public class Login implements Serializable {
-
+    
     UsuarioDP usuario;
-
+    
     public UsuarioDP getUsuario() {
-
+        
         return usuario;
-
+        
     }
-
+    
     public void setUsuario(UsuarioDP usuario) {
-
+        
         this.usuario = usuario;
-
+        
     }
-
+    
     public Login() {
-
+        
         usuario = new UsuarioDP();
-
+        
     }
-
+    
     public void autenticar() throws NamingException, SQLException, IOException {
         
-        
-
         UsuarioMD comprobar = new UsuarioMD();
         
-        if(usuario.getCiUsuario()==null)
-        {
+        if (usuario.getCiUsuario() == null) {
             usuario.setCiUsuario(usuario.getNombreUsuario());
         }
-        
+
         //usuario.setCiUsuario(conf);
-
         usuario = comprobar.Autenticar(usuario.getCiUsuario(), usuario.getContrasenaUsuario());
-
+        
         usuario.setEstadoSesion(true);
-
-        if (usuario.getCiUsuario() != null) {
-
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Usuario", usuario);
-
-            FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
-
+        
+        if (usuario.getTipoUsuario().equals("Ofertante")) {
+            usuario.setEsOfertante(true);
         } else {
-
-            String message = "POR FAVOR INGRESE LOS DATOS CORRECTOS";
-
-            FacesMessage facesMessage = new FacesMessage((FacesMessage.Severity) FacesMessage.VALUES.get(2), message, message);
-
-            FacesContext.getCurrentInstance().addMessage(message, facesMessage);
-
+            usuario.setEsOfertante(false);
         }
-
+        
+        if (usuario.getCiUsuario() != null) {
+            
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Usuario", usuario);
+            
+            FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
+            
+        } else {
+            
+            String message = "POR FAVOR INGRESE LOS DATOS CORRECTOS";
+            
+            FacesMessage facesMessage = new FacesMessage((FacesMessage.Severity) FacesMessage.VALUES.get(2), message, message);
+            
+            FacesContext.getCurrentInstance().addMessage(message, facesMessage);
+            
+        }
+        
     }
-
+    
     public void Cerrar() throws IOException {
 
         // this.setConfirmar(true);
         usuario.setEstadoSesion(false);
-
+        
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-
+        
         FacesContext.getCurrentInstance().getExternalContext().redirect("VentanaInicioAventron.xhtml");
-
+        
     }
-
+    
 }

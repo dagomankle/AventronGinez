@@ -103,6 +103,13 @@ public class ViajeMD {
 
         return elementos[5] + "-" + elementos[1] + "-" + elementos[2];
     }
+    
+    public String conversorDate2(Date param) {
+        Date hola = new Date(param.getTime());
+        String[] elementos = hola.toString().split(" ");
+
+        return elementos[2] + "-" + elementos[1] + "-" + elementos[5];
+    }
 
     /*public ViajeDP ConsultaporParametros(String idv) throws NamingException, SQLException {
         DataSource DSViaje = this.getAventronPool();
@@ -153,6 +160,32 @@ public class ViajeMD {
         Statement st = con.createStatement();
         String cadena = "";
         cadena = "select * from VIAJE where CIUSUARIO='" + userCI + "' AND FECHAVIAJE >= TRUNC(sysdate)";
+        ResultSet rs = st.executeQuery(cadena);
+        viajesDP = new LinkedList<>();
+        while (rs.next()) {
+            String idViaje = rs.getString("IDVIAJE");
+            String autoPlaca = rs.getString("AUTOPLACA");
+            String rutaNom = rs.getString("RUTANOMBRE");
+            String usuarioCI = rs.getString("CIUSUARIO");
+            String salidaViaje = rs.getString("SALIDAVIAJE");
+            String llegadaViaje = rs.getString("LLEGADAVIAJE");
+            Date fechaViaje = rs.getDate("FECHAVIAJE");
+            int plazasViaje = rs.getInt("PLAZASVIAJE");
+            ViajeDP nuevo = new ViajeDP(idViaje, autoPlaca, usuarioCI, rutaNom, salidaViaje, llegadaViaje, fechaViaje, plazasViaje);
+            this.viajesDP.add(nuevo);
+        }
+        con.close();
+        st.close();
+        return this.viajesDP;
+    }
+    
+     public LinkedList consultaPorParametrosPrin(String ciuSal, String ciuLleg, Date fechaV) throws NamingException, SQLException {
+        DataSource DSUsuario = this.getAventronPool();
+        Connection con = DSUsuario.getConnection();
+        Statement st = con.createStatement();
+        String cadena = "";
+        String fechanew = conversorDate2(fechaV);
+        cadena = "select * from VIAJE where SALIDAVIAJE='"+ciuSal+"' AND LLEGADAVIAJE ='"+ciuLleg+"' AND FECHAVIAJE >= TRUNC(sysdate) AND FECHAVIAJE ='"+fechanew+"'";
         ResultSet rs = st.executeQuery(cadena);
         viajesDP = new LinkedList<>();
         while (rs.next()) {
