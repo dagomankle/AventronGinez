@@ -278,6 +278,7 @@ public class ViajeDP {
     
     public LinkedList<ViajeDP> ConsultaPrincipal() throws NamingException, SQLException{
     
+     
         ViajeMD Consulta = new ViajeMD();
         
         this.viajesDP=Consulta.consultaPorParametrosPrin(this.salidaViaje, this.llegadaViaje, this.fechaViaje);

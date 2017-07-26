@@ -458,4 +458,26 @@ public class UsuarioDP {
     }*/
     
     
+    private boolean visibleDialogo=false;
+
+    public boolean isVisibleDialogo() {
+        return visibleDialogo;
+    }
+
+    public void setVisibleDialogo(boolean visibleDialogo) {
+        this.visibleDialogo = visibleDialogo;
+    }
+    
+    
+    public void showDialog(ActionEvent ae){
+        visibleDialogo=true;
+    }
+    public void hideDialog(ActionEvent ae){
+        visibleDialogo=false;
+    }
+    public void closeFAjax(AjaxBehaviorEvent event){
+        this.visibleDialogo=false;
+    }
+    
+    
 }

@@ -16,6 +16,9 @@
 
       xmlns:ice="http://www.icesoft.com/icefaces/component">
 
+
+
+
     <h:head>
 
 
@@ -97,15 +100,15 @@
 
 
 
-                        <ace:dateTimeEntry id="iAnio1" value="#{viajeDP.fechaViaje}" renderAsPopup ="true" label="Codigo" >
-                        
+                        <ace:dateTimeEntry id="iAnio1"  value="#{viajeDP.fechaViaje}" renderAsPopup ="true" label="Codigo" >
+
                         </ace:dateTimeEntry>
-                        
+
                         <ice:commandButton id="ActivarBusqueda"
                                            action="#{viajeDP.activarBus()}"
                                            value="Buscar">
                         </ice:commandButton>
-                        
+
                     </ice:panelGrid>
 
                     <ace:tabPane id="ConsViajes" label="Consulta Viajes" rendered="#{viajeDP.estadoBusqueda}">
@@ -129,7 +132,69 @@
                                 </ace:column>
                                 <ace:column id="idusua" headerText="USUARIO" sortBy="#{Viaje.ciUsuario}"
                                             filterBy="#{Viaje.ciUsuario}" filterMatchMode="contains">
+
+
+
                                     <h:outputText id="idCedUsu" value="#{Viaje.ciUsuario}"/>
+
+
+                                    <h:form>
+                                        <center>
+                                            <h:commandButton id="showdIAG" value="#{'Show Dialog'}" actionListener="#{usuarioDP.showDialog}"  type="button">
+                                                <f:ajax execute="@this" render="@all"/>
+                                            </h:commandButton>
+                                        </center>
+
+
+
+                                        <h:panelGroup rendered="#{usuarioDP.visibleDialogo}">
+
+                                            <!--/////////////////////////////////////////////////////BOTON USUARIO////////////////////////////////////////////-->
+
+
+
+
+
+
+                                            <ace:dialog id="dialogServerUsu"
+                                                        rendered="#{usuarioDP.visibleDialogo}"
+                                                        header="A sample dialog overview example using Server visible property"
+                                                        closable="false"
+                                                        modal="true"
+                                                        draggable="false"
+                                                        showEffect="clip"
+                                                        hideEffect="fade"
+                                                        width="400">
+
+
+                                                <h:panelGrid columns="2" width="100%">
+                                                    <h:outputLabel id="firstNameLabelUsu" for="firstNameInputField" value="#{usuarioDP.nombreUsuario}"/>
+
+
+
+                                                </h:panelGrid>
+
+                                                <h:panelGrid width="100%" style="text-align: center;" columns="1">
+                                                    <h:commandButton id="submitServer" value="Server Submit" actionListener="#{usuarioDP.hideDialog}">
+                                                    </h:commandButton>
+                                                </h:panelGrid>
+
+
+
+
+                                            </ace:dialog>
+
+
+
+
+                                            <!--/////////////////////////////////////////////////////BOTON USUARIO////////////////////////////////////////////-->
+
+                                        </h:panelGroup>
+                                    </h:form>
+
+
+
+
                                 </ace:column>
                                 <ace:column id="autoPlaca1" headerText="Automovil" sortBy="#{Viaje.autoPlaca}"
                                             filterBy="#{Viaje.autoPlaca}" filterMatchMode="contains">
@@ -172,7 +237,9 @@
             </ace:tabSet>
         </h:form>
 
-        
+
+
+
 
 
     </h:body>

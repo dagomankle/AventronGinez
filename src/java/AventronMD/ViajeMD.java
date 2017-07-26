@@ -183,8 +183,15 @@ public class ViajeMD {
         DataSource DSUsuario = this.getAventronPool();
         Connection con = DSUsuario.getConnection();
         Statement st = con.createStatement();
+        String fechanew="";
+        if(fechaV == null){
+            fechanew="15-Jul-1991";
+        }
+        else{
+            fechanew = conversorDate2(fechaV);
+        }
         String cadena = "";
-        String fechanew = conversorDate2(fechaV);
+        
         cadena = "select * from VIAJE where SALIDAVIAJE='"+ciuSal+"' AND LLEGADAVIAJE ='"+ciuLleg+"' AND FECHAVIAJE >= TRUNC(sysdate) AND FECHAVIAJE ='"+fechanew+"'";
         ResultSet rs = st.executeQuery(cadena);
         viajesDP = new LinkedList<>();
